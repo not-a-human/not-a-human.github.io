@@ -24,7 +24,9 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en">
-      <body className={`${geistSans.className}`}>{children}</body>
+      <body className={`${geistSans.className}`} style={{ fontSize: "300%" }}>
+        {children}
+      </body>
     </html>
   );
 }
