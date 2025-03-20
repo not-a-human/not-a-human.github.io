@@ -8,7 +8,7 @@ const nextConfig: NextConfig = {
   images: {
     unoptimized: true, // If you are using the Next.js image optimization feature, disable it for GitHub Pages
   },
-  assetPrefix: isProd ? "/not-a-human.github.io" : "", // Add a prefix in production
+  assetPrefix: isProd ? "" : "", // Add a prefix in production
   trailingSlash: true, // Add trailing slash to URLs
 };
 
