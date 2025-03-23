@@ -1,5 +1,7 @@
+import styles from './footer.module.css';
+
 export function Footer() {
     return (
-        <div></div>
+        <div className={`${styles.footer}`}></div>
     );
 }

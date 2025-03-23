@@ -1,6 +1,60 @@
+.projectContainer {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center; /* Center items horizontally */
+    align-items: flex-start; /* Align items to the top */
+    gap: 20px; /* Add spacing between items */
+    margin: 0 auto; /* Center the container itself */
+    width: 100%; /* Ensure it spans the full width */
+    max-width: 1200px; /* Optional: Limit the maximum width */
+    padding: 1rem; /* Add padding for spacing */
+}
+
 .projectImage {
-  width: 800px;
-  height: 500px;
-  object-fit: cover;
-  background-size: cover;
+    position: relative; /* Enable positioning for child elements like .projectOverlay */
+    background-size: cover; /* Ensure the image covers the container */
+    background-position: center; /* Center the image */
+    height: 300px; /* Adjust the height for responsiveness */
+    width: 100%; /* Make the image container responsive */
+    max-width: 550px; /* Limit the maximum width of each project item */
+    border-radius: 10px; /* Optional: Add rounded corners */
+    overflow: hidden; /* Ensure content stays within the container */
+    background-color: aliceblue; /* Fallback background color */
+}
+
+.projectOverlay {
+    position: absolute; /* Position the overlay over the image */
+    bottom: 0; /* Align the overlay to the bottom */
+    left: 0; /* Align the overlay to the left */
+    width: 100%; /* Make the overlay span the full width */
+    background: rgba(0, 0, 0, 0.6); /* Semi-transparent black background */
+    color: white; /* Set text color to white */
+    padding: 1rem; /* Add padding for spacing */
+    text-align: center; /* Center-align the text */
+    opacity: 0; /* Start with the overlay hidden */
+    transition: opacity 0.3s ease; /* Smooth transition for hover effect */
+}
+
+.projectImage:hover .projectOverlay {
+    opacity: 1; /* Show the overlay on hover */
+}
+
+.projectTechnologies {
+    position: absolute; /* Position it relative to the .projectImage */
+    top: 8%; /* Center vertically */
+    left: 50%; /* Center horizontally */
+    transform: translate(-50%, -50%); /* Adjust for the element's own dimensions */
+    display: flex; /* Use flexbox to align icons */
+    gap: 10px; /* Add spacing between icons */
+    background: rgba(0, 0, 0, 0.6); /* Optional: Add a semi-transparent background */
+    padding: 0.5rem 1rem; /* Add padding around the icons */
+    border-radius: 10px; /* Optional: Add rounded corners */
+    color: white; /* Set icon color to white */
+    z-index: 2; /* Ensure it appears above other elements */
+    opacity: 0; /* Start with the overlay hidden */
+    transition: opacity 0.3s ease; /* Smooth transition for hover effect */
+}
+
+.projectImage:hover .projectTechnologies {
+    opacity: 1; /* Show the overlay on hover */
 }

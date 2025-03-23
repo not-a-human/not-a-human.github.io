@@ -1,7 +1,7 @@
 import { DiMsqlServer, DiSqllite } from 'react-icons/di';
 import styles from './about.module.css';
 import { FaHtml5, FaCss3Alt, FaJs, FaReact, FaPhp } from "react-icons/fa";
-import { SiNextdotjs, SiPostgresql, SiDotnet, SiLaravel, SiMysql } from "react-icons/si";
+import { SiNextdotjs, SiPostgresql, SiDotnet, SiLaravel, SiMysql, SiJquery } from "react-icons/si";
 import { TbBrandCSharp } from 'react-icons/tb';
 import { BsBootstrapFill } from 'react-icons/bs';
 
@@ -49,6 +49,10 @@ export function About() {
                         <div className={styles.skillItem}>
                             <SiNextdotjs className={styles.skillIcon} />
                             <span>NextJS</span>
+                        </div>
+                        <div className={styles.skillItem}>
+                            <SiJquery className={styles.skillIcon} />
+                            <span>jQuery</span>
                         </div>
                         <div className={styles.skillItem}>
                             <BsBootstrapFill className={styles.skillIcon} />
