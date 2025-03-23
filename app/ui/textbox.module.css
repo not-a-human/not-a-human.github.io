@@ -25,6 +25,7 @@
   display: inline-block;
   width: 10px;
   animation: blink 0.5s infinite;
+  color: aqua;
 }
 
 @keyframes blink {

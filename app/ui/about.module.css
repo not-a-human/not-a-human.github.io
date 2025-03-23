@@ -24,11 +24,24 @@
     display: flex;    
     justify-content: space-between;
     width: 100%;
-  }
+    flex-wrap: wrap; /* Allow items to wrap on smaller screens */
+}
 
   .aboutme, .skills {
     width: 50%;
-    padding: 0 5%;
+    padding: 0 5rem;
+  }
+
+  @media (max-width: 992px) {
+    .aboutme, .skills {
+        width: 100%;
+        padding: 0 3rem;
+      }
+
+      .centerSmallHeader {
+        margin-top: 3rem;
+        margin-bottom: 3rem;
+      }
   }
 
     .aboutme {
