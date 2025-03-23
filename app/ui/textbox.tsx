@@ -2,7 +2,6 @@
 
 import { useState, useEffect } from "react";
 import styles from "./textbox.module.css"; // Ensure you have styles for typewriter effect
-
 import { VT323 } from "next/font/google";
 
 const vt323 = VT323({

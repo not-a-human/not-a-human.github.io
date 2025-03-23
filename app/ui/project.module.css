@@ -1,0 +1,6 @@
+.projectImage {
+  width: 800px;
+  height: 500px;
+  object-fit: cover;
+  background-size: cover;
+}
