@@ -5,6 +5,10 @@ import emailjs from 'emailjs-com';
 import { useState } from 'react';
 
 export function Contact() {
+    const [emptyFields, setEmptyFields] = useState(false);
+    const [success, setSuccess] = useState(false);
+    const [failure, setFailure] = useState(false);
+
     const [formData, setFormData] = useState({
         name: '',
         email: '',
@@ -19,6 +23,14 @@ export function Contact() {
     const handleSubmit = (e: React.FormEvent) => {
         e.preventDefault();
 
+        if (!formData.name || !formData.email || !formData.message) {
+            setEmptyFields(true);
+            return;
+        }
+
+        setEmptyFields(false);
+        setFailure(false);
+
         emailjs
             .send(
                 process.env.NEXT_PUBLIC_EMAILJS_SERVICE_ID || '', // Use environment variable
@@ -28,10 +40,16 @@ export function Contact() {
             )
             .then(
                 (result) => {
-                    alert('Message sent successfully!');
+                    setSuccess(true);
+                    setFormData({
+                        name: '',
+                        email: '',
+                        message: '',
+                    });
                 },
                 (error) => {
-                    alert('Failed to send message. Please try again.');
+                    setFailure(true);
+                    console.error(error.text);
                 }
             );
     };
@@ -51,6 +69,7 @@ export function Contact() {
                             placeholder="Name"
                             value={formData.name}
                             onChange={handleChange}
+                            disabled={success}
                         />
                         <input
                             className={`${styles.input}`}
@@ -59,6 +78,7 @@ export function Contact() {
                             placeholder="Email"
                             value={formData.email}
                             onChange={handleChange}
+                            disabled={success}
                         />
                         <textarea
                             className={`${styles.input}`}
@@ -66,7 +86,11 @@ export function Contact() {
                             placeholder="Message"
                             value={formData.message}
                             onChange={handleChange}
+                            disabled={success}
                         ></textarea>
+                        {emptyFields && <p className={styles.error}>Please fill in all fields.</p>}
+                        {success && <p className={styles.success}>Message sent successfully!</p>}
+                        {failure && <p className={styles.error}>Message failed to send. Please try contacting me through a social platform from the menu.</p>}
                         <div className={`${styles.button}`}>
                             <button type="submit">SUBMIT</button>
                         </div>
