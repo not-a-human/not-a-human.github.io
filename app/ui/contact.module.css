@@ -1,0 +1,76 @@
+.flex {
+    display: flex;
+    align-items: center;
+    align-content: center;
+    width: inherit;
+    justify-content:center;
+}
+
+.contactContainer {
+    font-size: 1.1rem;
+    max-width: 700px;
+    padding: 0 3rem;
+}
+
+.contactContainer p {
+    margin: 3rem 0;
+    max-width: 60rem;
+    line-height: 1.7;
+}
+
+.input {
+    padding: 0.5rem 1rem;
+    margin: 0.3em 0; /* Remove auto margin to avoid centering issues */
+    width: 100%; /* Make the input fill the parent container */
+    border-radius: 10px;
+    border: none;
+    box-sizing: border-box; /* Ensure padding is included in the width */
+}
+
+.input:focus {
+    outline: none;
+}
+
+.button {
+    width: 100%; /* Make the input fill the parent container */
+    box-sizing: border-box; /* Ensure padding is included in the width */
+    text-align: right;
+    margin-top: 1rem;
+    margin-bottom: 5rem;
+}
+
+.button button {
+    padding: 0.5rem 1rem;
+    border: none;
+    border-bottom: var(--main-color) 3px solid;
+    color: white;
+    cursor: pointer;
+    background: none;
+    position: relative; /* Required for the pseudo-element */
+    overflow: hidden; /* Ensures the animation stays within the button */
+    transition: color 0.3s ease; /* Smooth color transition for text */
+    font-weight: bold;
+}
+
+.button button::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: var(--main-color); /* Background color for hover effect */
+    z-index: -1; /* Place it behind the text */
+    transform: scaleY(0); /* Start with no background */
+    transform-origin: bottom; /* Animate from left to right */
+    transition: transform 0.3s ease; /* Smooth animation */
+}
+
+.button button:hover::before {
+    transform: scaleX(1); /* Expand the background fully */
+}
+
+.button button:hover {
+    color: black; /* Change text color on hover */
+}
+

@@ -4,6 +4,9 @@ import imageBG from "../assets/boy.png";
 import { Textbox } from "./ui/textbox";
 import { Menu } from "./ui/menu";
 import { About } from "./ui/about";
+import { Project } from "./ui/project";
+import { Contact } from "./ui/contact";
+import { Footer } from "./ui/footer";
 
 export default function Home() {
   return (
@@ -13,7 +16,9 @@ export default function Home() {
       </div>
       <Menu />
       <About />
+      <Project />
+      <Contact />
+      <Footer />
     </div>
-    
   );
 }

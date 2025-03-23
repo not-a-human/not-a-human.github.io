@@ -28,5 +28,5 @@
   }
   
   .menuItem:hover {
-    color: #007bff; /* Change color on hover for interactivity */
+    color: var(--main-color); /* Change color on hover for interactivity */
   }

@@ -15,17 +15,18 @@
   position: absolute;
   top: 0;
   left: 0;
-  width: 100%;
-  height: 100%;
+  width: inherit;
+  height: 100vh;
   background: transparent; /* Can also use rgba for slight overlay effect */
   z-index: 1; /* Ensures it stays on top */
+  overflow-x: hidden;
 }
 
 .cursor {
   display: inline-block;
   width: 10px;
   animation: blink 0.5s infinite;
-  color: aqua;
+  color: var(--main-color);
 }
 
 @keyframes blink {
@@ -39,5 +40,7 @@
 }
 
 .padding {
-  padding: 0 5%; /* Adjust padding as needed */
+  padding-left: 5%; /* Adjust padding as needed */
+  padding-right: 5%; /* Adjust padding as needed */
+  width: 95%;
 }
