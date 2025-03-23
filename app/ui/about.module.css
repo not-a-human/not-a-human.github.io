@@ -32,18 +32,6 @@
     padding: 0 5rem;
   }
 
-  @media (max-width: 992px) {
-    .aboutme, .skills {
-        width: 100%;
-        padding: 0 3rem;
-      }
-
-      .centerSmallHeader {
-        margin-top: 3rem;
-        margin-bottom: 3rem;
-      }
-  }
-
     .aboutme {
         text-align:justify;
     }
@@ -80,4 +68,21 @@
       .skillItem span {
         font-size: 1rem; /* Set the font size for the skill name */
         color: #fff; /* Set the text color */
+      }
+
+      @media (max-width: 992px) {
+        .aboutme, .skills {
+            width: 100%;
+            padding: 0 3rem;
+          }
+    
+          .centerSmallHeader {
+            margin-top: 3rem;
+            margin-bottom: 3rem;
+          }
+    
+          .skillsContainer {
+            gap: 0.1rem;
+          }
+    
       }
