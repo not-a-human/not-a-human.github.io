@@ -1,3 +1,42 @@
 .typewriter {
-  overflow: hidden;
+  overflow: hidden; /* Ensures text stays within bounds */
+  text-align: left; /* Align text as needed */
+  padding: 0; /* Remove padding to avoid extra space affecting alignment */
+  font-size: 300%; /* Adjust font size as needed */
+  line-height: 1; /* Ensure consistent line height */
+  width: 100%;
+  display: inline-block; /* Use inline-block for better alignment */
+  white-space: pre-wrap; /* Allows text to wrap dynamically */
+  position: relative;
+  word-wrap: break-word; /* Ensures long words break properly */
+}
+
+.overlay {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: transparent; /* Can also use rgba for slight overlay effect */
+  z-index: 1; /* Ensures it stays on top */
+}
+
+.cursor {
+  display: inline-block;
+  width: 10px;
+  animation: blink 0.5s infinite;
+}
+
+@keyframes blink {
+  50% {
+    opacity: 0;
+  }
+}
+
+.wrap {
+  white-space: pre-wrap; /* Allows text to wrap after typing is complete */
+}
+
+.padding {
+  padding: 0 5%; /* Adjust padding as needed */
 }

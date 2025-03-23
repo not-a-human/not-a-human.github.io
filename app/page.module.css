@@ -1,0 +1,11 @@
+.centerFlex {
+    display: flex;
+    align-items: center;
+    align-content: center;
+    width: 100vw;
+    height: 100vh;
+}
+
+.positionRelative {
+    position: relative;
+}

@@ -1,0 +1,31 @@
+.menu {
+    display: flex; /* Use flexbox for layout */
+    justify-content: space-between; /* Space out left and right sections */
+    align-items: center; /* Align items vertically */
+    position: sticky; /* Make the menu sticky */
+    top: 0; /* Stick to the top of the viewport */
+    z-index: 1000; /* Ensure the menu stays above other elements */
+    padding: 10px 20px; /* Add padding for spacing */
+    color: #fff; /* Set text color */
+  }
+  
+  .leftSection {
+    display: flex; /* Arrange GitHub and LinkedIn icons in a row */
+    gap: 20px; /* Add spacing between icons */
+  }
+  
+  .rightSection {
+    display: flex; /* Arrange menu items in a row */
+    gap: 20px; /* Add spacing between menu items */
+  }
+  
+  .menuItem {
+    cursor: pointer; /* Change cursor to pointer for better UX */
+    font-weight: bold; /* Make the text bold */
+    text-transform: uppercase; /* Optional: Make text uppercase */
+    text-decoration: none; /* Remove underline if links are used */
+  }
+  
+  .menuItem:hover {
+    color: #007bff; /* Change color on hover for interactivity */
+  }
