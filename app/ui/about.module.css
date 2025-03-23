@@ -1,0 +1,19 @@
+.aboutContainer {
+    display: flex;    
+    justify-content: space-between;
+    width: 100%;
+  }
+
+
+  .aboutme, .skills {
+    width: 50%;
+    padding: 0 5%;
+  }
+
+    .aboutme {
+        text-align:justify;
+    }
+
+    .aboutme p {
+        margin: 20px;
+    }
