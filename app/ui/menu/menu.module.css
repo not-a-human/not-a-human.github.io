@@ -4,6 +4,7 @@
   align-items: center; /* Align items vertically */
   color: #fff; /* Set text color */
   background-color: var(--background);
+  opacity: 0.8;
 }
 
 .mobileSocials {

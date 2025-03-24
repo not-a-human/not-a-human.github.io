@@ -8,4 +8,5 @@
   transform: translate(-50%, -50%); /* Center the shadow on the cursor */
   z-index: 9000;
   background: transparent;
+  overflow: none;
 }
