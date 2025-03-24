@@ -1,0 +1,11 @@
+.cursorShadow {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  border-radius: 50%;
+  pointer-events: none; /* Prevent interaction with the shadow */
+  box-shadow: 0 0 5rem 1rem var(--main-color);
+  transform: translate(-50%, -50%); /* Center the shadow on the cursor */
+  z-index: 9000;
+  background: transparent;
+}

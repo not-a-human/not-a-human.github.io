@@ -105,6 +105,7 @@
   position: relative;
   height: 100vh;
   overflow-y: auto;
+  padding-bottom: 6rem;
 }
 
 .closeButton {
@@ -118,6 +119,7 @@
   display: flex;
   gap: 10px;
   margin-bottom: 1rem;
+  flex-wrap: wrap;
 }
 
 .popupTechnologies span {
@@ -142,12 +144,14 @@
 }
 
 .popup h3,
-.popup h2 {
+.popup h2,
+.popup h4 {
   margin-bottom: 1rem;
   margin-top: 0.5rem;
 }
 
-.popup h3 {
+.popup h3,
+.popup h4 {
   font-weight: 300;
 }
 

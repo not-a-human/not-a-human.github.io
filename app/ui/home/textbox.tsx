@@ -1,4 +1,4 @@
-'use client';
+"use client";
 
 import { useState, useEffect } from "react";
 import styles from "./textbox.module.css"; // Ensure you have styles for typewriter effect
@@ -11,7 +11,8 @@ const vt323 = VT323({
 });
 
 export function Textbox() {
-  const text = "Hello! I am Avie. I am a software engineer. Please scroll down to learn more about me.";
+  const text =
+    "Hello! I am Avie. I am a software engineer. Please scroll down to learn more about me.";
   const typingSpeed = 150; // Typing speed in milliseconds
   const cursorBlinkSpeed = 500; // Cursor blink speed in milliseconds
 
@@ -39,7 +40,6 @@ export function Textbox() {
 
     return () => clearInterval(cursorInterval);
   }, []);
-
 
   return (
     <div className={`${styles.padding} ${vt323.className}`}>

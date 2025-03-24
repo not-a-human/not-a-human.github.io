@@ -1,16 +1,17 @@
-import Image from "next/image";
 import styles from "./page.module.css";
-import imageBG from "../assets/boy.png";
-import { Textbox } from "./ui/textbox";
-import { Menu } from "./ui/menu";
-import { About } from "./ui/about";
-import { Project } from "./ui/project";
-import { Contact } from "./ui/contact";
-import { Footer } from "./ui/footer";
+import { CursorShadow } from "./ui/cursor-shadow/cursorShadow";
+import { Textbox } from "./ui/home/textbox";
+import { Menu } from "./ui/menu/menu";
+import { About } from "./ui/about/about";
+import { Project } from "./ui/project/project";
+import { Contact } from "./ui/contact/contact";
+import { Footer } from "./ui/footer/footer";
+import { MobileSocials } from "./ui/menu/mobileSocials";
 
 export default function Home() {
   return (
     <div>
+      <CursorShadow />
       <div className={`${styles.centerFlex} ${styles.positionRelative}`}>
         <Textbox />
       </div>
@@ -19,6 +20,7 @@ export default function Home() {
       <Project />
       <Contact />
       <Footer />
+      <MobileSocials />
     </div>
   );
 }

@@ -3,8 +3,8 @@
 import { useState } from "react";
 import { useInView } from "react-intersection-observer";
 import styles from "./project.module.css";
-import FYP from "../../public/assets/FYP.gif";
-import FinPal from "../../public/assets/FinPal.png";
+import FYP from "../../../public/assets/FYP.gif";
+import FinPal from "../../../public/assets/FinPal.png";
 import { SiDotnet, SiJquery, SiMysql } from "react-icons/si";
 import {
   FaCss3Alt,
