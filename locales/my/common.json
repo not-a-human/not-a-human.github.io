@@ -1,0 +1,31 @@
+{
+  "intro": "Hello! Saya Avie. Saya seorang software engineer. Sila scroll ke bawah untuk mengenali saya dengan lebih lanjut.",
+  "menu": {
+    "about": "Kenalan",
+    "projects": "Projek",
+    "contact": "Hubungi Saya"
+  },
+  "about": {
+    "description": "Saya seorang Software Engineer berasal dari Malaysia yang mempunyai minat yang mendalam untuk pembangunan web. Saya bersedia dan bersemangat untuk menyumbang, belajar dan berkembang dalam bidang ini. Jika anda mempunyai kerja yang menarik dan selaras dengan kemahiran dan pengalaman saya, sila hubungi saya!",
+    "title-1": "Kenali Saya",
+    "title-2": "Kebolehan",
+    "title": "KENALAN"
+  },
+  "contact": {
+    "title": "HUBUNGI SAYA",
+    "description": "Anda mempunyai soalan atau ingin bekerjasama? Sila tinggalkan butiran anda di form di bawah dan saya akan menghubungi anda semula secepat mungkin.",
+    "submit": "HANTAR",
+    "failure": "Mesej gagal dihantar. Sila hubungi saya melalui platform sosial dari menu.",
+    "success": "Mesej berjaya dihantar!",
+    "emptyFields": "Sila isi semua ruangan.",
+    "field_name": "Nama",
+    "field_email": "Emel",
+    "field_message": "Mesej"
+  },
+  "project": {
+    "title": "PROJEK",
+    "about": "Pengenalan",
+    "technologies": "Teknologi",
+    "website": "Laman Web"
+  }
+}

@@ -3,6 +3,7 @@
 import { useState, useEffect } from "react";
 import styles from "./textbox.module.css"; // Ensure you have styles for typewriter effect
 import { VT323 } from "next/font/google";
+import { useTranslations } from "../../utils/useTranslations";
 
 const vt323 = VT323({
   variable: "--font-vt323",
@@ -11,14 +12,20 @@ const vt323 = VT323({
 });
 
 export function Textbox() {
-  const text =
-    "Hello! I am Avie. I am a software engineer. Please scroll down to learn more about me.";
+  const t = useTranslations();
+  const text = t("intro") || "";
   const typingSpeed = 150; // Typing speed in milliseconds
   const cursorBlinkSpeed = 500; // Cursor blink speed in milliseconds
 
   const [displayedText, setDisplayedText] = useState("");
   const [currentIndex, setCurrentIndex] = useState(0);
   const [showCursor, setShowCursor] = useState(true); // Toggle cursor visibility
+
+  // Reset typing effect when `text` changes
+  useEffect(() => {
+    setDisplayedText(""); // Clear displayed text
+    setCurrentIndex(0); // Reset index to start typing from the beginning
+  }, [text]);
 
   // Typing effect
   useEffect(() => {

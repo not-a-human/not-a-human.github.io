@@ -3,6 +3,14 @@
 import styles from "./contact.module.css";
 import emailjs from "emailjs-com";
 import { useState } from "react";
+import { useTranslations } from "../../utils/useTranslations";
+import { Roboto } from "next/font/google";
+
+const roboto = Roboto({
+  variable: "--font-vt323",
+  weight: "400",
+  subsets: ["latin"],
+});
 
 export function Contact() {
   const [emptyFields, setEmptyFields] = useState(false);
@@ -14,6 +22,8 @@ export function Contact() {
     email: "",
     message: "",
   });
+
+  const t = useTranslations();
 
   const handleChange = (
     e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>
@@ -59,20 +69,18 @@ export function Contact() {
   return (
     <div>
       <h1 className={`header`} id="contact">
-        CONTACT<div></div>
+        {t("contact.title")}
+        <div></div>
       </h1>
       <div className={`${styles.flex}`}>
         <div className={`${styles.contactContainer}`}>
-          <p>
-            Have a question or want to work together? Leave your details and
-            I'll get back to you as soon as possible.
-          </p>
+          <p>{t("contact.description")}</p>
           <form onSubmit={handleSubmit}>
             <input
               className={`${styles.input}`}
               type="text"
               name="name"
-              placeholder="Name"
+              placeholder={t("contact.field_name")}
               value={formData.name}
               onChange={handleChange}
               disabled={success}
@@ -81,33 +89,28 @@ export function Contact() {
               className={`${styles.input}`}
               type="email"
               name="email"
-              placeholder="Email"
+              placeholder={t("contact.field_email")}
               value={formData.email}
               onChange={handleChange}
               disabled={success}
             />
             <textarea
-              className={`${styles.input}`}
+              className={`${styles.input} ${roboto.className}`}
               name="message"
-              placeholder="Message"
+              placeholder={t("contact.field_message")}
               value={formData.message}
               onChange={handleChange}
               disabled={success}
             ></textarea>
             {emptyFields && (
-              <p className={styles.error}>Please fill in all fields.</p>
+              <p className={styles.error}>{t("contact.emptyFields")}</p>
             )}
             {success && (
-              <p className={styles.success}>Message sent successfully!</p>
+              <p className={styles.success}>{t("contact.success")}</p>
             )}
-            {failure && (
-              <p className={styles.error}>
-                Message failed to send. Please try contacting me through a
-                social platform from the menu.
-              </p>
-            )}
+            {failure && <p className={styles.error}>{t("contact.failure")}</p>}
             <div className={`${styles.button}`}>
-              <button type="submit">SUBMIT</button>
+              <button type="submit">{t("contact.submit")}</button>
             </div>
           </form>
         </div>

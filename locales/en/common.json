@@ -1,0 +1,31 @@
+{
+  "intro": "Hello! I am Avie. I am a software engineer. Please scroll down to learn more about me.",
+  "menu": {
+    "about": "About",
+    "projects": "Projects",
+    "contact": "Contact"
+  },
+  "about": {
+    "description": "I am a Software Engineer based in Malaysia with a passion for web development. I'm always eager to contribute, learn, and grow through new opportunities. If you have an exciting role that aligns with my skills and experience, feel free to reach out—I’d love to connect!",
+    "title-1": "About Me",
+    "title-2": "Skills",
+    "title": "ABOUT"
+  },
+  "contact": {
+    "title": "CONTACT ME",
+    "description": "Have a question or want to work together? Leave your details and I'll get back to you as soon as possible.",
+    "submit": "SUBMIT",
+    "failure": "Message failed to send. Please try contacting me through a social platform from the menu.",
+    "success": "Message sent successfully!",
+    "emptyFields": "Please fill in all fields.",
+    "field_name": "Name",
+    "field_email": "Email",
+    "field_message": "Message"
+  },
+  "project": {
+    "title": "PROJECT",
+    "about": "About",
+    "technologies": "Technologies",
+    "website": "Website"
+  }
+}

@@ -48,7 +48,8 @@
   background-color: rgb(0, 0, 0, 0);
 }
 
-.menuItem div {
+.menuItem div,
+.languageMenu button div {
   position: absolute;
   width: 90%;
   height: 0.1rem;
@@ -57,14 +58,47 @@
   bottom: -0.4rem;
 }
 
-.menuItem:hover div {
+.languageMenu button div {
+  bottom: -0.01rem;
+  width: 70%;
+}
+
+.menuItem:hover div,
+.languageMenu button:hover div,
+.enabledDiv {
   background-color: var(--main-color);
+}
+
+.languageMenu button:disabled div {
+  display: none;
 }
 
 .mobileSocials .menuItem div {
   bottom: auto;
   top: -0.9rem;
   width: 150%;
+}
+
+.languageMenu {
+  display: block;
+  position: absolute;
+  right: 0;
+  bottom: -1.5rem;
+}
+
+.languageMenu button {
+  width: 100px;
+  cursor: pointer;
+  padding: 0.6em 0.4em;
+  background-color: var(--background);
+  border: 0;
+  font-weight: bold;
+  position: relative;
+  background-color: rgb(0, 0, 0, 0.9);
+}
+
+.languageMenu button:disabled {
+  cursor: default;
 }
 
 @media (max-width: 768px) {
@@ -85,5 +119,18 @@
     background-color: var(--background);
     padding: 0.5rem 2rem;
     border-radius: 10px;
+  }
+
+  .languageMenu {
+    right: 33%;
+    bottom: -1rem;
+  }
+
+  .languageMenu button:first-of-type {
+    border-bottom-left-radius: 10px;
+  }
+
+  .languageMenu button:last-of-type {
+    border-bottom-right-radius: 10px;
   }
 }

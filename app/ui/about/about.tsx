@@ -1,3 +1,4 @@
+"use client";
 import { DiMsqlServer, DiSqllite } from "react-icons/di";
 import styles from "./about.module.css";
 import { FaHtml5, FaCss3Alt, FaJs, FaReact, FaPhp } from "react-icons/fa";
@@ -11,6 +12,7 @@ import {
 } from "react-icons/si";
 import { TbBrandCSharp } from "react-icons/tb";
 import { BsBootstrapFill } from "react-icons/bs";
+import { useTranslations } from "../../utils/useTranslations";
 
 const skills = [
   { icon: FaHtml5, title: "HTML" },
@@ -31,23 +33,20 @@ const skills = [
 ];
 
 export function About() {
+  const t = useTranslations();
   return (
     <div>
       <h1 className={`header`} id="about">
-        ABOUT<div></div>
+        {t("about.title")}
+        <div></div>
       </h1>
       <div className={`${styles.aboutContainer}`}>
         <div className={`${styles.aboutme}`}>
-          <h2 className={`centerSmallHeader`}>About Me</h2>
-          <p>
-            I am a Software Engineer based in Malaysia with a passion for web
-            development. I'm always eager to contribute, learn, and grow through
-            new opportunities. If you have an exciting role that aligns with my
-            skills and experience, feel free to reach out—I’d love to connect!
-          </p>
+          <h2 className={`centerSmallHeader`}>{t("about.title-1")}</h2>
+          <p>{t("about.description")}</p>
         </div>
         <div className={`${styles.skills}`}>
-          <h2 className={`centerSmallHeader`}>Skills</h2>
+          <h2 className={`centerSmallHeader`}>{t("about.title-2")}</h2>
           <div className={styles.skillsContainer}>
             {skills.map((skill, index) => {
               const Icon = skill.icon;
