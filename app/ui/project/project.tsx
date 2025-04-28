@@ -135,6 +135,10 @@ export function Project() {
       image: project.image,
       url: project.url,
     });
+
+    // Add a new history state when the popup is opened
+    window.history.pushState({ popupOpen: true }, "");
+
     document.documentElement.classList.add("no-scroll"); // Disable scrolling
   };
 
@@ -150,10 +154,18 @@ export function Project() {
       }
     };
 
+    const handlePopState = () => {
+      if (window.history.state?.popupOpen) {
+        closePopup();
+      }
+    };
+
     document.addEventListener("keydown", handleKeyDown);
+    window.addEventListener("popstate", handlePopState);
 
     return () => {
       document.removeEventListener("keydown", handleKeyDown);
+      window.removeEventListener("popstate", handlePopState);
     };
   }, []);
 
