@@ -1,6 +1,6 @@
 "use client";
 
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { useInView } from "react-intersection-observer";
 import styles from "./project.module.css";
 import FYP from "../../../public/assets/FYP.gif";
@@ -142,6 +142,20 @@ export function Project() {
     setSelectedProject(null);
     document.documentElement.classList.remove("no-scroll"); // Enable scrolling
   };
+
+  useEffect(() => {
+    const handleKeyDown = (event: KeyboardEvent) => {
+      if (event.key === "Escape") {
+        closePopup();
+      }
+    };
+
+    document.addEventListener("keydown", handleKeyDown);
+
+    return () => {
+      document.removeEventListener("keydown", handleKeyDown);
+    };
+  }, []);
 
   return (
     <div>
