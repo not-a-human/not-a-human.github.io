@@ -48,9 +48,11 @@ const projects = [
   {
     title_en: "APD Booking System",
     title_my: "Sistem Penempahan Bilik APD",
+    title_cn: "APD 预订系统",
     description_en: "Final year project, a room booking system for APD.",
     description_my:
       "Project Akhir Tahun DVM, sistem untuk menempah Bilik APD di KVSA.",
+    description_cn: "我的毕业设计项目，为 APD 开发的一套房间预订系统。",
     longDescription_en: "",
     longDescription_my: "",
     technologies: [
@@ -65,10 +67,13 @@ const projects = [
   {
     title_en: "FinPal",
     title_my: "FinPal",
+    title_cn: "FinPal",
     description_en:
       "A finance management app designed to help users plan allocated funds based on a percentage of their monthly salary.",
     description_my:
       "Aplikasi pengurusan kewangan yang direka untuk membantu pengguna merancang dana yang diperuntukkan berdasarkan peratusan gaji bulanan.",
+    description_cn:
+      "一款财务管理应用，旨在帮助用户根据每月薪资的百分比来规划资金分配。",
     longDescription_my: `
       <div>
         <p>
@@ -107,6 +112,22 @@ const projects = [
       </ul>
     </div>
   `,
+    longDescription_cn: `
+      <div>
+        <p>
+          FinPal 是一款财务管理应用，旨在帮助用户根据每月薪资的百分比来规划资金分配。用户可以创建账单和贷款记录，当某项账单或贷款超出该类别的分配资金时，应用会发出提醒。此外，用户还可以在应用中记录每月薪资。
+        </p>
+        <h4>功能特色：</h4>
+        <ul>
+          <li>根据用户当月薪资的百分比来规划分配资金。</li>
+          <li>创建和管理账单与贷款记录。</li>
+          <li>在应用中记录每月薪资。</li>
+          <li>当账单或贷款超出指定类别的分配资金时提醒用户。</li>
+          <li>支持数据导入/导出。</li>
+          <li>支持浅色/深色模式。</li>
+        </ul>
+      </div>
+    `,
     technologies: [
       { icon: SiDotnet, title: ".NET MAUI" },
       { icon: DiSqllite, title: "SQLite" },
