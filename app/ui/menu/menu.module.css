@@ -48,6 +48,10 @@
   background-color: rgb(0, 0, 0, 0);
 }
 
+.menuItem svg {
+  cursor: pointer;
+}
+
 .menuItem div,
 .languageMenu button div {
   position: absolute;

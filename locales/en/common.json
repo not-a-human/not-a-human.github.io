@@ -1,12 +1,12 @@
 {
-  "intro": "Hello! I am Avie. I am a software engineer. Please scroll down to learn more about me.",
+  "intro": "Hey there! I'm Avie — or you might know me by my IGN, NotAHuman. I'm a software engineer who loves building cool stuff. Feel free to scroll down and get to know me better!",
   "menu": {
     "about": "About",
     "projects": "Projects",
     "contact": "Contact"
   },
   "about": {
-    "description": "I am a Software Engineer based in Malaysia with a passion for web development. I'm always eager to contribute, learn, and grow through new opportunities. If you have an exciting role that aligns with my skills and experience, feel free to reach out—I’d love to connect!",
+    "description": "Hi there! I'm a Software Engineer from Malaysia with a strong passion for web development. I love learning new things, taking on challenges, and contributing to meaningful projects. If you have an exciting opportunity that matches my skills, I’d be happy to chat! In my free time, you’ll often find me gaming on Steam—always up for a good adventure or co-op session!",
     "title-1": "About Me",
     "title-2": "Skills",
     "title": "ABOUT"

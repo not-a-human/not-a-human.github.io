@@ -28,11 +28,13 @@ body {
   padding: 0;
   margin: 0;
   --outline: 1px solid red; /* Highlight all elements */
+  cursor: default;
 }
 
 a {
   color: inherit;
   text-decoration: none;
+  cursor: pointer;
 }
 
 .header {

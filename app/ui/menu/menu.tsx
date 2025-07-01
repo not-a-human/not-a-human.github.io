@@ -1,17 +1,12 @@
 "use client";
-import { useState, useEffect } from "react";
+
+import { useState, useEffect, ReactNode } from "react";
 import { BsTranslate } from "react-icons/bs";
 import styles from "./menu.module.css";
-import { FaGithub, FaLinkedin } from "react-icons/fa";
+import { FaGithub, FaLinkedin, FaSteam } from "react-icons/fa";
 import { IoMail } from "react-icons/io5";
 import LanguageSwitcher from "../language-switcher/LanguageSwitcher";
 import { useTranslations } from "../../utils/useTranslations";
-
-export const socials = {
-  GitHub: "https://github.com/not-a-human",
-  LinkedIn: "https://www.linkedin.com/in/avie-sinar/",
-  Email: "mailto:avie.phuah@gmail.com",
-};
 
 export function Menu() {
   const t = useTranslations();
@@ -46,38 +41,27 @@ export function Menu() {
   return (
     <div className={styles.menu}>
       <div className={styles.leftSection}>
-        <div className={styles.menuItem}>
-          <a href={socials.GitHub} target="_blank">
-            <FaGithub />
-            <div></div>
-          </a>
-        </div>
-        <div className={styles.menuItem}>
-          <a href={socials.LinkedIn} target="_blank">
-            <FaLinkedin />
-          </a>
-          <div></div>
-        </div>
-        <div className={styles.menuItem}>
-          <a href={socials.Email} target="_blank">
-            <IoMail />
-          </a>
-          <div></div>
-        </div>
+        <MenuWithLink
+          url={process.env.NEXT_PUBLIC_URL_GITHUB || "#"}
+          icon={<FaGithub />}
+        />
+        <MenuWithLink
+          url={process.env.NEXT_PUBLIC_URL_LINKEDIN || "#"}
+          icon={<FaLinkedin />}
+        />
+        <MenuWithLink
+          url={process.env.NEXT_PUBLIC_URL_STEAM || "#"}
+          icon={<FaSteam />}
+        />
+        <MenuWithLink
+          url={process.env.NEXT_PUBLIC_URL_EMAIL || "#"}
+          icon={<IoMail />}
+        />
       </div>
       <div className={styles.rightSection}>
-        <div className={styles.menuItem}>
-          <a href="#about">{t("menu.about")}</a>
-          <div></div>
-        </div>
-        <div className={styles.menuItem}>
-          <a href="#project">{t("menu.projects")}</a>
-          <div></div>
-        </div>
-        <div className={styles.menuItem}>
-          <a href="#contact">{t("menu.contact")}</a>
-          <div></div>
-        </div>
+        <MenuWithLink url="#about" text={t("menu.about")} />
+        <MenuWithLink url="#project" text={t("menu.projects")} />
+        <MenuWithLink url="#contact" text={t("menu.contact")} />
         <div
           className={styles.menuItem}
           onClick={handleClick}
@@ -90,6 +74,26 @@ export function Menu() {
         </div>
       </div>
       {showLanguageSwitcher && <LanguageSwitcher styles={styles} />}
+    </div>
+  );
+}
+
+export function MenuWithLink({
+  url,
+  icon,
+  text,
+}: {
+  url: string;
+  icon?: ReactNode;
+  text?: string;
+}) {
+  return (
+    <div className={styles.menuItem}>
+      <a href={url} target={icon ? "_blank" : "_self"}>
+        {icon ? icon : null}
+        {text ? text : null}
+        <div></div>
+      </a>
     </div>
   );
 }
