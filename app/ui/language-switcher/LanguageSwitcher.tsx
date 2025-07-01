@@ -15,6 +15,10 @@ export default function LanguageSwitcher({ styles }: { styles: any }) {
         Malay
         <div></div>
       </button>
+      <button onClick={() => setLanguage("cn")} disabled={language === "cn"}>
+        Chinese
+        <div></div>
+      </button>
     </div>
   );
 }
