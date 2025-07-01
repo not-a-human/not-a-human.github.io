@@ -23,10 +23,13 @@ import { Language, useLanguage } from "../../context/LanguageContext";
 interface Project {
   title_en: string;
   title_my: string;
+  title_cn?: string;
   description_en: string;
   description_my: string;
+  description_cn?: string;
   longDescription_en?: string;
   longDescription_my?: string;
+  longDescription_cn?: string;
   technologies: { icon: any; title: string }[];
   image: string;
   url: { github?: string; website?: string };
@@ -128,9 +131,10 @@ export function Project() {
 
   const handleCardClick = (project: Project) => {
     setSelectedProject({
-      title: project[`title_${language}`],
-      description: project[`description_${language}`],
-      longDescription: project[`longDescription_${language}`],
+      title: project[`title_${language}`] || project.title_en,
+      description: project[`description_${language}`] || project.description_en,
+      longDescription:
+        project[`longDescription_${language}`] || project.longDescription_en,
       technologies: project.technologies,
       image: project.image,
       url: project.url,
