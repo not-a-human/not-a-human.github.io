@@ -2,8 +2,9 @@
 
 import { useState, useEffect } from "react";
 import styles from "./textbox.module.css"; // Ensure you have styles for typewriter effect
-import { VT323 } from "next/font/google";
+import { VT323, DotGothic16 } from "next/font/google";
 import { useTranslations } from "../../utils/useTranslations";
+import { useLanguage } from "../../context/LanguageContext";
 
 const vt323 = VT323({
   variable: "--font-vt323",
@@ -11,9 +12,17 @@ const vt323 = VT323({
   subsets: ["latin"],
 });
 
+const dotGothic16 = DotGothic16({
+  variable: "--font-dotGothic16",
+  weight: "400",
+  subsets: ["latin"],
+});
+
 export function Textbox() {
   const t = useTranslations();
   const text = t("intro") || "";
+  const { language, setLanguage } = useLanguage();
+
   const typingSpeed = 150; // Typing speed in milliseconds
   const cursorBlinkSpeed = 500; // Cursor blink speed in milliseconds
 
@@ -49,7 +58,11 @@ export function Textbox() {
   }, []);
 
   return (
-    <div className={`${styles.padding} ${vt323.className}`}>
+    <div
+      className={`${styles.padding} ${
+        language === "cn" ? dotGothic16.className : vt323.className
+      }`}
+    >
       <p className={`${styles.typewriter}`}>
         {displayedText}
         {showCursor && <span className={styles.cursor}>_</span>}
