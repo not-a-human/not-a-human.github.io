@@ -48,14 +48,14 @@ export function Intro() {
       {/* Couple names */}
       <div className={styles.coupleSection}>
         <div className={styles.coupleNames}>
-          <h1 className={styles.coupleName}>AVIE SINAR</h1>
+          <h1 className={styles.coupleName}>Avie Sinar</h1>
           <h1 className={styles.coupleSubName}>PHUAH YONG CHERN</h1>
           <div className={styles.coupleConnector}>
             <div className={styles.connectorLine}></div>
             <span className={styles.ampersandLarge}>&</span>
             <div className={styles.connectorLine}></div>
           </div>
-          <h1 className={styles.coupleName}>AYUNI MUSPIRAH</h1>
+          <h1 className={styles.coupleName}>Ayuni Muspirah</h1>
           <h1 className={styles.coupleSubName}>BINTI RUSLIN</h1>
         </div>
       </div>
