@@ -192,29 +192,11 @@
 
 /* Ensure content stays above background */
 
-body {
-  margin: 0;
-  padding: 0;
-  background-color: 0;
-  height: 100vh;
-}
-
-html {
-  scroll-behavior: smooth;
-  scrollbar-color: var(--primary-color) var(--background-color);
-  scrollbar-track-color: 0;
-  height: 100vh;
-}
-
 ::-webkit-scrollbar-track {
   background: 0;
 }
 
 @media (max-width: 768px) {
-  :root {
-    --max-container-width: 100vw;
-  }
-
   .container {
     box-shadow: none;
     padding: 0;

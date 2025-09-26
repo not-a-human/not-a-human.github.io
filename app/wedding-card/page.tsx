@@ -15,6 +15,50 @@ export default function WeddingCardPage() {
 
   useEffect(() => {
     setIsClient(true);
+
+    // Apply wedding-specific body and html styles
+    const originalBodyStyle = {
+      margin: document.body.style.margin,
+      padding: document.body.style.padding,
+      backgroundColor: document.body.style.backgroundColor,
+      height: document.body.style.height,
+    };
+
+    const originalHtmlStyle = {
+      scrollBehavior: document.documentElement.style.scrollBehavior,
+      scrollbarColor: document.documentElement.style.scrollbarColor,
+      scrollbarTrackColor: (document.documentElement.style as any)
+        .scrollbarTrackColor,
+      height: document.documentElement.style.height,
+    };
+
+    // Apply wedding styles
+    document.body.style.margin = "0";
+    document.body.style.padding = "0";
+    document.body.style.backgroundColor = "0";
+    document.body.style.height = "100vh";
+
+    document.documentElement.style.scrollBehavior = "smooth";
+    document.documentElement.style.scrollbarColor =
+      "var(--primary-color) var(--background-color)";
+    (document.documentElement.style as any).scrollbarTrackColor = "0";
+    document.documentElement.style.height = "100vh";
+
+    // Cleanup function to restore original styles
+    return () => {
+      document.body.style.margin = originalBodyStyle.margin;
+      document.body.style.padding = originalBodyStyle.padding;
+      document.body.style.backgroundColor = originalBodyStyle.backgroundColor;
+      document.body.style.height = originalBodyStyle.height;
+
+      document.documentElement.style.scrollBehavior =
+        originalHtmlStyle.scrollBehavior;
+      document.documentElement.style.scrollbarColor =
+        originalHtmlStyle.scrollbarColor;
+      (document.documentElement.style as any).scrollbarTrackColor =
+        originalHtmlStyle.scrollbarTrackColor;
+      document.documentElement.style.height = originalHtmlStyle.height;
+    };
   }, []);
 
   useEffect(() => {
