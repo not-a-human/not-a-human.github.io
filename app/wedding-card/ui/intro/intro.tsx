@@ -103,22 +103,24 @@ export function Intro() {
       </div>
 
       {/* Schedule timeline */}
-      <div className={styles.scheduleSection}>
-        <h4 className={styles.scheduleTitle}>
-          <IoTime className={styles.scheduleIcon} />
-          Aturcara
-        </h4>
-        <div className={styles.timeline}>
-          <div className={styles.timelineItem}>
-            <div className={styles.timelineTime}>5:00 PM</div>
-            <div className={styles.timelineDot}></div>
-            <div className={styles.timelineEvent}>Akad Nikah</div>
-          </div>
-          <div className={styles.timelineConnector}></div>
-          <div className={styles.timelineItem}>
-            <div className={styles.timelineTime}>5:30 PM</div>
-            <div className={styles.timelineDot}></div>
-            <div className={styles.timelineEvent}>High Tea</div>
+      <div className={styles.detailItem}>
+        <div className={styles.detailIcon}>
+          <IoTime />
+        </div>
+        <div className={styles.detailContent}>
+          <h4 className={styles.detailLabel}>Aturcara</h4>
+          <div className={styles.timeline}>
+            <div className={styles.timelineItem}>
+              <div className={styles.timelineTime}>5:00 PM</div>
+              <div className={styles.timelineDot}></div>
+              <div className={styles.timelineEvent}>Akad Nikah</div>
+            </div>
+            <div className={styles.timelineConnector}></div>
+            <div className={styles.timelineItem}>
+              <div className={styles.timelineTime}>5:30 PM</div>
+              <div className={styles.timelineDot}></div>
+              <div className={styles.timelineEvent}>High Tea</div>
+            </div>
           </div>
         </div>
       </div>
