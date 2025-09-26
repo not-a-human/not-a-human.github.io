@@ -21,12 +21,43 @@ export function MusicPlayer({ isVisible = true }: MusicPlayerProps) {
     };
   }, [audio]);
 
+  // Autoplay when component becomes visible
+  useEffect(() => {
+    if (isVisible && !audio) {
+      // Initialize and autoplay audio
+      const newAudio = new Audio("/assets/music.ogg");
+      newAudio.loop = true;
+      newAudio.volume = 0.3;
+      setAudio(newAudio);
+
+      // Attempt autoplay
+      const playPromise = newAudio.play();
+
+      if (playPromise !== undefined) {
+        playPromise
+          .then(() => {
+            setIsPlaying(true);
+            console.log("Autoplay started successfully");
+          })
+          .catch((error) => {
+            console.log("Autoplay failed, user interaction required:", error);
+            // Audio is loaded but not playing, waiting for user interaction
+            setIsPlaying(false);
+          });
+      }
+    } else if (!isVisible && audio && isPlaying) {
+      // Pause when component becomes invisible
+      audio.pause();
+      setIsPlaying(false);
+    }
+  }, [isVisible, audio]);
+
   const toggleMusic = () => {
     if (!audio) {
-      // Initialize audio on first click to comply with browser autoplay policies
-      const newAudio = new Audio("/assets/music.ogg"); // You'll need to add your audio file
+      // Initialize audio if not already done
+      const newAudio = new Audio("/assets/music.ogg");
       newAudio.loop = true;
-      newAudio.volume = 0.3; // Set volume to 30%
+      newAudio.volume = 0.3;
       setAudio(newAudio);
 
       newAudio
