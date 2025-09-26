@@ -190,12 +190,6 @@
   }
 }
 
-/* Ensure content stays above background */
-
-::-webkit-scrollbar-track {
-  background: 0;
-}
-
 @media (max-width: 768px) {
   .container {
     box-shadow: none;
