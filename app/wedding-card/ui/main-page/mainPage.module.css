@@ -410,3 +410,169 @@
     font-size: 1.2rem;
   }
 }
+
+/* Scroll Hint Animation */
+.scrollHint {
+  position: absolute;
+  bottom: -10%;
+  left: 50%;
+  transform: translateX(-50%);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 1rem;
+  animation: fadeInBounce 0.8s ease-out;
+  z-index: 10;
+  background-color: rgba(0, 0, 0, 0.4);
+  backdrop-filter: blur(10px);
+  border: 1px solid rgba(240, 201, 123, 0.1);
+  border-radius: 20px;
+  padding: 1.5rem 2rem;
+  box-shadow: 0 8px 25px rgba(0, 0, 0, 0.2);
+}
+
+.scrollIcon {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: -2px;
+}
+
+.chevronDown {
+  width: 20px;
+  height: 20px;
+  border-right: 2px solid rgba(240, 201, 123, 0.8);
+  border-bottom: 2px solid rgba(240, 201, 123, 0.8);
+  transform: rotate(45deg);
+  animation: elegantBounce 2s ease-in-out infinite;
+}
+
+.chevronDown:nth-child(2) {
+  margin-top: -8px;
+  opacity: 0.6;
+  animation-delay: 0.2s;
+}
+
+.scrollText {
+  font-size: 0.9rem;
+  color: var(--white-color);
+  font-weight: 400;
+  text-shadow: 0 2px 4px rgba(0, 0, 0, 0.4);
+  letter-spacing: 1px;
+  animation: textFade 2.5s ease-in-out infinite;
+  text-align: center;
+  line-height: 1.2;
+  font-family: "Georgia", serif;
+}
+
+.decorativeDots {
+  display: flex;
+  gap: 6px;
+  align-items: center;
+}
+
+.decorativeDots span {
+  width: 4px;
+  height: 4px;
+  border-radius: 50%;
+  background: rgba(240, 201, 123, 0.6);
+  animation: dotPulse 1.8s ease-in-out infinite;
+}
+
+.decorativeDots span:nth-child(2) {
+  animation-delay: 0.3s;
+}
+
+.decorativeDots span:nth-child(3) {
+  animation-delay: 0.6s;
+}
+
+@keyframes fadeInBounce {
+  0% {
+    opacity: 0;
+    transform: translateX(-50%) translateY(20px);
+  }
+  60% {
+    opacity: 1;
+    transform: translateX(-50%) translateY(-5px);
+  }
+  100% {
+    opacity: 1;
+    transform: translateX(-50%) translateY(0);
+  }
+}
+
+@keyframes elegantBounce {
+  0%,
+  20%,
+  50%,
+  80%,
+  100% {
+    transform: rotate(45deg) translateY(0);
+  }
+  40% {
+    transform: rotate(45deg) translateY(8px);
+  }
+  60% {
+    transform: rotate(45deg) translateY(4px);
+  }
+}
+
+@keyframes textFade {
+  0%,
+  100% {
+    opacity: 0.7;
+  }
+  50% {
+    opacity: 1;
+  }
+}
+
+@keyframes dotPulse {
+  0%,
+  100% {
+    opacity: 0.3;
+    transform: scale(1);
+  }
+  50% {
+    opacity: 1;
+    transform: scale(1.2);
+  }
+}
+
+/* Responsive adjustments for scroll hint */
+@media (max-width: 768px) {
+  .scrollHint {
+    padding: 1rem 1.4rem;
+  }
+
+  .chevronDown {
+    width: 18px;
+    height: 18px;
+  }
+
+  .scrollText {
+    font-size: 0.8rem;
+  }
+
+  .decorativeDots span {
+    width: 3px;
+    height: 3px;
+  }
+}
+
+@media (max-width: 480px) {
+  .scrollHint {
+    padding: 0.8rem 1.2rem;
+  }
+
+  .chevronDown {
+    width: 16px;
+    height: 16px;
+  }
+
+  .scrollText {
+    font-size: 0.75rem;
+  }
+}
