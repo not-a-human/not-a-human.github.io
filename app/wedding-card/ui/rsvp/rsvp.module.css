@@ -130,6 +130,128 @@
   color: var(--white-color);
 }
 
+/* Custom Select Styles */
+.customSelect {
+  position: relative;
+}
+
+.selectTrigger {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0.8rem 1rem;
+  background: rgba(255, 255, 255, 0.05);
+  border: 1px solid rgba(240, 201, 123, 0.3);
+  border-radius: 8px;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  min-height: 50px;
+}
+
+.selectTrigger:hover {
+  border-color: rgba(240, 201, 123, 0.5);
+  background: rgba(255, 255, 255, 0.08);
+}
+
+.selectTriggerOpen {
+  border-color: rgba(240, 201, 123, 0.6);
+  background: rgba(255, 255, 255, 0.1);
+  box-shadow: 0 0 0 2px rgba(240, 201, 123, 0.1);
+}
+
+.selectText {
+  color: var(--white-color);
+  font-size: 0.95rem;
+  flex: 1;
+}
+
+.selectPlaceholder {
+  color: rgba(255, 255, 255, 0.5);
+}
+
+.selectArrow {
+  color: rgba(240, 201, 123, 0.7);
+  transition: transform 0.3s ease;
+  display: flex;
+  align-items: center;
+}
+
+.selectArrowOpen {
+  transform: rotate(180deg);
+}
+
+.selectOptions {
+  position: absolute;
+  top: 100%;
+  left: 0;
+  right: 0;
+  background: var(--background-color);
+  border: 1px solid rgba(240, 201, 123, 0.3);
+  border-radius: 8px;
+  box-shadow: 0 8px 25px rgba(0, 0, 0, 0.4);
+  z-index: 1000;
+  margin-top: 4px;
+  overflow: hidden;
+  animation: dropdownSlideIn 0.2s ease-out;
+}
+
+.selectOption {
+  padding: 1rem;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  border-bottom: 1px solid rgba(240, 201, 123, 0.1);
+}
+
+.selectOption:last-child {
+  border-bottom: none;
+}
+
+.selectOption:hover {
+  background: rgba(240, 201, 123, 0.1);
+}
+
+.selectOptionSelected {
+  background: rgba(240, 201, 123, 0.15);
+}
+
+.optionContent {
+  display: flex;
+  align-items: center;
+  gap: 0.8rem;
+}
+
+.optionEmoji {
+  font-size: 1.2rem;
+  flex-shrink: 0;
+}
+
+.optionText {
+  flex: 1;
+}
+
+.optionTitle {
+  color: var(--white-color);
+  font-weight: 500;
+  font-size: 0.95rem;
+  margin-bottom: 2px;
+}
+
+.optionSubtitle {
+  color: rgba(255, 255, 255, 0.6);
+  font-size: 0.8rem;
+}
+
+@keyframes dropdownSlideIn {
+  from {
+    opacity: 0;
+    transform: translateY(-8px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
 .textarea {
   resize: vertical;
   min-height: 80px;
@@ -222,6 +344,28 @@
   .submitButton,
   .cancelButton {
     width: 100%;
+  }
+
+  /* Mobile responsive for custom select */
+  .selectOptions {
+    max-height: 200px;
+    overflow-y: auto;
+  }
+
+  .selectOption {
+    padding: 0.8rem;
+  }
+
+  .optionContent {
+    gap: 0.6rem;
+  }
+
+  .optionTitle {
+    font-size: 0.9rem;
+  }
+
+  .optionSubtitle {
+    font-size: 0.75rem;
   }
 }
 

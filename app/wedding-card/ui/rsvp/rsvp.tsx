@@ -1,9 +1,10 @@
 "use client";
 
-import { useState } from "react";
+import { useState, useEffect, useRef } from "react";
 import styles from "./rsvp.module.css";
 import { createDatabaseClient, DatabaseRecord } from "../../../../lib/database";
 import { Modal } from "../modal/modal";
+import { FaCheck, FaTimes } from "react-icons/fa";
 
 interface RsvpProps {
   isOpen: boolean;
@@ -14,6 +15,7 @@ const tableName = "rsvp";
 
 export function Rsvp({ isOpen, onClose }: RsvpProps) {
   const db = createDatabaseClient();
+  const selectRef = useRef<HTMLDivElement>(null);
   const [rsvpForm, setRsvpForm] = useState({
     name: "",
     tel: "",
@@ -21,6 +23,7 @@ export function Rsvp({ isOpen, onClose }: RsvpProps) {
     numberOfGuests: 0,
   });
   const [isSubmitting, setIsSubmitting] = useState(false);
+  const [isDropdownOpen, setIsDropdownOpen] = useState(false);
   const [errors, setErrors] = useState({
     tel: "",
     numberOfGuests: "",
@@ -30,6 +33,26 @@ export function Rsvp({ isOpen, onClose }: RsvpProps) {
     message: "",
     type: "success" as "success" | "error",
   });
+
+  // Handle click outside to close dropdown
+  useEffect(() => {
+    const handleClickOutside = (event: MouseEvent) => {
+      if (
+        selectRef.current &&
+        !selectRef.current.contains(event.target as Node)
+      ) {
+        setIsDropdownOpen(false);
+      }
+    };
+
+    if (isDropdownOpen) {
+      document.addEventListener("mousedown", handleClickOutside);
+    }
+
+    return () => {
+      document.removeEventListener("mousedown", handleClickOutside);
+    };
+  }, [isDropdownOpen]);
 
   // Show snackbar notification
   const showSnackbar = (
@@ -172,6 +195,30 @@ export function Rsvp({ isOpen, onClose }: RsvpProps) {
     }
   };
 
+  // Custom select handlers
+  const handleSelectOption = (value: string) => {
+    const newAttendance = value;
+    const currentGuests = rsvpForm.numberOfGuests;
+
+    // Validate numberOfGuests based on new attendance value
+    const guestsError = validateNumberOfGuests(currentGuests, newAttendance);
+
+    setRsvpForm((prev) => ({ ...prev, attendance: value }));
+    setErrors((prev) => ({ ...prev, numberOfGuests: guestsError }));
+    setIsDropdownOpen(false);
+  };
+
+  const getDisplayText = (value: string) => {
+    switch (value) {
+      case "yes":
+        return "Ya, saya akan hadir";
+      case "no":
+        return "Tidak, saya tidak dapat hadir";
+      default:
+        return "Sila Pilih";
+    }
+  };
+
   const handleInputChange = (
     e: React.ChangeEvent<
       HTMLInputElement | HTMLTextAreaElement | HTMLSelectElement
@@ -256,18 +303,87 @@ export function Rsvp({ isOpen, onClose }: RsvpProps) {
             <label htmlFor="attendance" className={styles.label}>
               Adakah anda akan hadir? *
             </label>
-            <select
-              id="attendance"
-              name="attendance"
-              value={rsvpForm.attendance}
-              onChange={handleInputChange}
-              className={styles.select}
-              required
-            >
-              <option value="">Sila Pilih</option>
-              <option value="yes">Ya, saya akan hadir</option>
-              <option value="no">Tidak, saya tidak dapat hadir</option>
-            </select>
+            <div className={styles.customSelect} ref={selectRef}>
+              <div
+                className={`${styles.selectTrigger} ${
+                  isDropdownOpen ? styles.selectTriggerOpen : ""
+                }`}
+                onClick={() => setIsDropdownOpen(!isDropdownOpen)}
+              >
+                <span
+                  className={`${styles.selectText} ${
+                    !rsvpForm.attendance ? styles.selectPlaceholder : ""
+                  }`}
+                >
+                  {getDisplayText(rsvpForm.attendance)}
+                </span>
+                <div
+                  className={`${styles.selectArrow} ${
+                    isDropdownOpen ? styles.selectArrowOpen : ""
+                  }`}
+                >
+                  <svg width="12" height="8" viewBox="0 0 12 8" fill="none">
+                    <path
+                      d="M1 1L6 6L11 1"
+                      stroke="currentColor"
+                      strokeWidth="1.5"
+                      strokeLinecap="round"
+                      strokeLinejoin="round"
+                    />
+                  </svg>
+                </div>
+              </div>
+
+              {isDropdownOpen && (
+                <div className={styles.selectOptions}>
+                  <div
+                    className={`${styles.selectOption} ${
+                      rsvpForm.attendance === "yes"
+                        ? styles.selectOptionSelected
+                        : ""
+                    }`}
+                    onClick={() => handleSelectOption("yes")}
+                  >
+                    <div className={styles.optionContent}>
+                      <div className={styles.optionEmoji}>
+                        <FaCheck />
+                      </div>
+                      <div className={styles.optionText}>
+                        <div className={styles.optionTitle}>
+                          Ya, saya akan hadir
+                        </div>
+                        <div className={styles.optionSubtitle}>
+                          Saya akan meraikan bersama anda
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+
+                  <div
+                    className={`${styles.selectOption} ${
+                      rsvpForm.attendance === "no"
+                        ? styles.selectOptionSelected
+                        : ""
+                    }`}
+                    onClick={() => handleSelectOption("no")}
+                  >
+                    <div className={styles.optionContent}>
+                      <div className={styles.optionEmoji}>
+                        <FaTimes />
+                      </div>
+                      <div className={styles.optionText}>
+                        <div className={styles.optionTitle}>
+                          Tidak, saya tidak dapat hadir
+                        </div>
+                        <div className={styles.optionSubtitle}>
+                          Tetapi saya mengucapkan tahniah
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              )}
+            </div>
           </div>
 
           <div className={styles.formGroup}>
