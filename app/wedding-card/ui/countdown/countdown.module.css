@@ -1,7 +1,7 @@
 .countdownContainer {
   text-align: center;
   padding: 2rem 1rem;
-  margin: 2rem 0.5rem;
+  margin: 2rem 0rem;
   background: linear-gradient(
     135deg,
     rgba(240, 201, 123, 0.1),
@@ -99,6 +99,10 @@
 }
 
 @media screen and (max-width: 480px) {
+  .countdownContainer {
+    margin: 2rem 0.5rem;
+  }
+
   .countdown {
     gap: 0.3rem;
   }
