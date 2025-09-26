@@ -9,6 +9,7 @@ import { Countdown } from "./ui/countdown/countdown";
 import { Guestbook } from "./ui/guesbook/guestbook";
 import { GuestbookForm } from "./ui/guesbook/guestbookForm";
 import { Footer } from "./ui/footer/footer";
+import { MusicPlayer } from "./ui/music-player/musicPlayer";
 import { Modal } from "./ui/modal/modal";
 import { Rsvp } from "./ui/rsvp/rsvp";
 import { Location } from "./ui/location/location";
@@ -206,52 +207,57 @@ export default function WeddingCardPage() {
         <MainPage />
       </div>
 
-      <div
-        ref={introAnimation.ref}
-        className={getAnimationClasses(
-          introAnimation.isVisible,
-          "fadeInUp",
-          200
-        )}
-      >
-        <Intro />
-      </div>
+      {/* Wrapper div with position relative for sticky music player */}
+      <div style={{ position: "relative" }}>
+        <MusicPlayer isVisible={showMenu} />
 
-      <div
-        ref={countdownAnimation.ref}
-        className={getAnimationClasses(
-          countdownAnimation.isVisible,
-          "scaleUp",
-          300
-        )}
-      >
-        <Countdown targetDate="2025-11-09T09:00:00.000Z" />
-      </div>
+        <div
+          ref={introAnimation.ref}
+          className={getAnimationClasses(
+            introAnimation.isVisible,
+            "fadeInUp",
+            200
+          )}
+        >
+          <Intro />
+        </div>
 
-      <div
-        ref={guestbookAnimation.ref}
-        className={getAnimationClasses(
-          guestbookAnimation.isVisible,
-          "fadeInUp",
-          400
-        )}
-      >
-        <Guestbook
-          onOpenModal={() => setGuestbookModalOpen(true)}
-          entries={guestbookEntries}
-          onEntriesUpdate={setGuestbookEntries}
-        />
-      </div>
+        <div
+          ref={countdownAnimation.ref}
+          className={getAnimationClasses(
+            countdownAnimation.isVisible,
+            "scaleUp",
+            300
+          )}
+        >
+          <Countdown targetDate="2025-11-09T09:00:00.000Z" />
+        </div>
 
-      <div
-        ref={footerAnimation.ref}
-        className={getAnimationClasses(
-          footerAnimation.isVisible,
-          "fadeIn",
-          500
-        )}
-      >
-        <Footer />
+        <div
+          ref={guestbookAnimation.ref}
+          className={getAnimationClasses(
+            guestbookAnimation.isVisible,
+            "fadeInUp",
+            400
+          )}
+        >
+          <Guestbook
+            onOpenModal={() => setGuestbookModalOpen(true)}
+            entries={guestbookEntries}
+            onEntriesUpdate={setGuestbookEntries}
+          />
+        </div>
+
+        <div
+          ref={footerAnimation.ref}
+          className={getAnimationClasses(
+            footerAnimation.isVisible,
+            "fadeIn",
+            500
+          )}
+        >
+          <Footer />
+        </div>
       </div>
 
       {showMenu && (

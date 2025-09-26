@@ -1,0 +1,143 @@
+/* Music Player Island */
+.musicPlayer {
+  position: fixed;
+  top: 20px;
+  left: 50%;
+  transform: translateX(-50%);
+  z-index: 1000;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-bottom: 1rem;
+  transition: opacity 0.3s ease, visibility 0.3s ease;
+  width: 90%;
+}
+
+.musicPlayer.hidden {
+  opacity: 0;
+  visibility: hidden;
+}
+
+.musicContainer {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  background-color: rgba(0, 0, 0, 0.4);
+  backdrop-filter: blur(10px);
+  border: 1px solid rgba(240, 201, 123, 0.1);
+  border-radius: 25px;
+  padding: 0.75rem 1.5rem;
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+}
+
+.musicTitle {
+  font-size: 0.6rem;
+  color: var(--white-color);
+  font-weight: 500;
+  letter-spacing: 0.5px;
+}
+
+.musicWaves {
+  display: flex;
+  align-items: flex-end;
+  gap: 2px;
+}
+
+.wave {
+  width: 2px;
+  height: 4px;
+  background: linear-gradient(to top, #be822b, #f0c97b);
+  border-radius: 1px;
+  opacity: 0.5;
+  transition: all 0.3s ease;
+  transform: scaleY(1);
+}
+
+.wave:nth-child(1) {
+  animation-delay: 0s;
+}
+
+.wave:nth-child(2) {
+  animation-delay: 0.1s;
+}
+
+.wave:nth-child(3) {
+  animation-delay: 0.2s;
+}
+
+.wave:nth-child(4) {
+  animation-delay: 0.3s;
+}
+
+.wave:nth-child(5) {
+  animation-delay: 0.4s;
+}
+
+.waveActive {
+  opacity: 1;
+  animation: waveAnimation 1.2s ease-in-out infinite;
+}
+
+@keyframes waveAnimation {
+  0%,
+  100% {
+    transform: scaleY(1);
+  }
+  25% {
+    transform: scaleY(2);
+  }
+  50% {
+    transform: scaleY(3);
+  }
+  75% {
+    transform: scaleY(1.5);
+  }
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+  .musicPlayer {
+    top: 20px;
+    margin-bottom: 0.5rem;
+  }
+
+  .musicButton {
+    padding: 0.6rem 0.8rem;
+    border-radius: 20px;
+  }
+
+  .musicIcon {
+    font-size: 0.8rem;
+    width: 16px;
+    height: 16px;
+  }
+
+  .volumeIcon {
+    font-size: 0.7rem;
+  }
+
+  .wave {
+    width: 1.5px;
+    height: 3px;
+  }
+
+  .waveActive {
+    animation: waveAnimationMobile 1.2s ease-in-out infinite;
+  }
+
+  @keyframes waveAnimationMobile {
+    0%,
+    100% {
+      transform: scaleY(1);
+    }
+    25% {
+      transform: scaleY(2);
+    }
+    50% {
+      transform: scaleY(2.5);
+    }
+    75% {
+      transform: scaleY(1.3);
+    }
+  }
+}
