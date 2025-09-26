@@ -3,7 +3,7 @@
 import { useState } from "react";
 import styles from "./calendar.module.css";
 import { IoCloseOutline } from "react-icons/io5";
-import { FaCalendarAlt, FaApple } from "react-icons/fa";
+import { FaCalendarAlt, FaApple, FaMarker } from "react-icons/fa";
 import { SiGooglecalendar } from "react-icons/si";
 
 interface CalendarProps {
@@ -237,7 +237,9 @@ END:VCALENDAR`;
                 >
                   <span className={styles.dayNumber}>{date.getDate()}</span>
                   {isWeddingDate(date) && (
-                    <div className={styles.weddingDot}>💒</div>
+                    <div className={styles.weddingDot}>
+                      <FaMarker />
+                    </div>
                   )}
                 </div>
               ))}
@@ -278,7 +280,10 @@ END:VCALENDAR`;
           {/* Additional Info */}
           <div className={styles.additionalInfo}>
             <div className={styles.infoText}>
-              <p>📅 Save the date and never miss our special moment!</p>
+              <p>
+                <FaCalendarAlt /> Save the date and never miss our special
+                moment!
+              </p>
               <p>
                 The event will be added to your calendar with all the details.
               </p>

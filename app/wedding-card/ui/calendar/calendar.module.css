@@ -241,6 +241,7 @@
   right: 2px;
   font-size: 0.7rem;
   opacity: 0.9;
+  color: var(--secondary-color);
 }
 
 /* Calendar Actions */

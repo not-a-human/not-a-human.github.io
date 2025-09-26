@@ -91,6 +91,102 @@
   color: var(--primary-color);
 }
 
+/* Delivery Information Styles */
+.deliverySection {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+  gap: 1rem;
+  margin-bottom: 2rem;
+}
+
+.infoCard {
+  background: rgba(240, 201, 123, 0.05);
+  border: 1px solid rgba(240, 201, 123, 0.2);
+  border-radius: 12px;
+  padding: 1.5rem;
+  transition: all 0.3s ease;
+}
+
+.infoCard:hover {
+  border-color: var(--primary-color);
+  box-shadow: 0 4px 12px rgba(240, 201, 123, 0.1);
+}
+
+.cardHeader {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  margin-bottom: 1rem;
+}
+
+.cardIcon {
+  color: var(--primary-color);
+  font-size: 1.2rem;
+}
+
+.cardTitle {
+  font-family: var(--font-cinzel), serif;
+  font-size: 1.1rem;
+  font-weight: 600;
+  color: var(--primary-color);
+  margin: 0;
+}
+
+.infoContent {
+  display: flex;
+  flex-direction: column;
+  gap: 0.75rem;
+}
+
+.recipientName {
+  font-weight: 600;
+  color: var(--text-color);
+  margin: 0;
+  font-size: 1rem;
+}
+
+.address {
+  color: var(--text-color);
+  opacity: 0.9;
+  margin: 0;
+  line-height: 1.5;
+  font-size: 0.95rem;
+}
+
+.phoneNumber {
+  font-weight: 600;
+  color: var(--text-color);
+  margin: 0;
+  font-size: 1.1rem;
+  letter-spacing: 0.5px;
+}
+
+.copyButton {
+  background: rgba(240, 201, 123, 0.1);
+  border: 1px solid rgba(240, 201, 123, 0.3);
+  border-radius: 8px;
+  padding: 0.6rem 1rem;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  font-size: 0.9rem;
+  color: var(--primary-color);
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  align-self: flex-start;
+  font-weight: 500;
+}
+
+.copyButton:hover {
+  background: rgba(240, 201, 123, 0.2);
+  border-color: var(--primary-color);
+  transform: translateY(-1px);
+}
+
+.copyButton:active {
+  transform: translateY(0);
+}
+
 .itemsGrid {
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
@@ -280,6 +376,32 @@
   .itemsGrid {
     grid-template-columns: 1fr;
     gap: 1rem;
+  }
+
+  .deliverySection {
+    grid-template-columns: 1fr;
+    gap: 1rem;
+  }
+
+  .infoCard {
+    padding: 1.2rem;
+  }
+
+  .cardTitle {
+    font-size: 1rem;
+  }
+
+  .address {
+    font-size: 0.9rem;
+  }
+
+  .phoneNumber {
+    font-size: 1rem;
+  }
+
+  .copyButton {
+    padding: 0.5rem 0.8rem;
+    font-size: 0.85rem;
   }
 
   .itemCard {
