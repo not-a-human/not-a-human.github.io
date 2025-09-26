@@ -169,7 +169,8 @@
 }
 
 @keyframes pulseGlow {
-  0%, 100% {
+  0%,
+  100% {
     opacity: 0.7;
     transform: scale(1);
   }
@@ -180,7 +181,8 @@
 }
 
 @keyframes textGlow {
-  0%, 100% {
+  0%,
+  100% {
     opacity: 0.8;
   }
   50% {

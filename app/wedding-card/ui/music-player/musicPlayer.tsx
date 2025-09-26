@@ -111,19 +111,29 @@ export function MusicPlayer({ isVisible = true }: MusicPlayerProps) {
             </div>
             <div className={styles.musicWaves}>
               <div
-                className={`${styles.wave} ${isPlaying ? styles.waveActive : ""}`}
+                className={`${styles.wave} ${
+                  isPlaying ? styles.waveActive : ""
+                }`}
               ></div>
               <div
-                className={`${styles.wave} ${isPlaying ? styles.waveActive : ""}`}
+                className={`${styles.wave} ${
+                  isPlaying ? styles.waveActive : ""
+                }`}
               ></div>
               <div
-                className={`${styles.wave} ${isPlaying ? styles.waveActive : ""}`}
+                className={`${styles.wave} ${
+                  isPlaying ? styles.waveActive : ""
+                }`}
               ></div>
               <div
-                className={`${styles.wave} ${isPlaying ? styles.waveActive : ""}`}
+                className={`${styles.wave} ${
+                  isPlaying ? styles.waveActive : ""
+                }`}
               ></div>
               <div
-                className={`${styles.wave} ${isPlaying ? styles.waveActive : ""}`}
+                className={`${styles.wave} ${
+                  isPlaying ? styles.waveActive : ""
+                }`}
               ></div>
             </div>
           </>
