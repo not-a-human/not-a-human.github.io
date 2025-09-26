@@ -3,7 +3,7 @@
 import { useState } from "react";
 import styles from "./location.module.css";
 import { IoCloseOutline } from "react-icons/io5";
-import { FaMapMarkerAlt, FaRoute } from "react-icons/fa";
+import { FaMapMarkerAlt, FaRoute, FaWaze } from "react-icons/fa";
 import { SiGooglemaps } from "react-icons/si";
 import { GoCopy } from "react-icons/go";
 
@@ -18,11 +18,10 @@ const venueAddress = {
   address:
     "No 23, Rumah Mara Kampung Baru Parit Tinggi, Kuala Pilah, 72000, Kuala Pilah, Negeri Sembilan",
   coordinates: {
-    lat: 2.7297, // Approximate coordinates for Kuala Pilah
-    lng: 102.2492,
+    lat: 2.791904,
+    lng: 102.213402,
   },
-  googleMapsQuery:
-    "No 23, Rumah Mara Kampung Baru Parit Tinggi, Kuala Pilah, 72000, Negeri Sembilan",
+  googleMapsQuery: "Q6R7+Q97 Kuala Pilah, Negeri Sembilan",
   wazeQuery:
     "No 23, Rumah Mara Kampung Baru Parit Tinggi, Kuala Pilah, 72000, Negeri Sembilan",
 };
@@ -39,15 +38,13 @@ export function Location({ isOpen, onClose }: LocationProps) {
   }&q=${encodeURIComponent(venueAddress.googleMapsQuery)}&zoom=15`;
 
   // Fallback map URL (without API key)
-  const fallbackMapUrl = `https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3988.8!2d102.2492!3d2.7297!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x0%3A0x0!2zMsKwNDMnNDcuMCJOIDEwMsKwMTQnNTcuMCJF!5e0!3m2!1sen!2smy!4v1234567890123!5m2!1sen!2smy`;
+  const fallbackMapUrl = `https://www.google.com/maps?q=${venueAddress.coordinates.lat},${venueAddress.coordinates.lng}&hl=en&z=16&output=embed`;
 
   const handleGoogleMaps = () => {
     setLoadingApp("googlemaps");
 
-    // Google Maps URL
-    const googleMapsUrl = `https://www.google.com/maps/search/?api=1&query=${encodeURIComponent(
-      venueAddress.googleMapsQuery
-    )}`;
+    // Google Maps URL using coordinates
+    const googleMapsUrl = `https://www.google.com/maps/search/?api=1&query=${venueAddress.coordinates.lat},${venueAddress.coordinates.lng}`;
 
     window.open(googleMapsUrl, "_blank", "noopener,noreferrer");
 
@@ -59,10 +56,8 @@ export function Location({ isOpen, onClose }: LocationProps) {
   const handleWaze = () => {
     setLoadingApp("waze");
 
-    // Waze URL
-    const wazeUrl = `https://waze.com/ul?q=${encodeURIComponent(
-      venueAddress.wazeQuery
-    )}&navigate=yes`;
+    // Waze URL using coordinates
+    const wazeUrl = `https://waze.com/ul?ll=${venueAddress.coordinates.lat},${venueAddress.coordinates.lng}&navigate=yes`;
 
     window.open(wazeUrl, "_blank", "noopener,noreferrer");
 
@@ -153,7 +148,7 @@ export function Location({ isOpen, onClose }: LocationProps) {
                 onClick={handleWaze}
                 disabled={loadingApp === "waze"}
               >
-                <FaRoute className={styles.navButtonIcon} />
+                <FaWaze className={styles.navButtonIcon} />
                 <span>Waze</span>
                 {loadingApp === "waze" && (
                   <div className={styles.buttonSpinner}></div>
