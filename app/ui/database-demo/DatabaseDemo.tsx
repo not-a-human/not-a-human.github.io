@@ -40,7 +40,10 @@ export default function DatabaseDemo({
     try {
       const result = await db.getAll(tableName);
       if (result.error) {
-        throw new Error(result.error.message || "Failed to load records");
+        const errorMessage = typeof result.error === 'object' 
+          ? result.error.message || JSON.stringify(result.error) 
+          : result.error;
+        throw new Error(errorMessage || "Failed to load records");
       }
       setRecords(result.data);
     } catch (err) {
@@ -60,7 +63,10 @@ export default function DatabaseDemo({
     try {
       const result = await db.create(tableName, newRecord);
       if (result.error) {
-        throw new Error(result.error.message || "Failed to create record");
+        const errorMessage = typeof result.error === 'object' 
+          ? result.error.message || JSON.stringify(result.error) 
+          : result.error;
+        throw new Error(errorMessage || "Failed to create record");
       }
 
       if (result.data) {
@@ -109,7 +115,10 @@ export default function DatabaseDemo({
     try {
       const result = await db.delete(tableName, id);
       if (result.error) {
-        throw new Error(result.error.message || "Failed to delete record");
+        const errorMessage = typeof result.error === 'object' 
+          ? result.error.message || JSON.stringify(result.error) 
+          : result.error;
+        throw new Error(errorMessage || "Failed to delete record");
       }
 
       setRecords((prev) => prev.filter((record) => record.id !== id));
