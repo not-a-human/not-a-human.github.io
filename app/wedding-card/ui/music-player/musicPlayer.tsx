@@ -10,6 +10,7 @@ interface MusicPlayerProps {
 export function MusicPlayer({ isVisible = true }: MusicPlayerProps) {
   const [isPlaying, setIsPlaying] = useState(false);
   const [audio, setAudio] = useState<HTMLAudioElement | null>(null);
+  const [needsUserInteraction, setNeedsUserInteraction] = useState(false);
 
   // Cleanup audio when component unmounts
   useEffect(() => {
@@ -24,7 +25,7 @@ export function MusicPlayer({ isVisible = true }: MusicPlayerProps) {
   // Autoplay when component becomes visible
   useEffect(() => {
     if (isVisible && !audio) {
-      // Initialize and autoplay audio
+      // Initialize audio
       const newAudio = new Audio("/assets/music.ogg");
       newAudio.loop = true;
       newAudio.volume = 0.3;
@@ -37,12 +38,13 @@ export function MusicPlayer({ isVisible = true }: MusicPlayerProps) {
         playPromise
           .then(() => {
             setIsPlaying(true);
+            setNeedsUserInteraction(false);
             console.log("Autoplay started successfully");
           })
           .catch((error) => {
-            console.log("Autoplay failed, user interaction required:", error);
-            // Audio is loaded but not playing, waiting for user interaction
+            console.log("Autoplay blocked, showing user prompt:", error);
             setIsPlaying(false);
+            setNeedsUserInteraction(true);
           });
       }
     } else if (!isVisible && audio && isPlaying) {
@@ -53,6 +55,11 @@ export function MusicPlayer({ isVisible = true }: MusicPlayerProps) {
   }, [isVisible, audio]);
 
   const toggleMusic = () => {
+    // Hide the user interaction prompt once user clicks
+    if (needsUserInteraction) {
+      setNeedsUserInteraction(false);
+    }
+
     if (!audio) {
       // Initialize audio if not already done
       const newAudio = new Audio("/assets/music.ogg");
@@ -91,26 +98,36 @@ export function MusicPlayer({ isVisible = true }: MusicPlayerProps) {
       onClick={toggleMusic}
     >
       <div className={styles.musicContainer}>
-        <div className={styles.musicTitle}>
-          A Thousand Years - Christina Perri (Instrumental)
-        </div>
-        <div className={styles.musicWaves}>
-          <div
-            className={`${styles.wave} ${isPlaying ? styles.waveActive : ""}`}
-          ></div>
-          <div
-            className={`${styles.wave} ${isPlaying ? styles.waveActive : ""}`}
-          ></div>
-          <div
-            className={`${styles.wave} ${isPlaying ? styles.waveActive : ""}`}
-          ></div>
-          <div
-            className={`${styles.wave} ${isPlaying ? styles.waveActive : ""}`}
-          ></div>
-          <div
-            className={`${styles.wave} ${isPlaying ? styles.waveActive : ""}`}
-          ></div>
-        </div>
+        {needsUserInteraction && (
+          <div className={styles.playPrompt}>
+            <div className={styles.playIcon}>🎵</div>
+            <div className={styles.promptText}>Click to play music</div>
+          </div>
+        )}
+        {!needsUserInteraction && (
+          <>
+            <div className={styles.musicTitle}>
+              A Thousand Years - Christina Perri (Instrumental)
+            </div>
+            <div className={styles.musicWaves}>
+              <div
+                className={`${styles.wave} ${isPlaying ? styles.waveActive : ""}`}
+              ></div>
+              <div
+                className={`${styles.wave} ${isPlaying ? styles.waveActive : ""}`}
+              ></div>
+              <div
+                className={`${styles.wave} ${isPlaying ? styles.waveActive : ""}`}
+              ></div>
+              <div
+                className={`${styles.wave} ${isPlaying ? styles.waveActive : ""}`}
+              ></div>
+              <div
+                className={`${styles.wave} ${isPlaying ? styles.waveActive : ""}`}
+              ></div>
+            </div>
+          </>
+        )}
       </div>
     </div>
   );
