@@ -2,10 +2,10 @@
 
 import { useState } from "react";
 import styles from "./location.module.css";
-import { IoCloseOutline } from "react-icons/io5";
 import { FaMapMarkerAlt, FaRoute, FaWaze } from "react-icons/fa";
 import { SiGooglemaps } from "react-icons/si";
 import { GoCopy } from "react-icons/go";
+import { Modal } from "../modal/modal";
 
 interface LocationProps {
   isOpen: boolean;
@@ -29,8 +29,6 @@ const venueAddress = {
 export function Location({ isOpen, onClose }: LocationProps) {
   const [mapLoaded, setMapLoaded] = useState(false);
   const [loadingApp, setLoadingApp] = useState<string | null>(null);
-
-  if (!isOpen) return null;
 
   // Generate Google Maps embed URL
   const googleMapsEmbedUrl = `https://www.google.com/maps/embed/v1/place?key=${
@@ -72,93 +70,84 @@ export function Location({ isOpen, onClose }: LocationProps) {
   };
 
   return (
-    <div className={styles.popupOverlay} onClick={onClose}>
-      <div className={styles.popupContent} onClick={(e) => e.stopPropagation()}>
-        <div className={styles.popupHeader}>
-          <h2 className={styles.popupTitle}>Location</h2>
-          <button className={styles.closeButton} onClick={onClose}>
-            <IoCloseOutline />
-          </button>
+    <Modal isOpen={isOpen} onClose={onClose} title="Location" maxWidth="600px">
+      {/* Venue Information */}
+      <div className={styles.venueInfo}>
+        <div className={styles.venueHeader}>
+          <FaMapMarkerAlt className={styles.venueIcon} />
+          <div>
+            <h3 className={styles.venueName}>{venueAddress.name}</h3>
+            <p className={styles.venueAddress}>{venueAddress.address}</p>
+          </div>
         </div>
 
-        <div className={styles.popupBody}>
-          {/* Venue Information */}
-          <div className={styles.venueInfo}>
-            <div className={styles.venueHeader}>
-              <FaMapMarkerAlt className={styles.venueIcon} />
-              <div>
-                <h3 className={styles.venueName}>{venueAddress.name}</h3>
-                <p className={styles.venueAddress}>{venueAddress.address}</p>
-              </div>
+        <button
+          className={styles.copyButton}
+          onClick={handleCopyAddress}
+          title="Copy address"
+        >
+          <GoCopy /> Copy Address
+        </button>
+      </div>
+
+      {/* Google Map Embed */}
+      <div className={styles.mapContainer}>
+        {!mapLoaded && (
+          <div className={styles.mapPlaceholder}>
+            <div className={styles.mapLoader}>
+              <FaMapMarkerAlt className={styles.mapLoaderIcon} />
+              <p>Loading map...</p>
             </div>
-
-            <button
-              className={styles.copyButton}
-              onClick={handleCopyAddress}
-              title="Copy address"
-            >
-              <GoCopy /> Copy Address
-            </button>
           </div>
+        )}
 
-          {/* Google Map Embed */}
-          <div className={styles.mapContainer}>
-            {!mapLoaded && (
-              <div className={styles.mapPlaceholder}>
-                <div className={styles.mapLoader}>
-                  <FaMapMarkerAlt className={styles.mapLoaderIcon} />
-                  <p>Loading map...</p>
-                </div>
-              </div>
+        <iframe
+          src={fallbackMapUrl}
+          width="100%"
+          height="300"
+          style={{ border: 0, borderRadius: "12px" }}
+          allowFullScreen
+          loading="lazy"
+          referrerPolicy="no-referrer-when-downgrade"
+          title="Wedding Venue Location"
+          onLoad={() => setMapLoaded(true)}
+          className={mapLoaded ? styles.mapVisible : styles.mapHidden}
+        />
+      </div>
+
+      {/* Navigation Buttons */}
+      <div className={styles.navigationSection}>
+        <h4 className={styles.navigationTitle}>Get Directions</h4>
+
+        <div className={styles.navigationButtons}>
+          <button
+            className={`${styles.navButton} ${styles.googleMapsButton}`}
+            onClick={handleGoogleMaps}
+            disabled={loadingApp === "googlemaps"}
+          >
+            <SiGooglemaps className={styles.navButtonIcon} />
+            <span>Google Maps</span>
+            {loadingApp === "googlemaps" && (
+              <div className={styles.buttonSpinner}></div>
             )}
+          </button>
 
-            <iframe
-              src={fallbackMapUrl}
-              width="100%"
-              height="300"
-              style={{ border: 0, borderRadius: "12px" }}
-              allowFullScreen
-              loading="lazy"
-              referrerPolicy="no-referrer-when-downgrade"
-              title="Wedding Venue Location"
-              onLoad={() => setMapLoaded(true)}
-              className={mapLoaded ? styles.mapVisible : styles.mapHidden}
-            />
-          </div>
+          <button
+            className={`${styles.navButton} ${styles.wazeButton}`}
+            onClick={handleWaze}
+            disabled={loadingApp === "waze"}
+          >
+            <FaWaze className={styles.navButtonIcon} />
+            <span>Waze</span>
+            {loadingApp === "waze" && (
+              <div className={styles.buttonSpinner}></div>
+            )}
+          </button>
+        </div>
+      </div>
 
-          {/* Navigation Buttons */}
-          <div className={styles.navigationSection}>
-            <h4 className={styles.navigationTitle}>Get Directions</h4>
-
-            <div className={styles.navigationButtons}>
-              <button
-                className={`${styles.navButton} ${styles.googleMapsButton}`}
-                onClick={handleGoogleMaps}
-                disabled={loadingApp === "googlemaps"}
-              >
-                <SiGooglemaps className={styles.navButtonIcon} />
-                <span>Google Maps</span>
-                {loadingApp === "googlemaps" && (
-                  <div className={styles.buttonSpinner}></div>
-                )}
-              </button>
-
-              <button
-                className={`${styles.navButton} ${styles.wazeButton}`}
-                onClick={handleWaze}
-                disabled={loadingApp === "waze"}
-              >
-                <FaWaze className={styles.navButtonIcon} />
-                <span>Waze</span>
-                {loadingApp === "waze" && (
-                  <div className={styles.buttonSpinner}></div>
-                )}
-              </button>
-            </div>
-          </div>
-
-          {/* Additional Info */}
-          {/* <div className={styles.additionalInfo}>
+      {/* Additional Info */}
+      {/* <div className={styles.additionalInfo}>
             <div className={styles.infoCard}>
               <h4>Event Details</h4>
               <p>
@@ -184,8 +173,6 @@ export function Location({ isOpen, onClose }: LocationProps) {
               Having trouble finding us? Please call the family for assistance.
             </p>
           </div> */}
-        </div>
-      </div>
-    </div>
+    </Modal>
   );
 }

@@ -7,7 +7,15 @@ import { Intro } from "./ui/intro/intro";
 import { useState, useEffect } from "react";
 import { Countdown } from "./ui/countdown/countdown";
 import { Guestbook } from "./ui/guesbook/guestbook";
+import { GuestbookForm } from "./ui/guesbook/guestbookForm";
 import { Footer } from "./ui/footer/footer";
+import { Modal } from "./ui/modal/modal";
+import { Rsvp } from "./ui/rsvp/rsvp";
+import { Location } from "./ui/location/location";
+import { Calendar } from "./ui/calendar/calendar";
+import { MoneyGift } from "./ui/money-gift/moneyGift";
+import { Wishlist } from "./ui/wishlist/wishlist";
+import { DatabaseRecord } from "../../lib/database";
 import {
   useScrollAnimation,
   getAnimationClasses,
@@ -16,6 +24,19 @@ import {
 export default function WeddingCardPage() {
   const [isClient, setIsClient] = useState(false);
   const [showMenu, setShowMenu] = useState(false);
+
+  // Modal state management
+  const [guestbookModalOpen, setGuestbookModalOpen] = useState(false);
+  const [rsvpModalOpen, setRsvpModalOpen] = useState(false);
+  const [locationModalOpen, setLocationModalOpen] = useState(false);
+  const [calendarModalOpen, setCalendarModalOpen] = useState(false);
+  const [wishlistModalOpen, setWishlistModalOpen] = useState(false);
+  const [moneyGiftModalOpen, setMoneyGiftModalOpen] = useState(false);
+
+  // Guestbook entries state (shared between guestbook component and form)
+  const [guestbookEntries, setGuestbookEntries] = useState<DatabaseRecord[]>(
+    []
+  );
 
   // Scroll animation hooks for each section
   const mainPageAnimation = useScrollAnimation({ threshold: 0.2 });
@@ -215,7 +236,11 @@ export default function WeddingCardPage() {
           400
         )}
       >
-        <Guestbook />
+        <Guestbook
+          onOpenModal={() => setGuestbookModalOpen(true)}
+          entries={guestbookEntries}
+          onEntriesUpdate={setGuestbookEntries}
+        />
       </div>
 
       <div
@@ -229,7 +254,63 @@ export default function WeddingCardPage() {
         <Footer />
       </div>
 
-      {showMenu && <Menu />}
+      {showMenu && (
+        <Menu
+          onOpenRsvp={() => setRsvpModalOpen(true)}
+          onOpenMoneyGift={() => setMoneyGiftModalOpen(true)}
+          onOpenWishlist={() => setWishlistModalOpen(true)}
+          onOpenLocation={() => setLocationModalOpen(true)}
+          onOpenCalendar={() => setCalendarModalOpen(true)}
+        />
+      )}
+
+      {/* Centralized Modal Management */}
+      {guestbookModalOpen && (
+        <Modal
+          isOpen={guestbookModalOpen}
+          onClose={() => setGuestbookModalOpen(false)}
+          title="Tinggalkan Ucapan"
+          maxWidth="400px"
+        >
+          <GuestbookForm
+            onSuccess={() => setGuestbookModalOpen(false)}
+            onCancel={() => setGuestbookModalOpen(false)}
+            onEntriesUpdate={setGuestbookEntries}
+          />
+        </Modal>
+      )}
+
+      {rsvpModalOpen && (
+        <Rsvp isOpen={rsvpModalOpen} onClose={() => setRsvpModalOpen(false)} />
+      )}
+
+      {locationModalOpen && (
+        <Location
+          isOpen={locationModalOpen}
+          onClose={() => setLocationModalOpen(false)}
+        />
+      )}
+
+      {calendarModalOpen && (
+        <Calendar
+          isOpen={calendarModalOpen}
+          onClose={() => setCalendarModalOpen(false)}
+        />
+      )}
+
+      {wishlistModalOpen && (
+        <Wishlist
+          isOpen={wishlistModalOpen}
+          onClose={() => setWishlistModalOpen(false)}
+        />
+      )}
+
+      {moneyGiftModalOpen && (
+        <MoneyGift
+          isOpen={moneyGiftModalOpen}
+          onClose={() => setMoneyGiftModalOpen(false)}
+        />
+      )}
     </div>
   );
 }

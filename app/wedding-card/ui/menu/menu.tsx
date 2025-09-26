@@ -7,11 +7,14 @@ import { LuUserRoundCheck } from "react-icons/lu";
 import { BsCashCoin } from "react-icons/bs";
 import { GrMapLocation } from "react-icons/gr";
 import { RxCalendar } from "react-icons/rx";
-import { Rsvp } from "../rsvp/rsvp";
-import { MoneyGift } from "../money-gift/moneyGift";
-import { Wishlist } from "../wishlist/wishlist";
-import { Location } from "../location/location";
-import { Calendar } from "../calendar/calendar";
+
+interface MenuProps {
+  onOpenRsvp?: () => void;
+  onOpenMoneyGift?: () => void;
+  onOpenWishlist?: () => void;
+  onOpenLocation?: () => void;
+  onOpenCalendar?: () => void;
+}
 
 const menuItems = [
   { label: "RSVP", link: "#rsvp", icon: <LuUserRoundCheck /> },
@@ -21,14 +24,15 @@ const menuItems = [
   { label: "Calendar", link: "#calendar", icon: <RxCalendar /> },
 ];
 
-export function Menu() {
+export function Menu({
+  onOpenRsvp,
+  onOpenMoneyGift,
+  onOpenWishlist,
+  onOpenLocation,
+  onOpenCalendar,
+}: MenuProps) {
   const [hoveredIndex, setHoveredIndex] = useState<number | null>(null);
   const [clickedIndex, setClickedIndex] = useState<number | null>(null);
-  const [showRsvpPopup, setShowRsvpPopup] = useState(false);
-  const [showMoneyGiftPopup, setShowMoneyGiftPopup] = useState(false);
-  const [showWishlistPopup, setShowWishlistPopup] = useState(false);
-  const [showLocationPopup, setShowLocationPopup] = useState(false);
-  const [showCalendarPopup, setShowCalendarPopup] = useState(false);
 
   const handleMouseEnter = (index: number) => {
     setHoveredIndex(index);
@@ -43,29 +47,21 @@ export function Menu() {
     // Hide tooltip after 2 seconds on click
     setTimeout(() => setClickedIndex(null), 2000);
 
-    // Open RSVP popup for the first menu item (RSVP)
+    // Open appropriate modal using callback props
     if (index === 0) {
-      setShowRsvpPopup(true);
+      onOpenRsvp?.();
     }
-
-    // Open Money Gift popup for the second menu item (Money Gift)
     if (index === 1) {
-      setShowMoneyGiftPopup(true);
+      onOpenMoneyGift?.();
     }
-
-    // Open Wishlist popup for the third menu item (Wishlist)
     if (index === 2) {
-      setShowWishlistPopup(true);
+      onOpenWishlist?.();
     }
-
-    // Open Location popup for the fourth menu item (Location)
     if (index === 3) {
-      setShowLocationPopup(true);
+      onOpenLocation?.();
     }
-
-    // Open Calendar popup for the fifth menu item (Calendar)
     if (index === 4) {
-      setShowCalendarPopup(true);
+      onOpenCalendar?.();
     }
   };
 
@@ -87,24 +83,6 @@ export function Menu() {
           </div>
         ))}
       </div>
-
-      <Rsvp isOpen={showRsvpPopup} onClose={() => setShowRsvpPopup(false)} />
-      <MoneyGift
-        isOpen={showMoneyGiftPopup}
-        onClose={() => setShowMoneyGiftPopup(false)}
-      />
-      <Wishlist
-        isOpen={showWishlistPopup}
-        onClose={() => setShowWishlistPopup(false)}
-      />
-      <Location
-        isOpen={showLocationPopup}
-        onClose={() => setShowLocationPopup(false)}
-      />
-      <Calendar
-        isOpen={showCalendarPopup}
-        onClose={() => setShowCalendarPopup(false)}
-      />
     </>
   );
 }

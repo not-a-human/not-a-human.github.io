@@ -2,10 +2,10 @@
 
 import { useState } from "react";
 import styles from "./wishlist.module.css";
-import { IoCloseOutline } from "react-icons/io5";
 import { FiExternalLink } from "react-icons/fi";
 import { GoCopy } from "react-icons/go";
 import { FaMapMarkerAlt, FaPhone } from "react-icons/fa";
+import { Modal } from "../modal/modal";
 
 interface WishlistProps {
   isOpen: boolean;
@@ -123,109 +123,101 @@ export function Wishlist({ isOpen, onClose }: WishlistProps) {
   };
 
   return (
-    <div className={styles.popupOverlay} onClick={onClose}>
-      <div className={styles.popupContent} onClick={(e) => e.stopPropagation()}>
-        <div className={styles.popupHeader}>
-          <h2 className={styles.popupTitle}>Wedding Wishlist</h2>
-          <button className={styles.closeButton} onClick={onClose}>
-            <IoCloseOutline />
-          </button>
+    <Modal
+      isOpen={isOpen}
+      onClose={onClose}
+      title="Wedding Wishlist"
+      maxWidth="600px"
+    >
+      <div className={styles.wishlistIntro}>
+        <p>Help us start our new journey together! 💝</p>
+        <p>Click on any item to view it on Shopee.</p>
+      </div>
+
+      {/* Delivery Information Section */}
+      <div className={styles.deliverySection}>
+        <div className={styles.infoCard}>
+          <div className={styles.cardHeader}>
+            <FaMapMarkerAlt className={styles.cardIcon} />
+            <h3 className={styles.cardTitle}>Alamat Penghantaran</h3>
+          </div>
+          <div className={styles.infoContent}>
+            <p className={styles.recipientName}>{deliveryInfo.recipientName}</p>
+            <p className={styles.address}>{deliveryInfo.address}</p>
+            <button
+              className={styles.copyButton}
+              onClick={handleCopyAddress}
+              title="Copy address"
+            >
+              <GoCopy /> Copy Address
+            </button>
+          </div>
         </div>
 
-        <div className={styles.popupBody}>
-          <div className={styles.wishlistIntro}>
-            <p>Help us start our new journey together! 💝</p>
-            <p>Click on any item to view it on Shopee.</p>
+        <div className={styles.infoCard}>
+          <div className={styles.cardHeader}>
+            <FaPhone className={styles.cardIcon} />
+            <h3 className={styles.cardTitle}>Nombor Telefon</h3>
           </div>
-
-          {/* Delivery Information Section */}
-          <div className={styles.deliverySection}>
-            <div className={styles.infoCard}>
-              <div className={styles.cardHeader}>
-                <FaMapMarkerAlt className={styles.cardIcon} />
-                <h3 className={styles.cardTitle}>Alamat Penghantaran</h3>
-              </div>
-              <div className={styles.infoContent}>
-                <p className={styles.recipientName}>
-                  {deliveryInfo.recipientName}
-                </p>
-                <p className={styles.address}>{deliveryInfo.address}</p>
-                <button
-                  className={styles.copyButton}
-                  onClick={handleCopyAddress}
-                  title="Copy address"
-                >
-                  <GoCopy /> Copy Address
-                </button>
-              </div>
-            </div>
-
-            <div className={styles.infoCard}>
-              <div className={styles.cardHeader}>
-                <FaPhone className={styles.cardIcon} />
-                <h3 className={styles.cardTitle}>Nombor Telefon</h3>
-              </div>
-              <div className={styles.infoContent}>
-                <p className={styles.phoneNumber}>{deliveryInfo.phoneNumber}</p>
-                <button
-                  className={styles.copyButton}
-                  onClick={handleCopyPhone}
-                  title="Copy phone number"
-                >
-                  <GoCopy /> Copy Number
-                </button>
-              </div>
-            </div>
-          </div>
-
-          <div className={styles.itemsGrid}>
-            {wishlistItems.map((item) => (
-              <div
-                key={item.id}
-                className={`${styles.itemCard} ${
-                  loadingItems.includes(item.id) ? styles.loading : ""
-                }`}
-                onClick={() => handleItemClick(item)}
-              >
-                <div className={styles.imageContainer}>
-                  <img
-                    src={item.image}
-                    alt={item.name}
-                    className={styles.itemImage}
-                    onError={handleImageError}
-                  />
-                  <div className={styles.linkIcon}>
-                    <FiExternalLink />
-                  </div>
-                </div>
-
-                <div className={styles.itemInfo}>
-                  <h3 className={styles.itemName}>{item.name}</h3>
-                  {item.description && (
-                    <p className={styles.itemDescription}>{item.description}</p>
-                  )}
-                  {item.price && (
-                    <div className={styles.itemPrice}>{item.price}</div>
-                  )}
-                </div>
-
-                {loadingItems.includes(item.id) && (
-                  <div className={styles.loadingOverlay}>
-                    <div className={styles.spinner}></div>
-                  </div>
-                )}
-              </div>
-            ))}
-          </div>
-
-          <div className={styles.thankYouMessage}>
-            <p>Thank you for helping us build our future together! 🏠💕</p>
-            <p>
-              Terima kasih kerana membantu kami membina masa depan bersama! 🏠💕
-            </p>
+          <div className={styles.infoContent}>
+            <p className={styles.phoneNumber}>{deliveryInfo.phoneNumber}</p>
+            <button
+              className={styles.copyButton}
+              onClick={handleCopyPhone}
+              title="Copy phone number"
+            >
+              <GoCopy /> Copy Number
+            </button>
           </div>
         </div>
       </div>
-    </div>
+
+      <div className={styles.itemsGrid}>
+        {wishlistItems.map((item) => (
+          <div
+            key={item.id}
+            className={`${styles.itemCard} ${
+              loadingItems.includes(item.id) ? styles.loading : ""
+            }`}
+            onClick={() => handleItemClick(item)}
+          >
+            <div className={styles.imageContainer}>
+              <img
+                src={item.image}
+                alt={item.name}
+                className={styles.itemImage}
+                onError={handleImageError}
+              />
+              <div className={styles.linkIcon}>
+                <FiExternalLink />
+              </div>
+            </div>
+
+            <div className={styles.itemInfo}>
+              <h3 className={styles.itemName}>{item.name}</h3>
+              {item.description && (
+                <p className={styles.itemDescription}>{item.description}</p>
+              )}
+              {item.price && (
+                <div className={styles.itemPrice}>{item.price}</div>
+              )}
+            </div>
+
+            {loadingItems.includes(item.id) && (
+              <div className={styles.loadingOverlay}>
+                <div className={styles.spinner}></div>
+              </div>
+            )}
+          </div>
+        ))}
+      </div>
+
+      <div className={styles.thankYouMessage}>
+        <p>Thank you for helping us build our future together! 🏠💕</p>
+        <p>
+          Terima kasih kerana membantu kami membina masa depan bersama! 🏠💕
+        </p>
+      </div>
+    </Modal>
   );
 }

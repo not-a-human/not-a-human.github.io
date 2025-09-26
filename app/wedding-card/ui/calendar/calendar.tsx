@@ -2,9 +2,9 @@
 
 import { useState } from "react";
 import styles from "./calendar.module.css";
-import { IoCloseOutline } from "react-icons/io5";
 import { FaCalendarAlt, FaApple, FaMarker } from "react-icons/fa";
 import { SiGooglecalendar } from "react-icons/si";
+import { Modal } from "../modal/modal";
 
 interface CalendarProps {
   isOpen: boolean;
@@ -42,8 +42,6 @@ const malayMonths = [
 export function Calendar({ isOpen, onClose }: CalendarProps) {
   const [currentDate, setCurrentDate] = useState(new Date(2025, 10, 1)); // November 2025
   const [loadingCalendar, setLoadingCalendar] = useState<string | null>(null);
-
-  if (!isOpen) return null;
 
   // Get calendar data for the current month
   const getCalendarDays = () => {
@@ -171,126 +169,112 @@ END:VCALENDAR`;
   const calendarDays = getCalendarDays();
 
   return (
-    <div className={styles.popupOverlay} onClick={onClose}>
-      <div className={styles.popupContent} onClick={(e) => e.stopPropagation()}>
-        <div className={styles.popupHeader}>
-          <h2 className={styles.popupTitle}>Calendar</h2>
-          <button className={styles.closeButton} onClick={onClose}>
-            <IoCloseOutline />
-          </button>
-        </div>
-
-        <div className={styles.popupBody}>
-          {/* Wedding Event Info */}
-          <div className={styles.eventInfo}>
-            <div className={styles.eventHeader}>
-              <FaCalendarAlt className={styles.eventIcon} />
-              <div>
-                <h3 className={styles.eventTitle}>{weddingEvent.title}</h3>
-                <p className={styles.eventDate}>
-                  Ahad, 9 November 2025 • 5:00 PM - 6:30 PM
-                </p>
-              </div>
-            </div>
-          </div>
-
-          {/* Calendar Navigation */}
-          <div className={styles.calendarHeader}>
-            <button
-              className={styles.navButton}
-              onClick={() => navigateMonth("prev")}
-            >
-              ‹
-            </button>
-            <h3 className={styles.monthYear}>
-              {malayMonths[currentDate.getMonth()]} {currentDate.getFullYear()}
-            </h3>
-            <button
-              className={styles.navButton}
-              onClick={() => navigateMonth("next")}
-            >
-              ›
-            </button>
-          </div>
-
-          {/* Calendar Grid */}
-          <div className={styles.calendar}>
-            {/* Day headers */}
-            <div className={styles.dayHeaders}>
-              {malayDays.map((day) => (
-                <div key={day} className={styles.dayHeader}>
-                  {day}
-                </div>
-              ))}
-            </div>
-
-            {/* Calendar days */}
-            <div className={styles.daysGrid}>
-              {calendarDays.map((date, index) => (
-                <div
-                  key={index}
-                  className={`${styles.dayCell} ${
-                    !isCurrentMonth(date) ? styles.otherMonth : ""
-                  } ${isToday(date) ? styles.today : ""} ${
-                    isWeddingDate(date) ? styles.weddingDate : ""
-                  }`}
-                >
-                  <span className={styles.dayNumber}>{date.getDate()}</span>
-                  {isWeddingDate(date) && (
-                    <div className={styles.weddingDot}>
-                      <FaMarker />
-                    </div>
-                  )}
-                </div>
-              ))}
-            </div>
-          </div>
-
-          {/* Calendar Action Buttons */}
-          <div className={styles.calendarActions}>
-            <h4 className={styles.actionsTitle}>Add to Calendar</h4>
-
-            <div className={styles.actionButtons}>
-              <button
-                className={`${styles.actionButton} ${styles.googleButton}`}
-                onClick={handleGoogleCalendar}
-                disabled={loadingCalendar === "google"}
-              >
-                <SiGooglecalendar className={styles.actionButtonIcon} />
-                <span>Google Calendar</span>
-                {loadingCalendar === "google" && (
-                  <div className={styles.buttonSpinner}></div>
-                )}
-              </button>
-
-              <button
-                className={`${styles.actionButton} ${styles.appleButton}`}
-                onClick={handleAppleCalendar}
-                disabled={loadingCalendar === "apple"}
-              >
-                <FaApple className={styles.actionButtonIcon} />
-                <span>Apple Calendar</span>
-                {loadingCalendar === "apple" && (
-                  <div className={styles.buttonSpinner}></div>
-                )}
-              </button>
-            </div>
-          </div>
-
-          {/* Additional Info */}
-          <div className={styles.additionalInfo}>
-            <div className={styles.infoText}>
-              <p>
-                <FaCalendarAlt /> Save the date and never miss our special
-                moment!
-              </p>
-              <p>
-                The event will be added to your calendar with all the details.
-              </p>
-            </div>
+    <Modal isOpen={isOpen} onClose={onClose} title="Calendar" maxWidth="700px">
+      {/* Wedding Event Info */}
+      <div className={styles.eventInfo}>
+        <div className={styles.eventHeader}>
+          <FaCalendarAlt className={styles.eventIcon} />
+          <div>
+            <h3 className={styles.eventTitle}>{weddingEvent.title}</h3>
+            <p className={styles.eventDate}>
+              Ahad, 9 November 2025 • 5:00 PM - 6:30 PM
+            </p>
           </div>
         </div>
       </div>
-    </div>
+
+      {/* Calendar Navigation */}
+      <div className={styles.calendarHeader}>
+        <button
+          className={styles.navButton}
+          onClick={() => navigateMonth("prev")}
+        >
+          ‹
+        </button>
+        <h3 className={styles.monthYear}>
+          {malayMonths[currentDate.getMonth()]} {currentDate.getFullYear()}
+        </h3>
+        <button
+          className={styles.navButton}
+          onClick={() => navigateMonth("next")}
+        >
+          ›
+        </button>
+      </div>
+
+      {/* Calendar Grid */}
+      <div className={styles.calendar}>
+        {/* Day headers */}
+        <div className={styles.dayHeaders}>
+          {malayDays.map((day) => (
+            <div key={day} className={styles.dayHeader}>
+              {day}
+            </div>
+          ))}
+        </div>
+
+        {/* Calendar days */}
+        <div className={styles.daysGrid}>
+          {calendarDays.map((date, index) => (
+            <div
+              key={index}
+              className={`${styles.dayCell} ${
+                !isCurrentMonth(date) ? styles.otherMonth : ""
+              } ${isToday(date) ? styles.today : ""} ${
+                isWeddingDate(date) ? styles.weddingDate : ""
+              }`}
+            >
+              <span className={styles.dayNumber}>{date.getDate()}</span>
+              {isWeddingDate(date) && (
+                <div className={styles.weddingDot}>
+                  <FaMarker />
+                </div>
+              )}
+            </div>
+          ))}
+        </div>
+      </div>
+
+      {/* Calendar Action Buttons */}
+      <div className={styles.calendarActions}>
+        <h4 className={styles.actionsTitle}>Add to Calendar</h4>
+
+        <div className={styles.actionButtons}>
+          <button
+            className={`${styles.actionButton} ${styles.googleButton}`}
+            onClick={handleGoogleCalendar}
+            disabled={loadingCalendar === "google"}
+          >
+            <SiGooglecalendar className={styles.actionButtonIcon} />
+            <span>Google Calendar</span>
+            {loadingCalendar === "google" && (
+              <div className={styles.buttonSpinner}></div>
+            )}
+          </button>
+
+          <button
+            className={`${styles.actionButton} ${styles.appleButton}`}
+            onClick={handleAppleCalendar}
+            disabled={loadingCalendar === "apple"}
+          >
+            <FaApple className={styles.actionButtonIcon} />
+            <span>Apple Calendar</span>
+            {loadingCalendar === "apple" && (
+              <div className={styles.buttonSpinner}></div>
+            )}
+          </button>
+        </div>
+      </div>
+
+      {/* Additional Info */}
+      <div className={styles.additionalInfo}>
+        <div className={styles.infoText}>
+          <p>
+            <FaCalendarAlt /> Save the date and never miss our special moment!
+          </p>
+          <p>The event will be added to your calendar with all the details.</p>
+        </div>
+      </div>
+    </Modal>
   );
 }

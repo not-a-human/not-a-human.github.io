@@ -3,6 +3,7 @@
 import { useState } from "react";
 import styles from "./rsvp.module.css";
 import { createDatabaseClient, DatabaseRecord } from "../../../../lib/database";
+import { Modal } from "../modal/modal";
 
 interface RsvpProps {
   isOpen: boolean;
@@ -151,7 +152,18 @@ export function Rsvp({ isOpen, onClose }: RsvpProps) {
       showSnackbar("RSVP berjaya dihantar!", "success");
       // Close after a short delay to let user see the success message
       setTimeout(() => {
-        handleClose();
+        // Reset form and close modal
+        setRsvpForm({
+          name: "",
+          tel: "",
+          attendance: "",
+          numberOfGuests: 0,
+        });
+        setErrors({
+          tel: "",
+          numberOfGuests: "",
+        });
+        onClose();
       }, 1500);
     } catch (error) {
       showSnackbar("Ralat menghantar RSVP. Sila cuba lagi.", "error");
@@ -199,32 +211,9 @@ export function Rsvp({ isOpen, onClose }: RsvpProps) {
     }
   };
 
-  const handleClose = () => {
-    setRsvpForm({
-      name: "",
-      tel: "",
-      attendance: "",
-      numberOfGuests: 0,
-    });
-    setErrors({
-      tel: "",
-      numberOfGuests: "",
-    });
-    onClose();
-  };
-
-  if (!isOpen) return null;
-
   return (
-    <div className={styles.popupOverlay} onClick={handleClose}>
-      <div className={styles.popupContent} onClick={(e) => e.stopPropagation()}>
-        <div className={styles.popupHeader}>
-          <h2 className={styles.popupTitle}>RSVP</h2>
-          <button className={styles.closeButton} onClick={handleClose}>
-            ×
-          </button>
-        </div>
-
+    <>
+      <Modal isOpen={isOpen} onClose={onClose} title="RSVP" maxWidth="500px">
         <form onSubmit={handleSubmit} className={styles.formContainer}>
           <div className={styles.formGroup}>
             <label htmlFor="name" className={styles.label}>
@@ -309,7 +298,7 @@ export function Rsvp({ isOpen, onClose }: RsvpProps) {
           <div className={styles.formActions}>
             <button
               type="button"
-              onClick={handleClose}
+              onClick={onClose}
               className={styles.cancelButton}
             >
               Batal
@@ -331,7 +320,7 @@ export function Rsvp({ isOpen, onClose }: RsvpProps) {
             </button>
           </div>
         </form>
-      </div>
+      </Modal>
 
       {/* Snackbar Notification */}
       {snackbar.show && (
@@ -352,6 +341,6 @@ export function Rsvp({ isOpen, onClose }: RsvpProps) {
           </div>
         </div>
       )}
-    </div>
+    </>
   );
 }

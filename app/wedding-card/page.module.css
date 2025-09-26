@@ -119,7 +119,7 @@
   background-size: 200% 100%;
   animation: strongShimmer 4s ease-in-out infinite;
   pointer-events: none;
-  z-index: 2;
+  z-index: 1;
   mix-blend-mode: overlay;
 }
 

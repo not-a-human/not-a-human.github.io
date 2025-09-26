@@ -2,9 +2,9 @@
 
 import { useState } from "react";
 import styles from "./moneyGift.module.css";
-import { IoCloseOutline } from "react-icons/io5";
 import { FiDownload } from "react-icons/fi";
 import { GoCopy } from "react-icons/go";
+import { Modal } from "../modal/modal";
 
 interface MoneyGiftProps {
   isOpen: boolean;
@@ -46,75 +46,67 @@ export function MoneyGift({ isOpen, onClose }: MoneyGiftProps) {
   };
 
   return (
-    <div className={styles.popupOverlay} onClick={onClose}>
-      <div className={styles.popupContent} onClick={(e) => e.stopPropagation()}>
-        <div className={styles.popupHeader}>
-          <h2 className={styles.popupTitle}>Money Gift</h2>
-          <button className={styles.closeButton} onClick={onClose}>
-            <IoCloseOutline />
-          </button>
-        </div>
+    <Modal
+      isOpen={isOpen}
+      onClose={onClose}
+      title="Money Gift"
+      maxWidth="450px"
+    >
+      <div className={styles.bankingSection}>
+        <div className={styles.infoCard}>
+          <h3 className={styles.sectionTitle}>Banking Information</h3>
 
-        <div className={styles.popupBody}>
-          <div className={styles.bankingSection}>
-            <div className={styles.infoCard}>
-              <h3 className={styles.sectionTitle}>Banking Information</h3>
+          <div className={styles.infoRow}>
+            <span className={styles.label}>Nama Bank:</span>
+            <span className={styles.value}>{bankingInfo.bankName}</span>
+          </div>
 
-              <div className={styles.infoRow}>
-                <span className={styles.label}>Nama Bank:</span>
-                <span className={styles.value}>{bankingInfo.bankName}</span>
-              </div>
-
-              <div className={styles.infoRow}>
-                <span className={styles.label}>No Akaun:</span>
-                <div className={styles.accountWrapper}>
-                  <span className={styles.value}>
-                    {bankingInfo.accountNumber}
-                  </span>
-                  <button
-                    className={styles.copyButton}
-                    onClick={handleCopyAccountNumber}
-                    title="Copy account number"
-                  >
-                    <GoCopy />
-                  </button>
-                </div>
-              </div>
-            </div>
-
-            <div className={styles.qrSection}>
-              <h3 className={styles.sectionTitle}>Kod QR</h3>
-              <div className={styles.qrContainer}>
-                <img
-                  src={bankingInfo.qrCodeUrl}
-                  alt="QR Code for Payment"
-                  className={styles.qrImage}
-                  onError={(e) => {
-                    // Fallback if QR image is not found
-                    const target = e.target as HTMLImageElement;
-                    target.src =
-                      'data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" width="200" height="200" viewBox="0 0 200 200"><rect width="200" height="200" fill="%23f0c97b"/><text x="100" y="100" text-anchor="middle" dominant-baseline="middle" fill="white" font-size="16">QR Code</text></svg>';
-                  }}
-                />
-              </div>
-
+          <div className={styles.infoRow}>
+            <span className={styles.label}>No Akaun:</span>
+            <div className={styles.accountWrapper}>
+              <span className={styles.value}>{bankingInfo.accountNumber}</span>
               <button
-                className={styles.saveButton}
-                onClick={handleSaveQR}
-                disabled={isDownloading}
+                className={styles.copyButton}
+                onClick={handleCopyAccountNumber}
+                title="Copy account number"
               >
-                <FiDownload />
-                {isDownloading ? "Saving..." : "Simpan"}
+                <GoCopy />
               </button>
             </div>
           </div>
+        </div>
 
-          <div className={styles.thankYouMessage}>
-            <p>Terima kasih atas sumbangan anda! 🙏</p>
-            <p>Thank you for your generous gift! 🙏</p>
+        <div className={styles.qrSection}>
+          <h3 className={styles.sectionTitle}>Kod QR</h3>
+          <div className={styles.qrContainer}>
+            <img
+              src={bankingInfo.qrCodeUrl}
+              alt="QR Code for Payment"
+              className={styles.qrImage}
+              onError={(e) => {
+                // Fallback if QR image is not found
+                const target = e.target as HTMLImageElement;
+                target.src =
+                  'data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" width="200" height="200" viewBox="0 0 200 200"><rect width="200" height="200" fill="%23f0c97b"/><text x="100" y="100" text-anchor="middle" dominant-baseline="middle" fill="white" font-size="16">QR Code</text></svg>';
+              }}
+            />
           </div>
+
+          <button
+            className={styles.saveButton}
+            onClick={handleSaveQR}
+            disabled={isDownloading}
+          >
+            <FiDownload />
+            {isDownloading ? "Saving..." : "Simpan"}
+          </button>
         </div>
       </div>
-    </div>
+
+      <div className={styles.thankYouMessage}>
+        <p>Terima kasih atas sumbangan anda! 🙏</p>
+        <p>Thank you for your generous gift! 🙏</p>
+      </div>
+    </Modal>
   );
 }
