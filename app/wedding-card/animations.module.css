@@ -1,0 +1,158 @@
+/* Scroll Animation Styles */
+
+/* Base animation class */
+.scrollAnimation {
+  transition: all 0.8s cubic-bezier(0.4, 0, 0.2, 1);
+  will-change: opacity, transform;
+}
+
+/* Animation variants */
+.fadeIn {
+  opacity: 0;
+  transition: opacity 0.8s ease-out;
+}
+
+.fadeIn.visible {
+  opacity: 1;
+}
+
+.fadeInUp {
+  opacity: 0;
+  transform: translateY(30px);
+  transition: all 0.8s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.fadeInUp.visible {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+.fadeInDown {
+  opacity: 0;
+  transform: translateY(-30px);
+  transition: all 0.8s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.fadeInDown.visible {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+.fadeInLeft {
+  opacity: 0;
+  transform: translateX(-30px);
+  transition: all 0.8s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.fadeInLeft.visible {
+  opacity: 1;
+  transform: translateX(0);
+}
+
+.fadeInRight {
+  opacity: 0;
+  transform: translateX(30px);
+  transition: all 0.8s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.fadeInRight.visible {
+  opacity: 1;
+  transform: translateX(0);
+}
+
+.scaleUp {
+  opacity: 0;
+  transform: scale(0.9);
+  transition: all 0.8s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.scaleUp.visible {
+  opacity: 1;
+  transform: scale(1);
+}
+
+.slideUp {
+  opacity: 0;
+  transform: translateY(50px);
+  transition: all 1s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.slideUp.visible {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+.slideDown {
+  opacity: 0;
+  transform: translateY(-50px);
+  transition: all 1s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.slideDown.visible {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+/* Delay variations */
+.delay-100 {
+  transition-delay: 0.1s;
+}
+
+.delay-200 {
+  transition-delay: 0.2s;
+}
+
+.delay-300 {
+  transition-delay: 0.3s;
+}
+
+.delay-400 {
+  transition-delay: 0.4s;
+}
+
+.delay-500 {
+  transition-delay: 0.5s;
+}
+
+.delay-600 {
+  transition-delay: 0.6s;
+}
+
+/* Stagger animation for multiple elements */
+.stagger-1 {
+  transition-delay: 0.1s;
+}
+.stagger-2 {
+  transition-delay: 0.2s;
+}
+.stagger-3 {
+  transition-delay: 0.3s;
+}
+.stagger-4 {
+  transition-delay: 0.4s;
+}
+.stagger-5 {
+  transition-delay: 0.5s;
+}
+
+/* Smooth scrolling enhancement */
+.scrollContainer {
+  scroll-behavior: smooth;
+}
+
+/* Reduced motion for accessibility */
+@media (prefers-reduced-motion: reduce) {
+  .scrollAnimation,
+  .fadeIn,
+  .fadeInUp,
+  .fadeInDown,
+  .fadeInLeft,
+  .fadeInRight,
+  .scaleUp,
+  .slideUp,
+  .slideDown {
+    transition: none;
+    transform: none;
+    opacity: 1;
+  }
+}

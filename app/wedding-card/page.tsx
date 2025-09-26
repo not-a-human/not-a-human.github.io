@@ -8,13 +8,32 @@ import { useState, useEffect } from "react";
 import { Countdown } from "./ui/countdown/countdown";
 import { Guestbook } from "./ui/guesbook/guestbook";
 import { Footer } from "./ui/footer/footer";
+import {
+  useScrollAnimation,
+  getAnimationClasses,
+} from "./hooks/useScrollAnimation";
 
 export default function WeddingCardPage() {
   const [isClient, setIsClient] = useState(false);
   const [showMenu, setShowMenu] = useState(false);
 
+  // Scroll animation hooks for each section
+  const mainPageAnimation = useScrollAnimation({ threshold: 0.2 });
+  const introAnimation = useScrollAnimation({ threshold: 0.3 });
+  const countdownAnimation = useScrollAnimation({ threshold: 0.3 });
+  const guestbookAnimation = useScrollAnimation({ threshold: 0.3 });
+  const footerAnimation = useScrollAnimation({ threshold: 0.3 });
+
   useEffect(() => {
     setIsClient(true);
+
+    // Prevent browser scroll restoration and scroll to top
+    if ('scrollRestoration' in history) {
+      history.scrollRestoration = 'manual';
+    }
+    
+    // Scroll to top when page loads/reloads
+    window.scrollTo({ top: 0, behavior: 'instant' });
 
     // Apply wedding-specific body and html styles
     const originalBodyStyle = {
@@ -59,6 +78,29 @@ export default function WeddingCardPage() {
         originalHtmlStyle.scrollbarTrackColor;
       document.documentElement.style.height = originalHtmlStyle.height;
     };
+  }, []);
+
+  // Ensure scroll to top on page load/reload
+  useEffect(() => {
+    // Force scroll to top on mount
+    if (typeof window !== 'undefined') {
+      // Use setTimeout to ensure it runs after any other scroll effects
+      setTimeout(() => {
+        window.scrollTo({ top: 0, behavior: 'instant' });
+      }, 0);
+
+      // Also listen for the window load event as additional safeguard
+      const handleLoad = () => {
+        window.scrollTo({ top: 0, behavior: 'instant' });
+      };
+
+      if (document.readyState === 'complete') {
+        handleLoad();
+      } else {
+        window.addEventListener('load', handleLoad);
+        return () => window.removeEventListener('load', handleLoad);
+      }
+    }
   }, []);
 
   useEffect(() => {
@@ -132,11 +174,58 @@ export default function WeddingCardPage() {
         <div className={styles.patternOverlay}></div>
       </div>
 
-      <MainPage />
-      <Intro />
-      <Countdown targetDate="2025-11-09T09:00:00.000Z" />
-      <Guestbook />
-      <Footer />
+      {/* Main sections with scroll animations */}
+      <div
+        ref={mainPageAnimation.ref}
+        className={getAnimationClasses(mainPageAnimation.isVisible, "fadeIn")}
+      >
+        <MainPage />
+      </div>
+
+      <div
+        ref={introAnimation.ref}
+        className={getAnimationClasses(
+          introAnimation.isVisible,
+          "fadeInUp",
+          200
+        )}
+      >
+        <Intro />
+      </div>
+
+      <div
+        ref={countdownAnimation.ref}
+        className={getAnimationClasses(
+          countdownAnimation.isVisible,
+          "scaleUp",
+          300
+        )}
+      >
+        <Countdown targetDate="2025-11-09T09:00:00.000Z" />
+      </div>
+
+      <div
+        ref={guestbookAnimation.ref}
+        className={getAnimationClasses(
+          guestbookAnimation.isVisible,
+          "fadeInUp",
+          400
+        )}
+      >
+        <Guestbook />
+      </div>
+
+      <div
+        ref={footerAnimation.ref}
+        className={getAnimationClasses(
+          footerAnimation.isVisible,
+          "fadeIn",
+          500
+        )}
+      >
+        <Footer />
+      </div>
+
       {showMenu && <Menu />}
     </div>
   );
