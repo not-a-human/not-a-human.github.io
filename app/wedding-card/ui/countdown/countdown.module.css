@@ -1,0 +1,127 @@
+.countdownContainer {
+  text-align: center;
+  padding: 2rem 1rem;
+  margin: 2rem 0.5rem;
+  background: linear-gradient(
+    135deg,
+    rgba(240, 201, 123, 0.1),
+    rgba(190, 130, 43, 0.1)
+  );
+  border-radius: 20px;
+  border: 2px solid rgba(240, 201, 123, 0.3);
+  backdrop-filter: blur(10px);
+}
+
+.countdownTitle {
+  font-family: var(--font-cinzel), serif;
+  font-size: 1.5rem;
+  font-weight: 600;
+  color: var(--primary-color);
+  margin-bottom: 1.5rem;
+  text-shadow: 0 2px 4px rgba(0, 0, 0, 0.3);
+}
+
+.countdown {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 0.5rem;
+  margin: 1.5rem 0;
+  flex-wrap: wrap;
+}
+
+.timeUnit {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  background: rgba(240, 201, 123, 0.15);
+  border-radius: 12px;
+  padding: 1rem 0.8rem;
+  min-width: 60px;
+  border: 1px solid rgba(240, 201, 123, 0.4);
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
+  transition: all 0.3s ease;
+}
+
+.timeUnit:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 6px 16px rgba(0, 0, 0, 0.3);
+  background: rgba(240, 201, 123, 0.25);
+}
+
+.timeNumber {
+  font-family: var(--font-tangerine), cursive;
+  font-size: 2.5rem;
+  font-weight: 700;
+  color: var(--primary-color);
+  line-height: 1;
+  text-shadow: 0 2px 4px rgba(0, 0, 0, 0.4);
+}
+
+.timeLabel {
+  font-family: var(--font-cinzel), serif;
+  font-size: 0.75rem;
+  color: var(--white-color);
+  margin-top: 0.25rem;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+  opacity: 0.9;
+}
+
+.separator {
+  font-family: var(--font-tangerine), cursive;
+  font-size: 2rem;
+  color: var(--primary-color);
+  opacity: 0.7;
+  margin: 0 0.2rem;
+  animation: pulse 2s ease-in-out infinite;
+}
+
+.eventDate {
+  font-family: var(--font-cinzel), serif;
+  font-size: 0.9rem;
+  color: var(--white-color);
+  opacity: 0.8;
+  margin-top: 1rem;
+  letter-spacing: 0.5px;
+}
+
+@keyframes pulse {
+  0%,
+  100% {
+    opacity: 0.7;
+    transform: scale(1);
+  }
+  50% {
+    opacity: 1;
+    transform: scale(1.1);
+  }
+}
+
+@media screen and (max-width: 480px) {
+  .countdown {
+    gap: 0.3rem;
+  }
+
+  .timeUnit {
+    padding: 0.8rem 0.6rem;
+    min-width: 50px;
+  }
+
+  .timeNumber {
+    font-size: 2rem;
+  }
+
+  .timeLabel {
+    font-size: 0.65rem;
+  }
+
+  .separator {
+    font-size: 1.5rem;
+    margin: 0 0.1rem;
+  }
+
+  .countdownTitle {
+    font-size: 1.3rem;
+  }
+}

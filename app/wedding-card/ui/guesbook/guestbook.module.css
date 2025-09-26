@@ -1,0 +1,470 @@
+.guestbookContainer {
+  padding: 2rem 1rem;
+  margin: 2rem 0;
+  max-width: 100%;
+}
+
+.title {
+  text-align: center;
+  font-family: var(--font-cinzel), serif;
+  font-size: 1.8rem;
+  color: var(--primary-color);
+  margin-bottom: 2rem;
+  position: relative;
+}
+
+.title div {
+  width: 60px;
+  height: 2px;
+  background-color: var(--primary-color);
+  margin: 0.5rem auto;
+}
+
+.galleryContainer {
+  max-width: 400px;
+  margin: 0 auto;
+}
+
+.loadingContainer,
+.errorContainer {
+  text-align: center;
+  padding: 2rem;
+  background: rgba(240, 201, 123, 0.1);
+  border-radius: 12px;
+  margin: 1rem 0;
+}
+
+.errorContainer {
+  background: rgba(255, 107, 107, 0.1);
+  border: 1px solid rgba(255, 107, 107, 0.3);
+}
+
+.retryButton {
+  background: var(--primary-color);
+  color: var(--background-color);
+  border: none;
+  padding: 0.5rem 1rem;
+  border-radius: 8px;
+  cursor: pointer;
+  margin-top: 0.5rem;
+  font-weight: bold;
+  transition: all 0.3s ease;
+}
+
+.retryButton:hover {
+  transform: translateY(-1px);
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+}
+
+.emptyState {
+  text-align: center;
+  padding: 3rem 2rem;
+  background: rgba(240, 201, 123, 0.1);
+  border-radius: 12px;
+  border: 1px solid rgba(240, 201, 123, 0.3);
+  color: var(--white-color);
+  opacity: 0.8;
+}
+
+.entryCard {
+  background: linear-gradient(
+    135deg,
+    rgba(240, 201, 123, 0.15),
+    rgba(190, 130, 43, 0.1)
+  );
+  border: 1px solid rgba(240, 201, 123, 0.3);
+  border-radius: 16px;
+  padding: 1.5rem;
+  margin-bottom: 1.5rem;
+  backdrop-filter: blur(10px);
+  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.2);
+  transition: all 0.3s ease;
+  min-height: 160px;
+}
+
+.entryCard:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 12px 40px rgba(0, 0, 0, 0.3);
+  border-color: rgba(240, 201, 123, 0.5);
+}
+
+.entryHeader {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 1rem;
+  padding-bottom: 0.5rem;
+  border-bottom: 1px solid rgba(240, 201, 123, 0.2);
+}
+
+.entryName {
+  font-family: var(--font-cinzel), serif;
+  font-size: 1.1rem;
+  font-weight: 600;
+  color: var(--primary-color);
+  margin: 0;
+}
+
+.entryNumber {
+  font-size: 0.8rem;
+  color: var(--white-color);
+  opacity: 0.7;
+  background: rgba(240, 201, 123, 0.2);
+  padding: 0.25rem 0.5rem;
+  border-radius: 12px;
+}
+
+.entryMessage {
+  margin: 1rem 0;
+  line-height: 1.6;
+}
+
+.entryMessage p {
+  color: var(--white-color);
+  margin: 0;
+  font-size: 0.95rem;
+}
+
+.entryMeta {
+  display: flex;
+  justify-content: flex-end;
+  margin-top: 1rem;
+  padding-top: 0.5rem;
+  border-top: 1px solid rgba(240, 201, 123, 0.1);
+}
+
+.entryDate {
+  font-size: 0.75rem;
+  color: var(--white-color);
+  opacity: 0.6;
+  font-family: var(--font-cinzel), serif;
+}
+
+.navigationControls {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin: 1.5rem 0;
+  gap: 1rem;
+}
+
+.navButton {
+  background: rgba(240, 201, 123, 0.2);
+  color: var(--primary-color);
+  border: 1px solid rgba(240, 201, 123, 0.4);
+  padding: 0.7rem 1.2rem;
+  border-radius: 8px;
+  cursor: pointer;
+  font-weight: 500;
+  transition: all 0.3s ease;
+  min-width: 80px;
+}
+
+.navButton:hover:not(:disabled) {
+  background: rgba(240, 201, 123, 0.3);
+  transform: translateY(-1px);
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
+}
+
+.navButton:disabled {
+  opacity: 0.3;
+  cursor: not-allowed;
+}
+
+.pagination {
+  display: flex;
+  gap: 0.5rem;
+  justify-content: center;
+  flex: 1;
+  max-width: 150px;
+  overflow-x: auto;
+  padding: 0.25rem;
+}
+
+.paginationDot {
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  border: none;
+  background: rgba(240, 201, 123, 0.3);
+  cursor: pointer;
+  transition: all 0.3s ease;
+  flex-shrink: 0;
+}
+
+.paginationDot:hover {
+  background: rgba(240, 201, 123, 0.6);
+  transform: scale(1.2);
+}
+
+.paginationDot.active {
+  background: var(--primary-color);
+  transform: scale(1.3);
+  box-shadow: 0 2px 8px rgba(240, 201, 123, 0.4);
+}
+
+.actionContainer {
+  margin-top: 2rem;
+  text-align: center;
+}
+
+.addMessageButton {
+  background: linear-gradient(
+    135deg,
+    var(--primary-color),
+    var(--secondary-color)
+  );
+  color: var(--background-color);
+  border: none;
+  padding: 0.8rem 2rem;
+  border-radius: 25px;
+  font-weight: bold;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  box-shadow: 0 4px 16px rgba(240, 201, 123, 0.3);
+  font-family: var(--font-cinzel), serif;
+}
+
+.addMessageButton:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 6px 20px rgba(240, 201, 123, 0.4);
+}
+
+.formContainer {
+  background: rgba(240, 201, 123, 0.1);
+  border: 1px solid rgba(240, 201, 123, 0.3);
+  border-radius: 12px;
+  padding: 1.5rem;
+  margin-top: 1rem;
+  backdrop-filter: blur(10px);
+}
+
+.inputGroup {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+  margin-bottom: 1rem;
+}
+
+.input,
+.textarea {
+  background: rgba(0, 0, 0, 0.3);
+  border: 1px solid rgba(240, 201, 123, 0.4);
+  border-radius: 8px;
+  padding: 0.8rem;
+  color: var(--white-color);
+  font-family: inherit;
+  transition: all 0.3s ease;
+}
+
+.input:focus,
+.textarea:focus {
+  outline: none;
+  border-color: var(--primary-color);
+  box-shadow: 0 0 0 2px rgba(240, 201, 123, 0.2);
+}
+
+.input::placeholder,
+.textarea::placeholder {
+  color: rgba(255, 255, 255, 0.5);
+}
+
+.textarea {
+  resize: vertical;
+  min-height: 80px;
+}
+
+.formActions {
+  display: flex;
+  gap: 1rem;
+  justify-content: center;
+}
+
+.submitButton,
+.cancelButton {
+  padding: 0.7rem 1.5rem;
+  border-radius: 8px;
+  font-weight: 500;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  border: none;
+}
+
+.submitButton {
+  background: var(--primary-color);
+  color: var(--background-color);
+}
+
+.submitButton:hover:not(:disabled) {
+  transform: translateY(-1px);
+  box-shadow: 0 4px 12px rgba(240, 201, 123, 0.4);
+}
+
+.submitButton:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+}
+
+.cancelButton {
+  background: rgba(255, 255, 255, 0.1);
+  color: var(--white-color);
+  border: 1px solid rgba(255, 255, 255, 0.2);
+}
+
+.cancelButton:hover {
+  background: rgba(255, 255, 255, 0.2);
+  transform: translateY(-1px);
+}
+
+/* Popup Styles */
+.popupOverlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: rgba(0, 0, 0, 0.7);
+  backdrop-filter: blur(8px);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 10000;
+  padding: 1rem;
+  animation: fadeIn 0.3s ease-out;
+}
+
+.popupContent {
+  background: var(--background-color);
+  border: 2px solid rgba(240, 201, 123, 0.4);
+  border-radius: 16px;
+  max-width: 400px;
+  width: 100%;
+  max-height: 80vh;
+  overflow-y: auto;
+  box-shadow: 0 20px 40px rgba(0, 0, 0, 0.4);
+  animation: slideIn 0.3s ease-out;
+  position: relative;
+}
+
+.popupHeader {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 1.5rem 1.5rem 1rem 1.5rem;
+  border-bottom: 1px solid rgba(240, 201, 123, 0.2);
+}
+
+.popupTitle {
+  font-family: var(--font-cinzel), serif;
+  font-size: 1.3rem;
+  font-weight: 600;
+  color: var(--primary-color);
+  margin: 0;
+}
+
+.closeButton {
+  background: none;
+  border: none;
+  font-size: 1.8rem;
+  color: var(--white-color);
+  cursor: pointer;
+  width: 32px;
+  height: 32px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 50%;
+  transition: all 0.3s ease;
+  opacity: 0.7;
+}
+
+.closeButton:hover {
+  background: rgba(255, 255, 255, 0.1);
+  opacity: 1;
+  transform: scale(1.1);
+}
+
+.formContainer {
+  background: transparent;
+  border: none;
+  border-radius: 0;
+  padding: 1.5rem;
+  margin-top: 0;
+  backdrop-filter: none;
+}
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+
+@keyframes slideIn {
+  from {
+    opacity: 0;
+    transform: scale(0.9) translateY(-20px);
+  }
+  to {
+    opacity: 1;
+    transform: scale(1) translateY(0);
+  }
+}
+
+/* Mobile Responsive */
+@media screen and (max-width: 480px) {
+  .guestbookContainer {
+    padding: 1rem 0.5rem;
+  }
+
+  .entryCard {
+    padding: 1rem;
+    min-height: 140px;
+  }
+
+  .navigationControls {
+    gap: 0.5rem;
+  }
+
+  .navButton {
+    padding: 0.6rem 1rem;
+    font-size: 0.9rem;
+    min-width: 70px;
+  }
+
+  .pagination {
+    max-width: 120px;
+  }
+
+  .formActions {
+    flex-direction: column;
+    gap: 0.5rem;
+  }
+
+  .submitButton,
+  .cancelButton {
+    width: 100%;
+  }
+
+  .popupOverlay {
+    padding: 0.5rem;
+  }
+
+  .popupContent {
+    max-height: 90vh;
+  }
+
+  .popupHeader {
+    padding: 1rem 1rem 0.5rem 1rem;
+  }
+
+  .popupTitle {
+    font-size: 1.1rem;
+  }
+
+  .formContainer {
+    padding: 1rem;
+  }
+}

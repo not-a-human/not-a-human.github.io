@@ -67,7 +67,7 @@
 }
 
 .button button:hover::before {
-  transform: scaleX(1); /* Expand the background fully */
+  transform: scaleY(1); /* Expand the background fully from bottom to top */
 }
 
 .button button:hover {
