@@ -98,7 +98,10 @@ export default async function DatabasePage() {
         >
           <h3>⚠️ Database Not Configured</h3>
           <p>
-            <strong>Error:</strong> {typeof data.error === 'object' ? JSON.stringify(data.error) : data.error}
+            <strong>Error:</strong>{" "}
+            {typeof data.error === "object"
+              ? JSON.stringify(data.error)
+              : data.error}
           </p>
           <p>To get started:</p>
           <ol>
