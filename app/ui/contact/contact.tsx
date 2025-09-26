@@ -75,7 +75,7 @@ export function Contact() {
       <div className={`${styles.flex}`}>
         <div className={`${styles.contactContainer}`}>
           <p>{t("contact.description")}</p>
-          <form onSubmit={handleSubmit}>
+          <form onSubmit={handleSubmit} suppressHydrationWarning>
             <input
               className={`${styles.input}`}
               type="text"
@@ -84,6 +84,7 @@ export function Contact() {
               value={formData.name}
               onChange={handleChange}
               disabled={success}
+              suppressHydrationWarning
             />
             <input
               className={`${styles.input}`}
@@ -93,6 +94,7 @@ export function Contact() {
               value={formData.email}
               onChange={handleChange}
               disabled={success}
+              suppressHydrationWarning
             />
             <textarea
               className={`${styles.input} ${roboto.className}`}
@@ -101,6 +103,7 @@ export function Contact() {
               value={formData.message}
               onChange={handleChange}
               disabled={success}
+              suppressHydrationWarning
             ></textarea>
             {emptyFields && (
               <p className={styles.error}>{t("contact.emptyFields")}</p>
@@ -110,7 +113,9 @@ export function Contact() {
             )}
             {failure && <p className={styles.error}>{t("contact.failure")}</p>}
             <div className={`${styles.button}`}>
-              <button type="submit">{t("contact.submit")}</button>
+              <button type="submit" suppressHydrationWarning>
+                {t("contact.submit")}
+              </button>
             </div>
           </form>
         </div>
