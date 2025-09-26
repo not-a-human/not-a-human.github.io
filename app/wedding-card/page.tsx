@@ -28,12 +28,12 @@ export default function WeddingCardPage() {
     setIsClient(true);
 
     // Prevent browser scroll restoration and scroll to top
-    if ('scrollRestoration' in history) {
-      history.scrollRestoration = 'manual';
+    if ("scrollRestoration" in history) {
+      history.scrollRestoration = "manual";
     }
-    
+
     // Scroll to top when page loads/reloads
-    window.scrollTo({ top: 0, behavior: 'instant' });
+    window.scrollTo({ top: 0, behavior: "instant" });
 
     // Apply wedding-specific body and html styles
     const originalBodyStyle = {
@@ -83,22 +83,22 @@ export default function WeddingCardPage() {
   // Ensure scroll to top on page load/reload
   useEffect(() => {
     // Force scroll to top on mount
-    if (typeof window !== 'undefined') {
+    if (typeof window !== "undefined") {
       // Use setTimeout to ensure it runs after any other scroll effects
       setTimeout(() => {
-        window.scrollTo({ top: 0, behavior: 'instant' });
+        window.scrollTo({ top: 0, behavior: "instant" });
       }, 0);
 
       // Also listen for the window load event as additional safeguard
       const handleLoad = () => {
-        window.scrollTo({ top: 0, behavior: 'instant' });
+        window.scrollTo({ top: 0, behavior: "instant" });
       };
 
-      if (document.readyState === 'complete') {
+      if (document.readyState === "complete") {
         handleLoad();
       } else {
-        window.addEventListener('load', handleLoad);
-        return () => window.removeEventListener('load', handleLoad);
+        window.addEventListener("load", handleLoad);
+        return () => window.removeEventListener("load", handleLoad);
       }
     }
   }, []);
