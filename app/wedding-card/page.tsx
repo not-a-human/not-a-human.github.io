@@ -125,6 +125,9 @@ export default function WeddingCardPage() {
 
   return (
     <div className={styles.container} style={{ paddingBottom: "10rem" }}>
+      {/* Enhanced Shimmer Overlay for more visibility */}
+      {isClient && <div className={styles.shimmerOverlay}></div>}
+
       {/* Animated Background Elements */}
       <div className={styles.backgroundAnimation}>
         {isClient && (

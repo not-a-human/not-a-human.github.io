@@ -2,7 +2,8 @@
   max-width: var(--max-container-width);
   margin: 0 auto;
   padding: 20px;
-  box-shadow: 0 10px 20px rgb(0 0 0 / 19%), 0 6px 6px rgb(0 0 0 / 23%);
+  box-shadow: 0 10px 20px rgb(0 0 0 / 19%), 0 6px 6px rgb(0 0 0 / 23%),
+    0 0 60px rgba(240, 201, 123, 0.1), inset 0 1px 0 rgba(240, 201, 123, 0.1);
   background: linear-gradient(
     135deg,
     var(--background-color) 0%,
@@ -16,6 +17,110 @@
   color: var(--primary-color);
   position: relative;
   overflow: hidden;
+
+  /* Add elegant border with golden glow */
+  border: 1px solid rgba(240, 201, 123, 0.2);
+
+  /* Multiple background layers for shimmer effect */
+  background-image: 
+    /* Main shimmer overlay with increased visibility */ linear-gradient(
+      45deg,
+      transparent 20%,
+      rgba(240, 201, 123, 0.15) 45%,
+      rgba(255, 255, 255, 0.1) 50%,
+      rgba(240, 201, 123, 0.15) 55%,
+      transparent 80%
+    ),
+    /* Secondary shimmer with different angle */
+      linear-gradient(
+        -45deg,
+        transparent 30%,
+        rgba(240, 201, 123, 0.08) 48%,
+        rgba(255, 255, 255, 0.05) 50%,
+        rgba(240, 201, 123, 0.08) 52%,
+        transparent 70%
+      ),
+    /* Additional diagonal shimmer for more depth */
+      linear-gradient(
+        135deg,
+        transparent 35%,
+        rgba(240, 201, 123, 0.06) 50%,
+        transparent 65%
+      ),
+    /* Base gradient (existing) */
+      linear-gradient(
+        135deg,
+        var(--background-color) 0%,
+        #4a4a4a 25%,
+        var(--background-color) 50%,
+        #454545 75%,
+        var(--background-color) 100%
+      );
+
+  background-size: 150% 150%, 200% 200%, 250% 250%, 400% 400%;
+
+  animation: gradientShift 20s ease infinite,
+    shimmerMove 5s ease-in-out infinite,
+    elegantGlow 6s ease-in-out infinite alternate;
+}
+
+/* Elegant corner sparkles */
+.container::before {
+  content: "";
+  position: absolute;
+  top: -1px;
+  left: -1px;
+  right: -1px;
+  bottom: -1px;
+  background: linear-gradient(
+    45deg,
+    rgba(240, 201, 123, 0.3) 0%,
+    transparent 30%,
+    transparent 70%,
+    rgba(240, 201, 123, 0.3) 100%
+  );
+  border-radius: inherit;
+  z-index: -1;
+  animation: rotateGlow 15s linear infinite;
+}
+
+.container::after {
+  content: "";
+  position: absolute;
+  top: 10px;
+  right: 10px;
+  width: 4px;
+  height: 4px;
+  background: radial-gradient(
+    circle,
+    rgba(240, 201, 123, 0.8) 0%,
+    transparent 70%
+  );
+  border-radius: 50%;
+  animation: sparkleShine 3s ease-in-out infinite;
+  z-index: 1;
+}
+
+/* Enhanced Shimmer Overlay for better visibility */
+.shimmerOverlay {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: linear-gradient(
+    110deg,
+    transparent 25%,
+    rgba(240, 201, 123, 0.1) 48%,
+    rgba(255, 255, 255, 0.15) 50%,
+    rgba(240, 201, 123, 0.1) 52%,
+    transparent 75%
+  );
+  background-size: 200% 100%;
+  animation: strongShimmer 4s ease-in-out infinite;
+  pointer-events: none;
+  z-index: 2;
+  mix-blend-mode: overlay;
 }
 
 /* Background Animation Container */
@@ -190,9 +295,106 @@
   }
 }
 
+/* New elegant shimmer and glow animations */
+@keyframes shimmerMove {
+  0% {
+    background-position: -150% 0, -200% 0, -250% 0, 0% 50%;
+  }
+  25% {
+    background-position: -75% 0, -100% 0, -125% 0, 25% 25%;
+  }
+  50% {
+    background-position: 150% 0, 200% 0, 250% 0, 100% 50%;
+  }
+  75% {
+    background-position: 75% 0, 100% 0, 125% 0, 75% 75%;
+  }
+  100% {
+    background-position: -150% 0, -200% 0, -250% 0, 0% 50%;
+  }
+}
+
+@keyframes elegantGlow {
+  0% {
+    box-shadow: 0 10px 20px rgb(0 0 0 / 19%), 0 6px 6px rgb(0 0 0 / 23%),
+      0 0 60px rgba(240, 201, 123, 0.1), inset 0 1px 0 rgba(240, 201, 123, 0.1);
+  }
+  100% {
+    box-shadow: 0 15px 30px rgb(0 0 0 / 25%), 0 8px 8px rgb(0 0 0 / 30%),
+      0 0 80px rgba(240, 201, 123, 0.2), inset 0 1px 0 rgba(240, 201, 123, 0.2),
+      0 0 120px rgba(240, 201, 123, 0.1);
+  }
+}
+
+/* Additional sparkle overlay for extra elegance */
+@keyframes sparkleShine {
+  0%,
+  100% {
+    opacity: 0;
+    transform: scale(0) rotate(0deg);
+  }
+  50% {
+    opacity: 1;
+    transform: scale(1) rotate(180deg);
+  }
+}
+
+@keyframes rotateGlow {
+  0% {
+    transform: rotate(0deg);
+  }
+  100% {
+    transform: rotate(360deg);
+  }
+}
+
+/* Strong shimmer animation for the overlay */
+@keyframes strongShimmer {
+  0% {
+    background-position: -200% 0;
+    opacity: 0;
+  }
+  20% {
+    opacity: 1;
+  }
+  50% {
+    background-position: 0% 0;
+    opacity: 1;
+  }
+  80% {
+    opacity: 1;
+  }
+  100% {
+    background-position: 200% 0;
+    opacity: 0;
+  }
+}
+
 @media (max-width: 768px) {
   .container {
     box-shadow: none;
     padding: 0;
+    /* Reduce animation intensity on mobile for better performance */
+    animation: gradientShift 25s ease infinite,
+      elegantGlow 8s ease-in-out infinite alternate;
+  }
+
+  .container::before {
+    /* Simplify border glow on mobile */
+    background: linear-gradient(
+      45deg,
+      rgba(240, 201, 123, 0.2) 0%,
+      transparent 50%,
+      rgba(240, 201, 123, 0.2) 100%
+    );
+    animation: rotateGlow 20s linear infinite;
+  }
+
+  .container::after {
+    /* Smaller sparkle on mobile */
+    width: 3px;
+    height: 3px;
+    top: 8px;
+    right: 8px;
   }
 }
