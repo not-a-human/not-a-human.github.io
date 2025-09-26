@@ -14,8 +14,8 @@ interface MoneyGiftProps {
 // Banking information - you can modify these details as needed
 const bankingInfo = {
   bankName: "Maybank",
-  accountNumber: "1234567890123456",
-  qrCodeUrl: "/assets/qr-code-sample.svg",
+  accountNumber: "164847116413",
+  qrCodeUrl: "/assets/bank-qr-code.jpg",
 };
 
 export function MoneyGift({ isOpen, onClose }: MoneyGiftProps) {
@@ -29,7 +29,7 @@ export function MoneyGift({ isOpen, onClose }: MoneyGiftProps) {
       // Create a link element to download the QR code
       const link = document.createElement("a");
       link.href = bankingInfo.qrCodeUrl;
-      link.download = "wedding-payment-qr.svg";
+      link.download = "wedding-payment-qr.jpeg";
       document.body.appendChild(link);
       link.click();
       document.body.removeChild(link);
