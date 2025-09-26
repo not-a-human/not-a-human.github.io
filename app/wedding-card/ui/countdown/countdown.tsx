@@ -4,6 +4,8 @@ import styles from "./countdown.module.css";
 import { useEffect, useState } from "react";
 
 export function Countdown({ targetDate }: { targetDate: string }) {
+  const [isClient, setIsClient] = useState(false);
+
   const calculateTimeLeft = () => {
     const difference = +new Date(targetDate) - +new Date();
     let timeLeft = {
@@ -23,15 +25,29 @@ export function Countdown({ targetDate }: { targetDate: string }) {
     return timeLeft;
   };
 
-  const [timeLeft, setTimeLeft] = useState(calculateTimeLeft());
+  // Initialize with zero values to match SSR
+  const [timeLeft, setTimeLeft] = useState({
+    days: 0,
+    hours: 0,
+    minutes: 0,
+    seconds: 0,
+  });
 
   useEffect(() => {
+    // Set client flag and initialize countdown
+    setIsClient(true);
+    setTimeLeft(calculateTimeLeft());
+  }, []);
+
+  useEffect(() => {
+    if (!isClient) return;
+
     const timer = setInterval(() => {
       setTimeLeft(calculateTimeLeft());
     }, 1000);
 
     return () => clearInterval(timer);
-  }, [targetDate]);
+  }, [isClient, targetDate]);
 
   return (
     <div className={styles.countdownContainer}>

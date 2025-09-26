@@ -7,6 +7,16 @@ import { GrLinkNext, GrLinkPrevious } from "react-icons/gr";
 
 const tableName = "guestbook";
 
+// Utility function to shuffle array using Fisher-Yates algorithm
+const shuffleArray = (array: DatabaseRecord[]): DatabaseRecord[] => {
+  const shuffled = [...array];
+  for (let i = shuffled.length - 1; i > 0; i--) {
+    const j = Math.floor(Math.random() * (i + 1));
+    [shuffled[i], shuffled[j]] = [shuffled[j], shuffled[i]];
+  }
+  return shuffled;
+};
+
 interface GuestbookProps {
   onOpenModal?: () => void;
   entries?: DatabaseRecord[];
@@ -37,7 +47,9 @@ export function Guestbook({
   // Update local state when entries prop changes
   useEffect(() => {
     if (entries.length > 0) {
-      setGuestbookEntries(entries);
+      // Shuffle entries from props as well
+      const shuffledEntries = shuffleArray(entries);
+      setGuestbookEntries(shuffledEntries);
     }
   }, [entries]);
 
@@ -50,8 +62,10 @@ export function Guestbook({
       if (result.error) {
         throw new Error(result.error.message || "Failed to load records");
       }
-      setGuestbookEntries(result.data);
-      onEntriesUpdate?.(result.data);
+      // Shuffle the data before setting state
+      const shuffledEntries = shuffleArray(result.data);
+      setGuestbookEntries(shuffledEntries);
+      onEntriesUpdate?.(shuffledEntries);
     } catch (err) {
       setError(err instanceof Error ? err.message : "Unknown error occurred");
     } finally {
