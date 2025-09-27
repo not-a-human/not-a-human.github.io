@@ -190,3 +190,31 @@
     opacity: 1;
   }
 }
+
+/* Light Mode Music Player Styling */
+:global(body:not(.dark-mode)) .musicContainer {
+  background-color: rgba(255, 255, 255, 0.95);
+  border: 1px solid rgba(184, 148, 31, 0.3);
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1),
+              0 2px 8px rgba(0, 0, 0, 0.05);
+}
+
+:global(body:not(.dark-mode)) .musicTitle {
+  color: #333333;
+}
+
+:global(body:not(.dark-mode)) .promptText {
+  color: #333333;
+}
+
+:global(body:not(.dark-mode)) .playIcon {
+  color: #b8941f;
+}
+
+:global(body:not(.dark-mode)) .wave {
+  background: linear-gradient(to top, #8b6e1a, #b8941f);
+}
+
+:global(body:not(.dark-mode)) .playPrompt {
+  color: #b8941f;
+}
