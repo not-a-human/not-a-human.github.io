@@ -146,38 +146,85 @@
   cursor: pointer;
   transition: all 0.3s ease;
   min-height: 50px;
+  backdrop-filter: blur(10px);
+  position: relative;
 }
 
 .selectTrigger:hover {
   border-color: rgba(240, 201, 123, 0.5);
   background: rgba(255, 255, 255, 0.08);
+  transform: translateY(-1px);
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
 }
 
 .selectTriggerOpen {
   border-color: rgba(240, 201, 123, 0.6);
   background: rgba(255, 255, 255, 0.1);
-  box-shadow: 0 0 0 2px rgba(240, 201, 123, 0.1);
+  box-shadow: 0 0 0 2px rgba(240, 201, 123, 0.1), 0 4px 15px rgba(0, 0, 0, 0.2);
+}
+
+/* Light mode specific styling for select trigger */
+:global(body:not(.dark-mode)) .selectTrigger {
+  background: rgba(255, 255, 255, 0.95);
+  border: 1px solid rgba(184, 148, 31, 0.3);
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+}
+
+:global(body:not(.dark-mode)) .selectTrigger:hover {
+  border-color: rgba(184, 148, 31, 0.5);
+  background: rgba(255, 255, 255, 1);
+  transform: translateY(-1px);
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.15);
+}
+
+:global(body:not(.dark-mode)) .selectTriggerOpen {
+  border-color: #b8941f;
+  background: rgba(255, 255, 255, 1);
+  box-shadow: 0 0 0 2px rgba(184, 148, 31, 0.2), 0 4px 20px rgba(0, 0, 0, 0.15);
 }
 
 .selectText {
   color: var(--white-color);
   font-size: 0.95rem;
   flex: 1;
+  font-weight: 500;
 }
 
 .selectPlaceholder {
   color: rgba(255, 255, 255, 0.5);
+  font-weight: 400;
+}
+
+/* Light mode specific styling for select text */
+:global(body:not(.dark-mode)) .selectText {
+  color: #2a2a2a;
+}
+
+:global(body:not(.dark-mode)) .selectPlaceholder {
+  color: rgba(42, 42, 42, 0.6);
 }
 
 .selectArrow {
   color: rgba(240, 201, 123, 0.7);
-  transition: transform 0.3s ease;
+  transition: transform 0.3s ease, color 0.3s ease;
   display: flex;
   align-items: center;
+  opacity: 0.8;
 }
 
 .selectArrowOpen {
   transform: rotate(180deg);
+  color: rgba(240, 201, 123, 1);
+  opacity: 1;
+}
+
+/* Light mode specific styling for select arrow */
+:global(body:not(.dark-mode)) .selectArrow {
+  color: rgba(184, 148, 31, 0.7);
+}
+
+:global(body:not(.dark-mode)) .selectArrowOpen {
+  color: #b8941f;
 }
 
 .selectOptions {
@@ -187,12 +234,20 @@
   right: 0;
   background: var(--background-color);
   border: 1px solid rgba(240, 201, 123, 0.3);
-  border-radius: 8px;
-  box-shadow: 0 8px 25px rgba(0, 0, 0, 0.4);
+  border-radius: 12px;
+  box-shadow: 0 8px 25px rgba(0, 0, 0, 0.4), 0 0 0 1px rgba(240, 201, 123, 0.1);
   z-index: 1000;
   margin-top: 4px;
   overflow: hidden;
   animation: dropdownSlideIn 0.2s ease-out;
+  backdrop-filter: blur(20px);
+}
+
+/* Light mode specific styling for select options */
+:global(body:not(.dark-mode)) .selectOptions {
+  background: rgba(255, 255, 255, 0.98);
+  border: 1px solid rgba(184, 148, 31, 0.3);
+  box-shadow: 0 8px 30px rgba(0, 0, 0, 0.15), 0 0 0 1px rgba(184, 148, 31, 0.1);
 }
 
 .selectOption {
@@ -200,6 +255,7 @@
   cursor: pointer;
   transition: all 0.2s ease;
   border-bottom: 1px solid rgba(240, 201, 123, 0.1);
+  position: relative;
 }
 
 .selectOption:last-child {
@@ -208,10 +264,41 @@
 
 .selectOption:hover {
   background: rgba(240, 201, 123, 0.1);
+  transform: translateX(2px);
 }
 
 .selectOptionSelected {
   background: rgba(240, 201, 123, 0.15);
+  border-left: 3px solid rgba(240, 201, 123, 0.6);
+}
+
+.selectOptionSelected::before {
+  content: '';
+  position: absolute;
+  left: 0;
+  top: 0;
+  bottom: 0;
+  width: 3px;
+  background: linear-gradient(to bottom, rgba(240, 201, 123, 0.8), rgba(240, 201, 123, 0.4));
+}
+
+/* Light mode specific styling for select options */
+:global(body:not(.dark-mode)) .selectOption {
+  border-bottom: 1px solid rgba(184, 148, 31, 0.1);
+}
+
+:global(body:not(.dark-mode)) .selectOption:hover {
+  background: rgba(184, 148, 31, 0.08);
+  transform: translateX(2px);
+}
+
+:global(body:not(.dark-mode)) .selectOptionSelected {
+  background: rgba(184, 148, 31, 0.12);
+  border-left: 3px solid rgba(184, 148, 31, 0.6);
+}
+
+:global(body:not(.dark-mode)) .selectOptionSelected::before {
+  background: linear-gradient(to bottom, rgba(184, 148, 31, 0.8), rgba(184, 148, 31, 0.4));
 }
 
 .optionContent {
@@ -223,6 +310,12 @@
 .optionEmoji {
   font-size: 1.2rem;
   flex-shrink: 0;
+  color: rgba(240, 201, 123, 0.8);
+  transition: transform 0.2s ease;
+}
+
+.selectOption:hover .optionEmoji {
+  transform: scale(1.1);
 }
 
 .optionText {
@@ -231,14 +324,30 @@
 
 .optionTitle {
   color: var(--white-color);
-  font-weight: 500;
+  font-weight: 600;
   font-size: 0.95rem;
   margin-bottom: 2px;
+  line-height: 1.3;
 }
 
 .optionSubtitle {
   color: rgba(255, 255, 255, 0.6);
   font-size: 0.8rem;
+  line-height: 1.4;
+  font-weight: 400;
+}
+
+/* Light mode specific styling for option content */
+:global(body:not(.dark-mode)) .optionEmoji {
+  color: rgba(184, 148, 31, 0.8);
+}
+
+:global(body:not(.dark-mode)) .optionTitle {
+  color: #2a2a2a;
+}
+
+:global(body:not(.dark-mode)) .optionSubtitle {
+  color: rgba(42, 42, 42, 0.6);
 }
 
 @keyframes dropdownSlideIn {
@@ -301,6 +410,55 @@
   transform: translateY(-1px);
 }
 
+/* Light mode specific styling for cancel button */
+:global(body:not(.dark-mode)) .cancelButton {
+  background: rgba(184, 148, 31, 0.1);
+  color: #8b6e1a;
+  border: 1px solid rgba(184, 148, 31, 0.3);
+}
+
+:global(body:not(.dark-mode)) .cancelButton:hover {
+  background: rgba(184, 148, 31, 0.2);
+  border-color: rgba(184, 148, 31, 0.4);
+  color: #6b5015;
+  transform: translateY(-1px);
+}
+
+/* Light mode specific styling for select options */
+:global(body:not(.dark-mode)) .select option {
+  background: #ffffff;
+  color: #2a2a2a;
+}
+
+/* Light mode specific styling for inputs */
+:global(body:not(.dark-mode)) .input,
+:global(body:not(.dark-mode)) .select,
+:global(body:not(.dark-mode)) .textarea {
+  background: rgba(255, 255, 255, 0.9);
+  border: 1px solid rgba(184, 148, 31, 0.3);
+  color: #2a2a2a;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+}
+
+:global(body:not(.dark-mode)) .input:focus,
+:global(body:not(.dark-mode)) .select:focus,
+:global(body:not(.dark-mode)) .textarea:focus {
+  border-color: #b8941f;
+  box-shadow: 0 0 0 2px rgba(184, 148, 31, 0.2), 0 2px 12px rgba(0, 0, 0, 0.15);
+  background: rgba(255, 255, 255, 1);
+}
+
+:global(body:not(.dark-mode)) .input::placeholder,
+:global(body:not(.dark-mode)) .textarea::placeholder {
+  color: rgba(42, 42, 42, 0.6);
+}
+
+:global(body:not(.dark-mode)) .inputError {
+  background: rgba(255, 255, 255, 0.95);
+  border-color: #ff6b6b !important;
+  box-shadow: 0 0 0 2px rgba(255, 107, 107, 0.2),
+    0 2px 8px rgba(255, 107, 107, 0.1) !important;
+}
 @keyframes fadeIn {
   from {
     opacity: 0;
