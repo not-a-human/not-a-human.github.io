@@ -29,6 +29,9 @@ export default function WeddingCardPage() {
   const [scrollY, setScrollY] = useState(0);
   const contentRef = useRef<HTMLDivElement>(null);
 
+  // Dark mode state
+  const [isDarkMode, setIsDarkMode] = useState(false);
+
   // Mouse position for floating hearts
   const [mousePosition, setMousePosition] = useState({ x: 0, y: 0 });
   const [floatingHearts, setFloatingHearts] = useState<
@@ -57,6 +60,15 @@ export default function WeddingCardPage() {
 
   useEffect(() => {
     setIsClient(true);
+
+    // Initialize dark mode from localStorage - default to dark mode
+    const savedDarkMode = localStorage.getItem('wedding-dark-mode');
+    if (savedDarkMode) {
+      setIsDarkMode(JSON.parse(savedDarkMode));
+    } else {
+      // Default to dark mode
+      setIsDarkMode(true);
+    }
 
     // Prevent browser scroll restoration and scroll to top
     if ("scrollRestoration" in history) {
@@ -134,6 +146,26 @@ export default function WeddingCardPage() {
       }
     }
   }, []);
+
+  // Dark mode effect
+  useEffect(() => {
+    if (!isClient) return;
+
+    // Apply dark mode class to body
+    if (isDarkMode) {
+      document.body.classList.add('dark-mode');
+    } else {
+      document.body.classList.remove('dark-mode');
+    }
+
+    // Save to localStorage
+    localStorage.setItem('wedding-dark-mode', JSON.stringify(isDarkMode));
+  }, [isDarkMode, isClient]);
+
+  // Toggle dark mode function
+  const toggleDarkMode = () => {
+    setIsDarkMode(prev => !prev);
+  };
 
   useEffect(() => {
     let ticking = false;
@@ -439,6 +471,8 @@ export default function WeddingCardPage() {
           onOpenWishlist={() => setWishlistModalOpen(true)}
           onOpenLocation={() => setLocationModalOpen(true)}
           onOpenCalendar={() => setCalendarModalOpen(true)}
+          isDarkMode={isDarkMode}
+          onToggleDarkMode={toggleDarkMode}
         />
       )}
 

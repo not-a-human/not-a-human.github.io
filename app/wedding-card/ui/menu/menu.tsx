@@ -14,6 +14,8 @@ interface MenuProps {
   onOpenWishlist?: () => void;
   onOpenLocation?: () => void;
   onOpenCalendar?: () => void;
+  isDarkMode?: boolean;
+  onToggleDarkMode?: () => void;
 }
 
 const menuItems = [
@@ -22,6 +24,7 @@ const menuItems = [
   { label: "Wishlist", link: "#wishlist", icon: <TfiGift /> },
   { label: "Location", link: "#location", icon: <GrMapLocation /> },
   { label: "Calendar", link: "#calendar", icon: <RxCalendar /> },
+  { label: "Theme", link: "#dark-mode", icon: null }, // Special dark mode item
 ];
 
 export function Menu({
@@ -30,6 +33,8 @@ export function Menu({
   onOpenWishlist,
   onOpenLocation,
   onOpenCalendar,
+  isDarkMode = false,
+  onToggleDarkMode,
 }: MenuProps) {
   const [hoveredIndex, setHoveredIndex] = useState<number | null>(null);
   const [clickedIndex, setClickedIndex] = useState<number | null>(null);
@@ -45,7 +50,13 @@ export function Menu({
   };
 
   const handleClick = (index: number) => {
-    // If this is the first click on this item
+    // Dark mode toggle works immediately on first click
+    if (index === 5) {
+      onToggleDarkMode?.();
+      return;
+    }
+
+    // If this is the first click on this item (for other menu items)
     if (firstClickIndex !== index) {
       // Show tooltip for first click
       setClickedIndex(index);
@@ -103,19 +114,33 @@ export function Menu({
             onMouseLeave={handleMouseLeave}
             onClick={() => handleClick(index)}
           >
-            <div className={styles.icon}>{item.icon}</div>
+            <div className={styles.icon}>
+              {index === 5 ? (
+                // Dark mode toggle icon
+                <span className={styles.darkModeIcon}>
+                  {isDarkMode ? '☀️' : '🌙'}
+                </span>
+              ) : (
+                item.icon
+              )}
+            </div>
             {(hoveredIndex === index || clickedIndex === index) && (
               <div className={styles.tooltip}>
                 {firstClickIndex === index ? (
                   <>
-                    {item.label}
+                    {index === 5 
+                      ? (isDarkMode ? 'Light Mode' : 'Dark Mode')
+                      : item.label
+                    }
                     <br />
                     <span className={styles.clickAgain}>
-                      Click again to open
+                      {index === 5 ? 'Click to toggle' : 'Click again to open'}
                     </span>
                   </>
                 ) : (
-                  item.label
+                  index === 5 
+                    ? (isDarkMode ? 'Light Mode' : 'Dark Mode')
+                    : item.label
                 )}
               </div>
             )}
