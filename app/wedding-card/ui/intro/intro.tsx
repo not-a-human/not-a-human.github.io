@@ -49,17 +49,43 @@ export function Intro() {
       </div>
 
       {/* Couple names */}
-      <div className={styles.coupleSection}>
-        <div className={styles.coupleNames}>
-          <h1 className={styles.coupleName}>Avie Sinar</h1>
-          <h1 className={styles.coupleSubName}>PHUAH YONG CHERN</h1>
-          <div className={styles.coupleConnector}>
-            <div className={styles.connectorLine}></div>
-            <span className={styles.ampersandLarge}>&</span>
-            <div className={styles.connectorLine}></div>
+      <div className={styles.flipCard}>
+        <div className={styles.flipCardInner}>
+          <div className={styles.flipCardFront}>
+            <div className={styles.coupleSection}>
+              <div className={styles.coupleNames}>
+                <h1 className={styles.coupleName}>Avie Sinar</h1>
+                <h1 className={styles.coupleSubName}>PHUAH YONG CHERN</h1>
+                <div className={styles.coupleConnector}>
+                  <div className={styles.connectorLine}></div>
+                  <span className={styles.ampersandLarge}>&</span>
+                  <div className={styles.connectorLine}></div>
+                </div>
+                <h1 className={styles.coupleName}>Ayuni Muspirah</h1>
+                <h1 className={styles.coupleSubName}>BINTI RUSLIN</h1>
+              </div>
+            </div>
           </div>
-          <h1 className={styles.coupleName}>Ayuni Muspirah</h1>
-          <h1 className={styles.coupleSubName}>BINTI RUSLIN</h1>
+          <div className={styles.flipCardBack}>
+            <div className={styles.coupleSection}>
+              <div className={styles.backContent}>
+                <h2 className={styles.backTitle}>Our Love Story</h2>
+                <div className={styles.loveStoryText}>
+                  <p>"Dua hati, satu cerita, forever & always."</p>
+                  <div className={styles.heartPattern}>💕</div>
+                  <p className={styles.dateText}>Est. 2025</p>
+                  <p className={styles.weddingDate}>
+                    Wedding Day
+                    <br />
+                    9.11.2025
+                  </p>
+                </div>
+                <div className={styles.backDecoration}>
+                  <div className={styles.decorativeBorder}></div>
+                </div>
+              </div>
+            </div>
+          </div>
         </div>
       </div>
 

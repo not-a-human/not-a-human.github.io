@@ -19,6 +19,12 @@
 /* Greeting Section */
 .greetingSection {
   margin-bottom: 3rem;
+  perspective: 1000px;
+  transition: all 0.3s ease;
+}
+
+.greetingSection:hover {
+  transform: translateY(-2px);
 }
 
 .greeting {
@@ -29,6 +35,15 @@
   letter-spacing: 0.5px;
   margin-bottom: 1.5rem;
   line-height: 1.4;
+  transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+  transform-style: preserve-3d;
+  cursor: pointer;
+}
+
+.greeting:hover {
+  transform: rotateX(5deg) translateZ(10px);
+  text-shadow: 0 5px 15px rgba(240, 201, 123, 0.5);
+  letter-spacing: 1px;
 }
 
 .decorativeLine {
@@ -55,6 +70,15 @@
   color: var(--primary-color);
   font-size: 1rem;
   animation: heartbeat 2s ease-in-out infinite;
+  transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+  cursor: pointer;
+  transform-style: preserve-3d;
+}
+
+.heartIcon:hover {
+  transform: rotateY(360deg) scale(1.5);
+  filter: drop-shadow(0 0 15px rgba(240, 201, 123, 0.8));
+  animation-play-state: paused;
 }
 
 /* Parents Section */
@@ -108,15 +132,67 @@
   font-weight: 600;
 }
 
+/* 3D Flip Card */
+.flipCard {
+  background-color: transparent;
+  width: 100%;
+  height: auto;
+  min-height: 300px;
+  perspective: 1000px;
+  margin-bottom: 3rem;
+  cursor: pointer;
+}
+
+.flipCardInner {
+  position: relative;
+  width: 100%;
+  height: 100%;
+  text-align: center;
+  transition: transform 0.8s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+  transform-style: preserve-3d;
+}
+
+.flipCard:hover .flipCardInner {
+  transform: rotateY(180deg);
+}
+
+.flipCardFront,
+.flipCardBack {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  -webkit-backface-visibility: hidden;
+  backface-visibility: hidden;
+  border-radius: 16px;
+}
+
+.flipCardFront {
+  transform: rotateY(0deg);
+}
+
+.flipCardBack {
+  transform: rotateY(180deg);
+}
+
 /* Couple Section */
 .coupleSection {
-  margin-bottom: 3rem;
+  width: 100%;
   padding: 2rem 1rem;
   background: rgba(240, 201, 123, 0.1);
   border: 2px solid rgba(240, 201, 123, 0.3);
   border-radius: 16px;
   backdrop-filter: blur(10px);
   box-shadow: 0 8px 32px rgba(0, 0, 0, 0.1);
+  transition: all 0.3s ease;
+  height: 100%;
+  min-height: 280px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.flipCard:hover .coupleSection {
+  box-shadow: 0 12px 40px rgba(0, 0, 0, 0.2);
 }
 
 .coupleNames {
@@ -154,14 +230,14 @@
 .coupleName:hover {
   transform: translateY(-2px) scale(1.05);
   filter: drop-shadow(0 0 20px rgba(240, 201, 123, 0.6))
-          drop-shadow(0 0 40px rgba(240, 201, 123, 0.3))
-          drop-shadow(0 4px 8px rgba(0, 0, 0, 0.2));
+    drop-shadow(0 0 40px rgba(240, 201, 123, 0.3))
+    drop-shadow(0 4px 8px rgba(0, 0, 0, 0.2));
   animation-play-state: paused;
   background-position: 0% 50%;
 }
 
 .coupleName::before {
-  content: '';
+  content: "";
   position: absolute;
   top: -5px;
   left: -5px;
@@ -186,7 +262,8 @@
 }
 
 @keyframes gradientShift {
-  0%, 100% {
+  0%,
+  100% {
     background-position: 0% 50%;
   }
   50% {
@@ -281,11 +358,121 @@
 }
 
 @keyframes pulseGlow {
-  0%, 100% {
+  0%,
+  100% {
     filter: drop-shadow(0 0 5px rgba(240, 201, 123, 0.3));
   }
   50% {
     filter: drop-shadow(0 0 10px rgba(240, 201, 123, 0.6));
+  }
+}
+
+/* Flip Card Back Content */
+.backContent {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  height: 100%;
+  padding: 1rem;
+}
+
+.backTitle {
+  font-family: var(--font-tangerine), cursive;
+  font-size: 2.5rem;
+  font-weight: 700;
+  background: linear-gradient(
+    135deg,
+    var(--primary-color),
+    #f5c842,
+    var(--primary-color)
+  );
+  background-clip: text;
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  margin-bottom: 1rem;
+  animation: shimmer 2s ease-in-out infinite alternate;
+}
+
+.loveStoryText {
+  text-align: center;
+  color: var(--white-color);
+  font-family: var(--font-cinzel), serif;
+}
+
+.loveStoryText p {
+  font-size: 1rem;
+  font-style: italic;
+  margin: 0.5rem 0;
+  opacity: 0.9;
+}
+
+.heartPattern {
+  font-size: 2rem;
+  margin: 1rem 0;
+  animation: heartBeat 1.5s ease-in-out infinite;
+}
+
+.dateText {
+  font-size: 0.9rem;
+  color: var(--primary-color);
+  font-weight: 600;
+  letter-spacing: 1px;
+}
+
+.weddingDate {
+  font-size: 1.1rem;
+  color: var(--primary-color);
+  font-weight: 700;
+  margin-top: 1rem;
+  text-align: center;
+  line-height: 1.3;
+}
+
+.backDecoration {
+  margin-top: 1.5rem;
+}
+
+.decorativeBorder {
+  width: 100px;
+  height: 2px;
+  background: linear-gradient(
+    90deg,
+    transparent,
+    var(--primary-color),
+    transparent
+  );
+  animation: pulse 2s ease-in-out infinite;
+}
+
+@keyframes shimmer {
+  0% {
+    background-position: -200% center;
+  }
+  100% {
+    background-position: 200% center;
+  }
+}
+
+@keyframes heartBeat {
+  0%,
+  100% {
+    transform: scale(1);
+  }
+  50% {
+    transform: scale(1.2);
+  }
+}
+
+@keyframes pulse {
+  0%,
+  100% {
+    opacity: 0.6;
+    transform: scaleX(1);
+  }
+  50% {
+    opacity: 1;
+    transform: scaleX(1.2);
   }
 }
 
@@ -305,13 +492,39 @@
   background: rgba(240, 201, 123, 0.08);
   border: 1px solid rgba(240, 201, 123, 0.2);
   border-radius: 12px;
-  transition: all 0.3s ease;
+  transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+  perspective: 1000px;
+  transform-style: preserve-3d;
+  cursor: pointer;
+  position: relative;
+  overflow: hidden;
+}
+
+.detailItem::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: -100%;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(
+    90deg,
+    transparent,
+    rgba(240, 201, 123, 0.2),
+    transparent
+  );
+  transition: left 0.5s ease;
 }
 
 .detailItem:hover {
-  background: rgba(240, 201, 123, 0.12);
-  border-color: rgba(240, 201, 123, 0.4);
-  transform: translateY(-1px);
+  background: rgba(240, 201, 123, 0.15);
+  border-color: rgba(240, 201, 123, 0.5);
+  transform: translateY(-5px) rotateX(5deg) rotateY(5deg) scale(1.02);
+  box-shadow: 0 10px 25px rgba(0, 0, 0, 0.2), 0 0 30px rgba(240, 201, 123, 0.3);
+}
+
+.detailItem:hover::before {
+  left: 100%;
 }
 
 .detailIcon {
@@ -319,6 +532,13 @@
   font-size: 1.2rem;
   margin-top: 0.2rem;
   flex-shrink: 0;
+  transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+  transform-style: preserve-3d;
+}
+
+.detailItem:hover .detailIcon {
+  transform: rotateY(360deg) scale(1.2);
+  filter: drop-shadow(0 0 10px rgba(240, 201, 123, 0.8));
 }
 
 .detailContent {
@@ -581,5 +801,24 @@
 
   .timelineDescription {
     font-size: 0.7rem;
+  }
+
+  /* Reduce 3D effects on mobile for better performance */
+  .flipCard:hover .flipCardInner {
+    transform: rotateY(180deg);
+    transition: transform 0.6s ease;
+  }
+
+  .detailItem:hover {
+    transform: translateY(-3px) scale(1.01);
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.15);
+  }
+
+  .greeting:hover {
+    transform: translateZ(5px);
+  }
+
+  .heartIcon:hover {
+    transform: scale(1.3);
   }
 }
