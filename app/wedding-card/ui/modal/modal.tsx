@@ -24,22 +24,6 @@ export function Modal({
   closeOnOverlayClick = true,
   className = "",
 }: ModalProps) {
-  // Handle body scroll when modal is open/closed
-  useEffect(() => {
-    if (isOpen) {
-      // Disable scrolling when modal is open
-      document.body.style.overflow = "hidden";
-    } else {
-      // Re-enable scrolling when modal is closed
-      document.body.style.overflow = "unset";
-    }
-
-    // Cleanup function to ensure scrolling is re-enabled when component unmounts
-    return () => {
-      document.body.style.overflow = "unset";
-    };
-  }, [isOpen]);
-
   // Handle ESC key press
   useEffect(() => {
     const handleEscKey = (event: KeyboardEvent) => {
