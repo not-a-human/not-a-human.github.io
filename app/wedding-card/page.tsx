@@ -62,7 +62,7 @@ export default function WeddingCardPage() {
     setIsClient(true);
 
     // Initialize dark mode from localStorage - default to dark mode
-    const savedDarkMode = localStorage.getItem('wedding-dark-mode');
+    const savedDarkMode = localStorage.getItem("wedding-dark-mode");
     if (savedDarkMode) {
       setIsDarkMode(JSON.parse(savedDarkMode));
     } else {
@@ -153,18 +153,18 @@ export default function WeddingCardPage() {
 
     // Apply dark mode class to body
     if (isDarkMode) {
-      document.body.classList.add('dark-mode');
+      document.body.classList.add("dark-mode");
     } else {
-      document.body.classList.remove('dark-mode');
+      document.body.classList.remove("dark-mode");
     }
 
     // Save to localStorage
-    localStorage.setItem('wedding-dark-mode', JSON.stringify(isDarkMode));
+    localStorage.setItem("wedding-dark-mode", JSON.stringify(isDarkMode));
   }, [isDarkMode, isClient]);
 
   // Toggle dark mode function
   const toggleDarkMode = () => {
-    setIsDarkMode(prev => !prev);
+    setIsDarkMode((prev) => !prev);
   };
 
   useEffect(() => {

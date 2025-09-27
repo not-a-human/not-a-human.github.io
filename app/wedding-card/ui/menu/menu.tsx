@@ -118,7 +118,7 @@ export function Menu({
               {index === 5 ? (
                 // Dark mode toggle icon
                 <span className={styles.darkModeIcon}>
-                  {isDarkMode ? '☀️' : '🌙'}
+                  {isDarkMode ? "☀️" : "🌙"}
                 </span>
               ) : (
                 item.icon
@@ -128,19 +128,24 @@ export function Menu({
               <div className={styles.tooltip}>
                 {firstClickIndex === index ? (
                   <>
-                    {index === 5 
-                      ? (isDarkMode ? 'Light Mode' : 'Dark Mode')
-                      : item.label
-                    }
+                    {index === 5
+                      ? isDarkMode
+                        ? "Light Mode"
+                        : "Dark Mode"
+                      : item.label}
                     <br />
                     <span className={styles.clickAgain}>
-                      {index === 5 ? 'Click to toggle' : 'Click again to open'}
+                      {index === 5 ? "Click to toggle" : "Click again to open"}
                     </span>
                   </>
+                ) : index === 5 ? (
+                  isDarkMode ? (
+                    "Light Mode"
+                  ) : (
+                    "Dark Mode"
+                  )
                 ) : (
-                  index === 5 
-                    ? (isDarkMode ? 'Light Mode' : 'Dark Mode')
-                    : item.label
+                  item.label
                 )}
               </div>
             )}

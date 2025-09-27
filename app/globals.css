@@ -2,12 +2,12 @@
   --background: #ffffff;
   --foreground: #171717;
   --main-color: cyan;
-  /* Wedding theme variables */
-  --primary-color: #f0c97b;
-  --secondary-color: #be822b;
-  --background-color: #404040;
-  --white-color: #ededed;
-  --text-color: #ededed;
+  /* Wedding theme variables - Light mode */
+  --primary-color: #b8941f;
+  --secondary-color: #8b6e1a;
+  --background-color: #ffffff;
+  --white-color: #333333;
+  --text-color: #2a2a2a;
   --max-container-width: 420px;
 }
 
