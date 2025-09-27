@@ -780,10 +780,10 @@
 }
 
 /* Light Mode Timeline Styling */
-:global(body:not(.dark-mode)) .timeline {
+/* :global(body:not(.dark-mode)) .timeline {
   background: rgba(184, 148, 31, 0.03);
   border: 1px solid rgba(184, 148, 31, 0.1);
-}
+} */
 
 :global(body:not(.dark-mode)) .timelineTime {
   color: #b8941f;
