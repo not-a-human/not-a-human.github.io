@@ -270,9 +270,9 @@ END:VCALENDAR`;
       <div className={styles.additionalInfo}>
         <div className={styles.infoText}>
           <p>
-            <FaCalendarAlt /> Save the date and never miss our special moment!
+            <FaCalendarAlt /> Save the date geng!
           </p>
-          <p>The event will be added to your calendar with all the details.</p>
+          <p>Nanti semua masuk calendar siap ada details.</p>
         </div>
       </div>
     </Modal>

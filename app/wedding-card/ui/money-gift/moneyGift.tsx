@@ -46,15 +46,10 @@ export function MoneyGift({ isOpen, onClose }: MoneyGiftProps) {
   };
 
   return (
-    <Modal
-      isOpen={isOpen}
-      onClose={onClose}
-      title="Money Gift"
-      maxWidth="450px"
-    >
+    <Modal isOpen={isOpen} onClose={onClose} title="Angpow" maxWidth="450px">
       <div className={styles.bankingSection}>
         <div className={styles.infoCard}>
-          <h3 className={styles.sectionTitle}>Banking Information</h3>
+          <h3 className={styles.sectionTitle}>Maklumat Perbankan</h3>
 
           <div className={styles.infoRow}>
             <span className={styles.label}>Nama Bank:</span>

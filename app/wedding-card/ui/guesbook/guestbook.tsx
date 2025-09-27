@@ -90,7 +90,7 @@ export function Guestbook({
     <>
       <div className={styles.guestbookContainer}>
         <h1 className={styles.title}>
-          Guestbook
+          Buku Wish & Doa
           <div></div>
         </h1>
 
@@ -113,7 +113,9 @@ export function Guestbook({
           <div className={styles.galleryContainer}>
             {guestbookEntries.length === 0 ? (
               <div className={styles.emptyState}>
-                <p>No messages yet. Be the first to leave a message!</p>
+                <p>
+                  Tiada mesej lagi. Jadilah yang pertama meninggalkan mesej!
+                </p>
               </div>
             ) : (
               <>

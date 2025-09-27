@@ -18,7 +18,7 @@ interface MenuProps {
 
 const menuItems = [
   { label: "RSVP", link: "#rsvp", icon: <LuUserRoundCheck /> },
-  { label: "Money Gift", link: "#money-gift", icon: <BsCashCoin /> },
+  { label: "Angpow", link: "#money-gift", icon: <BsCashCoin /> },
   { label: "Wishlist", link: "#wishlist", icon: <TfiGift /> },
   { label: "Location", link: "#location", icon: <GrMapLocation /> },
   { label: "Calendar", link: "#calendar", icon: <RxCalendar /> },

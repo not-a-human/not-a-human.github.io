@@ -132,9 +132,9 @@ export function Wishlist({ isOpen, onClose }: WishlistProps) {
     >
       <div className={styles.wishlistIntro}>
         <p>
-          Bantu kami memulakan perjalanan baharu kami! <LuHeartHandshake />
+          Jom support kami mulakan chapter baru <LuHeartHandshake />
         </p>
-        <p>Klik pada mana-mana item untuk melihatnya di Shopee.</p>
+        <p>Klik je mana-mana item, terus boleh tengok kat Shopee.</p>
       </div>
 
       {/* Delivery Information Section */}

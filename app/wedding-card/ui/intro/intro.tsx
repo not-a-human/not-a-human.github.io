@@ -119,7 +119,7 @@ export function Intro() {
                 <div className={styles.timelineContent}>
                   <div className={styles.timelineEvent}>Akad Nikah</div>
                   <div className={styles.timelineDescription}>
-                    Upacara pernikahan
+                    The Nikah Event
                   </div>
                 </div>
               </div>
@@ -134,7 +134,7 @@ export function Intro() {
                 <div className={styles.timelineContent}>
                   <div className={styles.timelineEvent}>High Tea</div>
                   <div className={styles.timelineDescription}>
-                    Jamuan makan petang
+                    Petang-petang hi-tea
                   </div>
                 </div>
               </div>
