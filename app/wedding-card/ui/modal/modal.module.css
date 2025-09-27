@@ -2,37 +2,38 @@
 .modalOverlay {
   position: fixed;
   top: 0;
-  left: 0;
-  right: 0;
   bottom: 0;
+  left: 50%;
+  transform: translateX(-50%);
   background: rgba(0, 0, 0, 0.7);
   backdrop-filter: blur(8px);
   display: flex;
   justify-content: center;
-  align-items: center;
+  align-items: flex-end;
   z-index: 10000;
-  padding: 1rem;
+  padding: 0;
   animation: fadeIn 0.3s ease-out;
-  /* Ensure proper centering */
   box-sizing: border-box;
-  min-height: 100vh;
+  width: var(--max-container-width);
 }
 
 .modalContent {
   border: 2px solid rgba(240, 201, 123, 0.4);
-  border-radius: 16px;
+  border-radius: 16px 16px 0 0;
   width: 100%;
-  max-height: 85vh;
+  max-width: 600px;
+  max-height: calc(80vh - 100px);
+  margin: 0 auto;
   display: flex;
   flex-direction: column;
-  box-shadow: 0 20px 40px rgba(0, 0, 0, 0.4), 0 0 0 1px rgba(240, 201, 123, 0.1);
-  animation: slideIn 0.3s ease-out;
+  box-shadow: 0 -10px 40px rgba(0, 0, 0, 0.4),
+    0 0 0 1px rgba(240, 201, 123, 0.1);
+  animation: slideFromBottom 0.4s cubic-bezier(0.25, 0.46, 0.45, 0.94) both;
   position: relative;
-  /* Ensure proper centering */
-  margin: auto;
   flex-shrink: 0;
   box-sizing: border-box;
   backdrop-filter: blur(10px);
+  padding-bottom: 3.8rem;
 }
 
 .modalHeader {
@@ -99,35 +100,40 @@
   }
 }
 
-@keyframes slideIn {
+@keyframes slideFromBottom {
   from {
     opacity: 0;
-    transform: translateY(-20px) scale(0.95);
+    transform: translateY(100%);
   }
   to {
     opacity: 1;
-    transform: translateY(0) scale(1);
+    transform: translateY(0);
   }
 }
 
 /* Mobile Responsiveness */
 @media (max-width: 768px) {
   .modalOverlay {
-    padding: 0.5rem;
-    /* Ensure proper mobile centering */
-    min-height: 100vh;
-    min-height: 100dvh; /* Dynamic viewport height for mobile */
+    padding: 0;
+    left: 0;
+    right: 0;
+    transform: none;
+    width: 100%;
   }
 
   .modalContent {
-    max-height: 90vh;
-    max-height: 90dvh; /* Dynamic viewport height for mobile */
-    /* Ensure modal doesn't get pushed off screen */
-    margin: auto;
+    max-width: 100%;
+    max-height: calc(85vh - 80px);
+    border-radius: 12px 12px 0 0;
+    padding-bottom: 4.4rem;
   }
 
   .modalHeader {
-    padding: 1rem 1rem 0.5rem 1rem;
+    padding: 1rem;
+  }
+
+  .modalBody {
+    padding: 1rem;
   }
 
   .modalTitle {
@@ -150,13 +156,12 @@
 
 @media (max-width: 480px) {
   .modalOverlay {
-    padding: 0.25rem;
+    padding: 0;
   }
 
   .modalContent {
-    border-radius: 12px;
-    max-height: 95vh;
-    max-height: 95dvh;
+    border-radius: 12px 12px 0 0;
+    max-height: calc(90vh - 80px);
   }
 
   .modalHeader {
@@ -255,4 +260,8 @@
 
 :global(body.dark-mode) .modalBody {
   color: #e0e0e0;
+}
+
+.modalBody {
+  padding-bottom: 5rem;
 }

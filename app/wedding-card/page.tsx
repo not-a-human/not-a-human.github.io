@@ -47,6 +47,47 @@ export default function WeddingCardPage() {
   const [wishlistModalOpen, setWishlistModalOpen] = useState(false);
   const [moneyGiftModalOpen, setMoneyGiftModalOpen] = useState(false);
 
+  // Helper function to close all modals
+  const closeAllModals = () => {
+    setGuestbookModalOpen(false);
+    setRsvpModalOpen(false);
+    setLocationModalOpen(false);
+    setCalendarModalOpen(false);
+    setWishlistModalOpen(false);
+    setMoneyGiftModalOpen(false);
+  };
+
+  // Modal opening handlers that close other modals first
+  const openGuestbookModal = () => {
+    closeAllModals();
+    setGuestbookModalOpen(true);
+  };
+
+  const openRsvpModal = () => {
+    closeAllModals();
+    setRsvpModalOpen(true);
+  };
+
+  const openLocationModal = () => {
+    closeAllModals();
+    setLocationModalOpen(true);
+  };
+
+  const openCalendarModal = () => {
+    closeAllModals();
+    setCalendarModalOpen(true);
+  };
+
+  const openWishlistModal = () => {
+    closeAllModals();
+    setWishlistModalOpen(true);
+  };
+
+  const openMoneyGiftModal = () => {
+    closeAllModals();
+    setMoneyGiftModalOpen(true);
+  };
+
   // Guestbook entries state (shared between guestbook component and form)
   const [guestbookEntries, setGuestbookEntries] = useState<DatabaseRecord[]>(
     []
@@ -446,7 +487,7 @@ export default function WeddingCardPage() {
             )}
           >
             <Guestbook
-              onOpenModal={() => setGuestbookModalOpen(true)}
+              onOpenModal={openGuestbookModal}
               entries={guestbookEntries}
               onEntriesUpdate={setGuestbookEntries}
             />
@@ -467,11 +508,11 @@ export default function WeddingCardPage() {
 
       {showMenu && (
         <Menu
-          onOpenRsvp={() => setRsvpModalOpen(true)}
-          onOpenMoneyGift={() => setMoneyGiftModalOpen(true)}
-          onOpenWishlist={() => setWishlistModalOpen(true)}
-          onOpenLocation={() => setLocationModalOpen(true)}
-          onOpenCalendar={() => setCalendarModalOpen(true)}
+          onOpenRsvp={openRsvpModal}
+          onOpenMoneyGift={openMoneyGiftModal}
+          onOpenWishlist={openWishlistModal}
+          onOpenLocation={openLocationModal}
+          onOpenCalendar={openCalendarModal}
           isDarkMode={isDarkMode}
           onToggleDarkMode={toggleDarkMode}
         />
