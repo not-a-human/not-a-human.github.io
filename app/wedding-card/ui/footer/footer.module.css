@@ -223,6 +223,10 @@
 }
 
 @media screen and (max-width: 480px) {
+  .footerContainer {
+    padding-bottom: 2rem;
+  }
+
   .footerContent {
     gap: 1rem;
   }
@@ -237,4 +241,12 @@
     min-width: 120px;
     justify-content: center;
   }
+}
+
+/* PDF Download Section */
+.downloadSection {
+  margin: 2rem 0 1rem;
+  display: flex;
+  justify-content: center;
+  align-items: center;
 }

@@ -26,6 +26,7 @@ export default function WeddingCardPage() {
   const [isClient, setIsClient] = useState(false);
   const [showMenu, setShowMenu] = useState(false);
   const [hasScrolled, setHasScrolled] = useState(false);
+  const [scrollY, setScrollY] = useState(0);
   const contentRef = useRef<HTMLDivElement>(null);
 
   // Modal state management
@@ -129,10 +130,13 @@ export default function WeddingCardPage() {
   }, []);
 
   useEffect(() => {
+    let ticking = false;
+
     const handleScroll = () => {
       if (!contentRef.current) return;
 
       const scrollTop = contentRef.current.scrollTop;
+      setScrollY(scrollTop); // Update scroll position for parallax
 
       // Show menu when scrolled past the MainPage (approximately 100vh)
       const scrollThreshold = window.innerHeight * 0.8; // 80% of viewport height
@@ -145,17 +149,27 @@ export default function WeddingCardPage() {
       }
     };
 
+    const throttledScroll = () => {
+      if (!ticking) {
+        requestAnimationFrame(() => {
+          handleScroll();
+          ticking = false;
+        });
+        ticking = true;
+      }
+    };
+
     const contentElement = contentRef.current;
     if (contentElement) {
-      // Add scroll listener to content div
-      contentElement.addEventListener("scroll", handleScroll);
+      // Add throttled scroll listener for better performance
+      contentElement.addEventListener("scroll", throttledScroll);
 
       // Check initial scroll position
       handleScroll();
 
       // Cleanup
       return () => {
-        contentElement.removeEventListener("scroll", handleScroll);
+        contentElement.removeEventListener("scroll", throttledScroll);
       };
     }
   }, [isClient, hasScrolled]);
@@ -164,11 +178,44 @@ export default function WeddingCardPage() {
       {/* Enhanced Shimmer Overlay for more visibility */}
       {isClient && <div className={styles.shimmerOverlay}></div>}
 
-      {/* Animated Background Elements */}
+      {/* Animated Background Elements with Parallax */}
       <div className={styles.backgroundAnimation}>
+        {/* Additional Parallax Layers */}
+        {isClient && (
+          <>
+            {/* Far background layer - slowest movement */}
+            <div
+              className={styles.parallaxLayer}
+              style={{
+                transform: `translateY(${scrollY * 0.05}px) scale(${
+                  1 + scrollY * 0.00005
+                })`,
+                background: `radial-gradient(circle at ${
+                  20 + scrollY * 0.01
+                }% ${
+                  30 + scrollY * 0.01
+                }%, rgba(240, 201, 123, 0.02) 0%, transparent 50%)`,
+              }}
+            ></div>
+
+            {/* Mid background layer */}
+            <div
+              className={styles.parallaxLayer}
+              style={{
+                transform: `translateY(${scrollY * 0.08}px) rotate(${
+                  scrollY * 0.01
+                }deg)`,
+                background: `conic-gradient(from ${
+                  scrollY * 0.1
+                }deg at 70% 70%, transparent 0deg, rgba(190, 130, 43, 0.015) 90deg, transparent 180deg)`,
+              }}
+            ></div>
+          </>
+        )}
+
         {isClient && (
           <div className={styles.floatingParticles}>
-            {/* Reduced floating hearts from 8 to 4 */}
+            {/* Reduced floating hearts from 8 to 4 with parallax */}
             {[...Array(4)].map((_, i) => (
               <div
                 key={`heart-${i}`}
@@ -179,13 +226,14 @@ export default function WeddingCardPage() {
                     "--duration": `${20 + i * 3}s`,
                     "--start-x": `${25 + i * 25}%`,
                     "--end-x": `${30 + i * 25}%`,
+                    transform: `translateY(${scrollY * (0.1 + i * 0.05)}px)`,
                   } as React.CSSProperties
                 }
               >
                 ♥
               </div>
             ))}
-            {/* Reduced floating sparkles from 12 to 6 */}
+            {/* Reduced floating sparkles from 12 to 6 with parallax */}
             {[...Array(6)].map((_, i) => (
               <div
                 key={`sparkle-${i}`}
@@ -196,6 +244,7 @@ export default function WeddingCardPage() {
                     "--duration": `${15 + i * 2}s`,
                     "--start-x": `${20 + i * 15}%`,
                     "--end-x": `${25 + i * 15}%`,
+                    transform: `translateY(${scrollY * (0.15 + i * 0.03)}px)`,
                   } as React.CSSProperties
                 }
               >
@@ -205,12 +254,29 @@ export default function WeddingCardPage() {
           </div>
         )}
 
-        {/* Gradient overlays */}
-        <div className={styles.gradientOverlay1}></div>
-        <div className={styles.gradientOverlay2}></div>
+        {/* Gradient overlays with parallax */}
+        <div
+          className={styles.gradientOverlay1}
+          style={{
+            transform: `translateY(${scrollY * 0.3}px)`,
+          }}
+        ></div>
+        <div
+          className={styles.gradientOverlay2}
+          style={{
+            transform: `translateY(${scrollY * 0.2}px)`,
+          }}
+        ></div>
 
-        {/* Subtle pattern */}
-        <div className={styles.patternOverlay}></div>
+        {/* Subtle pattern with parallax */}
+        <div
+          className={styles.patternOverlay}
+          style={{
+            transform: `translateY(${scrollY * 0.1}px) scale(${
+              1 + scrollY * 0.0001
+            })`,
+          }}
+        ></div>
       </div>
 
       <div ref={contentRef} className={styles.content}>
