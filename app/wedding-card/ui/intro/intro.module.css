@@ -222,43 +222,7 @@
   line-height: 1;
   text-shadow: none;
   position: relative;
-  cursor: pointer;
-  transition: all 0.4s cubic-bezier(0.25, 0.46, 0.45, 0.94);
   animation: gradientShift 3s ease-in-out infinite;
-}
-
-.coupleName:hover {
-  transform: translateY(-2px) scale(1.05);
-  filter: drop-shadow(0 0 20px rgba(240, 201, 123, 0.6))
-    drop-shadow(0 0 40px rgba(240, 201, 123, 0.3))
-    drop-shadow(0 4px 8px rgba(0, 0, 0, 0.2));
-  animation-play-state: paused;
-  background-position: 0% 50%;
-}
-
-.coupleName::before {
-  content: "";
-  position: absolute;
-  top: -5px;
-  left: -5px;
-  right: -5px;
-  bottom: -5px;
-  background: linear-gradient(
-    135deg,
-    rgba(240, 201, 123, 0.4),
-    rgba(245, 200, 66, 0.3),
-    rgba(230, 184, 0, 0.4),
-    rgba(240, 201, 123, 0.4)
-  );
-  border-radius: 8px;
-  opacity: 0;
-  transition: opacity 0.4s ease;
-  z-index: -1;
-  filter: blur(10px);
-}
-
-.coupleName:hover::before {
-  opacity: 1;
 }
 
 @keyframes gradientShift {
@@ -287,14 +251,6 @@
   margin: 0 0 1rem 0;
   letter-spacing: 1px;
   position: relative;
-  cursor: pointer;
-  transition: all 0.3s ease;
-}
-
-.coupleSubName:hover {
-  transform: translateY(-1px);
-  letter-spacing: 1.5px;
-  filter: drop-shadow(0 0 10px rgba(240, 201, 123, 0.4));
 }
 
 .coupleConnector {

@@ -29,6 +29,12 @@ export default function WeddingCardPage() {
   const [scrollY, setScrollY] = useState(0);
   const contentRef = useRef<HTMLDivElement>(null);
 
+  // Mouse position for floating hearts
+  const [mousePosition, setMousePosition] = useState({ x: 0, y: 0 });
+  const [floatingHearts, setFloatingHearts] = useState<
+    Array<{ id: number; x: number; y: number; delay: number; size: number }>
+  >([]);
+
   // Modal state management
   const [guestbookModalOpen, setGuestbookModalOpen] = useState(false);
   const [rsvpModalOpen, setRsvpModalOpen] = useState(false);
@@ -173,10 +179,94 @@ export default function WeddingCardPage() {
       };
     }
   }, [isClient, hasScrolled]);
+
+  // Mouse movement tracking for floating hearts
+  useEffect(() => {
+    if (!isClient) return;
+
+    const handleMouseMove = (e: MouseEvent) => {
+      setMousePosition({ x: e.clientX, y: e.clientY });
+    };
+
+    const handleMouseEnter = () => {
+      // Initialize floating hearts when mouse enters
+      const hearts = Array.from({ length: 8 }, (_, i) => ({
+        id: i,
+        x: Math.random() * window.innerWidth,
+        y: Math.random() * window.innerHeight,
+        delay: i * 0.2,
+        size: 0.8 + Math.random() * 0.6,
+      }));
+      setFloatingHearts(hearts);
+    };
+
+    const handleMouseLeave = () => {
+      // Clear floating hearts when mouse leaves
+      setFloatingHearts([]);
+    };
+
+    document.addEventListener("mousemove", handleMouseMove);
+    document.addEventListener("mouseenter", handleMouseEnter);
+    document.addEventListener("mouseleave", handleMouseLeave);
+
+    // Initialize hearts on mount
+    handleMouseEnter();
+
+    return () => {
+      document.removeEventListener("mousemove", handleMouseMove);
+      document.removeEventListener("mouseenter", handleMouseEnter);
+      document.removeEventListener("mouseleave", handleMouseLeave);
+    };
+  }, [isClient]);
+
+  // Update floating hearts positions with smooth animation
+  useEffect(() => {
+    if (!isClient || floatingHearts.length === 0) return;
+
+    const updateHearts = () => {
+      setFloatingHearts((prevHearts) =>
+        prevHearts.map((heart) => {
+          const targetX =
+            mousePosition.x + Math.sin(Date.now() * 0.001 + heart.delay) * 100;
+          const targetY =
+            mousePosition.y + Math.cos(Date.now() * 0.001 + heart.delay) * 80;
+
+          // Smooth interpolation towards target position
+          const lerpFactor = 0.02;
+          return {
+            ...heart,
+            x: heart.x + (targetX - heart.x) * lerpFactor,
+            y: heart.y + (targetY - heart.y) * lerpFactor,
+          };
+        })
+      );
+    };
+
+    const animationFrame = setInterval(updateHearts, 16); // ~60fps
+    return () => clearInterval(animationFrame);
+  }, [isClient, mousePosition, floatingHearts.length]);
+
   return (
     <div className={styles.container}>
       {/* Enhanced Shimmer Overlay for more visibility */}
       {isClient && <div className={styles.shimmerOverlay}></div>}
+
+      {/* Interactive Floating Hearts */}
+      {isClient &&
+        floatingHearts.map((heart) => (
+          <div
+            key={heart.id}
+            className={styles.floatingHeart}
+            style={{
+              left: `${heart.x}px`,
+              top: `${heart.y}px`,
+              transform: `scale(${heart.size})`,
+              animationDelay: `${heart.delay}s`,
+            }}
+          >
+            💖
+          </div>
+        ))}
 
       {/* Animated Background Elements with Parallax */}
       <div className={styles.backgroundAnimation}>

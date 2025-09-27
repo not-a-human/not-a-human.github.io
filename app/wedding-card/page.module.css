@@ -483,7 +483,67 @@
   .container::before,
   .container::after,
   .shimmerOverlay,
-  .particle {
+  .particle,
+  .floatingHeart {
     animation: none;
+  }
+}
+
+/* Interactive Floating Hearts */
+.floatingHeart {
+  position: fixed;
+  font-size: 1.2rem;
+  color: rgba(240, 201, 123, 0.6);
+  pointer-events: none;
+  z-index: 1000;
+  animation: floatAndGlow 3s ease-in-out infinite;
+  user-select: none;
+  text-shadow: 0 0 10px rgba(240, 201, 123, 0.4);
+  transition: all 0.3s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+}
+
+.floatingHeart:nth-child(odd) {
+  animation: floatAndGlow 3s ease-in-out infinite reverse;
+}
+
+.floatingHeart:nth-child(3n) {
+  color: rgba(255, 182, 193, 0.5);
+  text-shadow: 0 0 8px rgba(255, 182, 193, 0.3);
+}
+
+.floatingHeart:nth-child(4n) {
+  color: rgba(255, 105, 180, 0.4);
+  text-shadow: 0 0 12px rgba(255, 105, 180, 0.5);
+}
+
+@keyframes floatAndGlow {
+  0%,
+  100% {
+    transform: translateY(0px) rotate(0deg);
+    opacity: 0.6;
+    filter: drop-shadow(0 0 5px rgba(240, 201, 123, 0.3));
+  }
+  25% {
+    transform: translateY(-8px) rotate(-2deg);
+    opacity: 0.8;
+    filter: drop-shadow(0 0 8px rgba(240, 201, 123, 0.5));
+  }
+  50% {
+    transform: translateY(-12px) rotate(2deg);
+    opacity: 1;
+    filter: drop-shadow(0 0 12px rgba(240, 201, 123, 0.7));
+  }
+  75% {
+    transform: translateY(-6px) rotate(-1deg);
+    opacity: 0.9;
+    filter: drop-shadow(0 0 8px rgba(240, 201, 123, 0.6));
+  }
+}
+
+/* Mobile optimizations for floating hearts */
+@media (max-width: 768px) {
+  .floatingHeart {
+    font-size: 1rem;
+    animation-duration: 4s; /* Slower on mobile for better performance */
   }
 }
