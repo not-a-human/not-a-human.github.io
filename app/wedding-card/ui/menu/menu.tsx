@@ -7,6 +7,7 @@ import { LuUserRoundCheck } from "react-icons/lu";
 import { BsCashCoin } from "react-icons/bs";
 import { GrMapLocation } from "react-icons/gr";
 import { RxCalendar } from "react-icons/rx";
+import { MdOutlineDarkMode, MdOutlineLightMode } from "react-icons/md";
 
 interface MenuProps {
   onOpenRsvp?: () => void;
@@ -116,10 +117,11 @@ export function Menu({
           >
             <div className={styles.icon}>
               {index === 5 ? (
-                // Dark mode toggle icon
-                <span className={styles.darkModeIcon}>
-                  {isDarkMode ? "☀️" : "🌙"}
-                </span>
+                isDarkMode ? (
+                  <MdOutlineLightMode />
+                ) : (
+                  <MdOutlineDarkMode />
+                )
               ) : (
                 item.icon
               )}
