@@ -47,11 +47,12 @@ export function MusicPlayer({ isVisible = true }: MusicPlayerProps) {
             setNeedsUserInteraction(true);
           });
       }
-    } else if (!isVisible && audio && isPlaying) {
-      // Pause when component becomes invisible
-      audio.pause();
-      setIsPlaying(false);
     }
+    // else if (!isVisible && audio && isPlaying) {
+    //   // Pause when component becomes invisible
+    //   audio.pause();
+    //   setIsPlaying(false);
+    // }
   }, [isVisible, audio]);
 
   const toggleMusic = () => {
