@@ -8,6 +8,8 @@ import {
   FaCalendarAlt,
 } from "react-icons/fa";
 import { IoTime } from "react-icons/io5";
+import { GiDiamondRing } from "react-icons/gi";
+import { MdRestaurant } from "react-icons/md";
 
 export function Intro() {
   return (
@@ -108,14 +110,32 @@ export function Intro() {
             <div className={styles.timeline}>
               <div className={styles.timelineItem}>
                 <div className={styles.timelineTime}>5:00 PM</div>
-                <div className={styles.timelineDot}></div>
-                <div className={styles.timelineEvent}>Akad Nikah</div>
+                <div className={styles.timelineDot}>
+                  <div className={styles.dotInner}>
+                    <GiDiamondRing />
+                  </div>
+                </div>
+                <div className={styles.timelineContent}>
+                  <div className={styles.timelineEvent}>Akad Nikah</div>
+                  <div className={styles.timelineDescription}>
+                    Upacara pernikahan
+                  </div>
+                </div>
               </div>
               <div className={styles.timelineConnector}></div>
               <div className={styles.timelineItem}>
                 <div className={styles.timelineTime}>5:30 PM</div>
-                <div className={styles.timelineDot}></div>
-                <div className={styles.timelineEvent}>High Tea</div>
+                <div className={styles.timelineDot}>
+                  <div className={styles.dotInner}>
+                    <MdRestaurant />
+                  </div>
+                </div>
+                <div className={styles.timelineContent}>
+                  <div className={styles.timelineEvent}>High Tea</div>
+                  <div className={styles.timelineDescription}>
+                    Jamuan makan petang
+                  </div>
+                </div>
               </div>
             </div>
           </div>
