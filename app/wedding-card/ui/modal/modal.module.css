@@ -110,25 +110,6 @@
   }
 }
 
-/* Custom scrollbar for modal content */
-.modalContent::-webkit-scrollbar {
-  width: 6px;
-}
-
-.modalContent::-webkit-scrollbar-track {
-  background: rgba(240, 201, 123, 0.1);
-  border-radius: 3px;
-}
-
-.modalContent::-webkit-scrollbar-thumb {
-  background: rgba(240, 201, 123, 0.3);
-  border-radius: 3px;
-}
-
-.modalContent::-webkit-scrollbar-thumb:hover {
-  background: rgba(240, 201, 123, 0.5);
-}
-
 /* Mobile Responsiveness */
 @media (max-width: 768px) {
   .modalOverlay {
@@ -269,7 +250,6 @@
 }
 
 :global(body.dark-mode) .closeButton:hover {
-  background: rgba(212, 175, 55, 0.1);
   color: #d4af37;
 }
 
