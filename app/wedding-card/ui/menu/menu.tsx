@@ -1,6 +1,6 @@
 "use client";
 
-import { useState } from "react";
+import { useState, useRef } from "react";
 import { TfiGift } from "react-icons/tfi";
 import styles from "./menu.module.css";
 import { LuUserRoundCheck } from "react-icons/lu";
@@ -33,6 +33,8 @@ export function Menu({
 }: MenuProps) {
   const [hoveredIndex, setHoveredIndex] = useState<number | null>(null);
   const [clickedIndex, setClickedIndex] = useState<number | null>(null);
+  const [firstClickIndex, setFirstClickIndex] = useState<number | null>(null);
+  const clickTimeoutRef = useRef<NodeJS.Timeout | null>(null);
 
   const handleMouseEnter = (index: number) => {
     setHoveredIndex(index);
@@ -43,9 +45,34 @@ export function Menu({
   };
 
   const handleClick = (index: number) => {
-    setClickedIndex(index);
-    // Hide tooltip after 2 seconds on click
-    setTimeout(() => setClickedIndex(null), 2000);
+    // If this is the first click on this item
+    if (firstClickIndex !== index) {
+      // Show tooltip for first click
+      setClickedIndex(index);
+      setFirstClickIndex(index);
+
+      // Clear any existing timeout
+      if (clickTimeoutRef.current) {
+        clearTimeout(clickTimeoutRef.current);
+      }
+
+      // Reset first click state after 3 seconds
+      clickTimeoutRef.current = setTimeout(() => {
+        setFirstClickIndex(null);
+        setClickedIndex(null);
+      }, 3000);
+
+      return; // Don't open modal on first click
+    }
+
+    // This is the second click - open modal
+    setClickedIndex(null);
+    setFirstClickIndex(null);
+
+    // Clear timeout
+    if (clickTimeoutRef.current) {
+      clearTimeout(clickTimeoutRef.current);
+    }
 
     // Open appropriate modal using callback props
     if (index === 0) {
@@ -78,7 +105,19 @@ export function Menu({
           >
             <div className={styles.icon}>{item.icon}</div>
             {(hoveredIndex === index || clickedIndex === index) && (
-              <div className={styles.tooltip}>{item.label}</div>
+              <div className={styles.tooltip}>
+                {firstClickIndex === index ? (
+                  <>
+                    {item.label}
+                    <br />
+                    <span className={styles.clickAgain}>
+                      Click again to open
+                    </span>
+                  </>
+                ) : (
+                  item.label
+                )}
+              </div>
             )}
           </div>
         ))}

@@ -4,7 +4,7 @@ import styles from "./page.module.css";
 import { Menu } from "./ui/menu/menu";
 import { MainPage } from "./ui/main-page/mainPage";
 import { Intro } from "./ui/intro/intro";
-import { useState, useEffect } from "react";
+import { useState, useEffect, useRef } from "react";
 import { Countdown } from "./ui/countdown/countdown";
 import { Guestbook } from "./ui/guesbook/guestbook";
 import { GuestbookForm } from "./ui/guesbook/guestbookForm";
@@ -25,6 +25,8 @@ import {
 export default function WeddingCardPage() {
   const [isClient, setIsClient] = useState(false);
   const [showMenu, setShowMenu] = useState(false);
+  const [hasScrolled, setHasScrolled] = useState(false);
+  const contentRef = useRef<HTMLDivElement>(null);
 
   // Modal state management
   const [guestbookModalOpen, setGuestbookModalOpen] = useState(false);
@@ -78,6 +80,7 @@ export default function WeddingCardPage() {
     document.body.style.padding = "0";
     document.body.style.backgroundColor = "0";
     document.body.style.height = "100vh";
+    document.body.style.overflow = "hidden";
 
     document.documentElement.style.scrollBehavior = "smooth";
     document.documentElement.style.scrollbarColor =
@@ -127,26 +130,37 @@ export default function WeddingCardPage() {
 
   useEffect(() => {
     const handleScroll = () => {
+      if (!contentRef.current) return;
+
+      const scrollTop = contentRef.current.scrollTop;
+
       // Show menu when scrolled past the MainPage (approximately 100vh)
       const scrollThreshold = window.innerHeight * 0.8; // 80% of viewport height
-      const shouldShowMenu = window.scrollY > scrollThreshold;
+      const shouldShowMenu = scrollTop > scrollThreshold;
       setShowMenu(shouldShowMenu);
+
+      // Track if user has scrolled for scroll hint
+      if (scrollTop > 100 && !hasScrolled) {
+        setHasScrolled(true);
+      }
     };
 
-    // Add scroll listener
-    window.addEventListener("scroll", handleScroll);
+    const contentElement = contentRef.current;
+    if (contentElement) {
+      // Add scroll listener to content div
+      contentElement.addEventListener("scroll", handleScroll);
 
-    // Check initial scroll position
-    handleScroll();
+      // Check initial scroll position
+      handleScroll();
 
-    // Cleanup
-    return () => {
-      window.removeEventListener("scroll", handleScroll);
-    };
-  }, []);
-
+      // Cleanup
+      return () => {
+        contentElement.removeEventListener("scroll", handleScroll);
+      };
+    }
+  }, [isClient, hasScrolled]);
   return (
-    <div className={styles.container} style={{ paddingBottom: "10rem" }}>
+    <div className={styles.container}>
       {/* Enhanced Shimmer Overlay for more visibility */}
       {isClient && <div className={styles.shimmerOverlay}></div>}
 
@@ -199,64 +213,66 @@ export default function WeddingCardPage() {
         <div className={styles.patternOverlay}></div>
       </div>
 
-      {/* Main sections with scroll animations */}
-      <div
-        ref={mainPageAnimation.ref}
-        className={getAnimationClasses(mainPageAnimation.isVisible, "fadeIn")}
-      >
-        <MainPage />
-      </div>
-
-      {/* Wrapper div with position relative for sticky music player */}
-      <div style={{ position: "relative" }}>
-        <MusicPlayer isVisible={showMenu} />
-
+      <div ref={contentRef} className={styles.content}>
+        {/* Main sections with scroll animations */}
         <div
-          ref={introAnimation.ref}
-          className={getAnimationClasses(
-            introAnimation.isVisible,
-            "fadeInUp",
-            200
-          )}
+          ref={mainPageAnimation.ref}
+          className={getAnimationClasses(mainPageAnimation.isVisible, "fadeIn")}
         >
-          <Intro />
+          <MainPage hasScrolled={hasScrolled} />
         </div>
 
-        <div
-          ref={countdownAnimation.ref}
-          className={getAnimationClasses(
-            countdownAnimation.isVisible,
-            "scaleUp",
-            300
-          )}
-        >
-          <Countdown targetDate="2025-11-09T09:00:00.000Z" />
-        </div>
+        {/* Wrapper div with position relative for sticky music player */}
+        <div style={{ position: "relative" }}>
+          <MusicPlayer isVisible={showMenu} />
 
-        <div
-          ref={guestbookAnimation.ref}
-          className={getAnimationClasses(
-            guestbookAnimation.isVisible,
-            "fadeInUp",
-            400
-          )}
-        >
-          <Guestbook
-            onOpenModal={() => setGuestbookModalOpen(true)}
-            entries={guestbookEntries}
-            onEntriesUpdate={setGuestbookEntries}
-          />
-        </div>
+          <div
+            ref={introAnimation.ref}
+            className={getAnimationClasses(
+              introAnimation.isVisible,
+              "fadeInUp",
+              200
+            )}
+          >
+            <Intro />
+          </div>
 
-        <div
-          ref={footerAnimation.ref}
-          className={getAnimationClasses(
-            footerAnimation.isVisible,
-            "fadeIn",
-            500
-          )}
-        >
-          <Footer />
+          <div
+            ref={countdownAnimation.ref}
+            className={getAnimationClasses(
+              countdownAnimation.isVisible,
+              "scaleUp",
+              300
+            )}
+          >
+            <Countdown targetDate="2025-11-09T09:00:00.000Z" />
+          </div>
+
+          <div
+            ref={guestbookAnimation.ref}
+            className={getAnimationClasses(
+              guestbookAnimation.isVisible,
+              "fadeInUp",
+              400
+            )}
+          >
+            <Guestbook
+              onOpenModal={() => setGuestbookModalOpen(true)}
+              entries={guestbookEntries}
+              onEntriesUpdate={setGuestbookEntries}
+            />
+          </div>
+
+          <div
+            ref={footerAnimation.ref}
+            className={getAnimationClasses(
+              footerAnimation.isVisible,
+              "fadeIn",
+              500
+            )}
+          >
+            <Footer />
+          </div>
         </div>
       </div>
 

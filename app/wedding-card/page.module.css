@@ -1,7 +1,8 @@
 .container {
   max-width: var(--max-container-width);
   margin: 0 auto;
-  padding: 20px;
+  padding: 0 20px;
+  height: 100vh;
   box-shadow: 0 10px 20px rgb(0 0 0 / 19%), 0 6px 6px rgb(0 0 0 / 23%),
     0 0 60px rgba(240, 201, 123, 0.1), inset 0 1px 0 rgba(240, 201, 123, 0.1);
   background: linear-gradient(
@@ -16,7 +17,7 @@
   animation: gradientShift 30s ease infinite;
   color: var(--primary-color);
   position: relative;
-  overflow: hidden;
+  overflow: visible;
 
   /* Add elegant border with golden glow */
   border: 1px solid rgba(240, 201, 123, 0.2);
@@ -198,6 +199,37 @@
   );
   background-size: 40px 40px;
   animation: patternMove 60s linear infinite;
+}
+
+.content {
+  height: 100vh;
+  overflow-y: auto;
+  overflow-x: hidden;
+  scroll-behavior: smooth;
+  padding-bottom: 5rem; /* Add space for the menu at bottom */
+
+  /* Custom scrollbar styling for webkit browsers */
+  scrollbar-width: thin;
+  scrollbar-color: var(--primary-color) transparent;
+}
+
+.content::-webkit-scrollbar {
+  width: 6px;
+}
+
+.content::-webkit-scrollbar-track {
+  background: transparent;
+}
+
+.content::-webkit-scrollbar-thumb {
+  background: var(--primary-color);
+  border-radius: 3px;
+  opacity: 0.7;
+}
+
+.content::-webkit-scrollbar-thumb:hover {
+  background: rgba(240, 201, 123, 0.9);
+  opacity: 1;
 }
 
 /* Animations */

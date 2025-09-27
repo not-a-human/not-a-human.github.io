@@ -7,44 +7,37 @@ import { MdOutlineLocationOn } from "react-icons/md";
 import { useState, useEffect } from "react";
 import { BsHeartArrow, BsHearts } from "react-icons/bs";
 
-export function MainPage() {
+interface MainPageProps {
+  hasScrolled: boolean;
+}
+
+export function MainPage({ hasScrolled }: MainPageProps) {
   const [showScrollHint, setShowScrollHint] = useState(false);
 
   useEffect(() => {
     let hintTimer: NodeJS.Timeout;
-    let hasScrolled = false;
 
     // Show hint after 4 seconds if user hasn't scrolled
-    const startHintTimer = () => {
+    if (!hasScrolled) {
       hintTimer = setTimeout(() => {
         if (!hasScrolled) {
           setShowScrollHint(true);
         }
       }, 4000);
-    };
+    }
 
-    // Check if user has scrolled
-    const handleScroll = () => {
-      if (window.scrollY > 100) {
-        // User scrolled more than 100px
-        hasScrolled = true;
-        setShowScrollHint(false);
-        window.removeEventListener("scroll", handleScroll);
-      }
-    };
-
-    // Start the timer and add scroll listener
-    startHintTimer();
-    window.addEventListener("scroll", handleScroll);
+    // Hide hint if user has scrolled
+    if (hasScrolled) {
+      setShowScrollHint(false);
+    }
 
     // Cleanup
     return () => {
       if (hintTimer) {
         clearTimeout(hintTimer);
       }
-      window.removeEventListener("scroll", handleScroll);
     };
-  }, []);
+  }, [hasScrolled]);
   return (
     <div className={styles.flexCenter}>
       <div className={styles.mainContainer}>
