@@ -21,7 +21,7 @@ export function Footer() {
           <h4 className={styles.sectionTitle}>Made with Love</h4>
           <p className={styles.creatorName}>Avie Sinar</p>
           <p className={styles.creatorDescription}>
-            Crafted with care for our special day
+            With lots of sayang, crafted for our big day
           </p>
         </div>
 
@@ -57,7 +57,7 @@ export function Footer() {
           <h4 className={styles.sectionTitle}>Our Day</h4>
           <p className={styles.weddingDate}>November 9, 2025</p>
           <p className={styles.weddingMessage}>
-            Thank you for being part of our journey
+            Thanks sebab join our journey geng
           </p>
         </div>
       </div>
