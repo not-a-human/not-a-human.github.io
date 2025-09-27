@@ -217,7 +217,9 @@ export function Wishlist({ isOpen, onClose }: WishlistProps) {
             >
               <GoCopy /> Copy Address
               {copyFeedback.address && (
-                <span className={styles.copyFeedback}>{copyFeedback.address}</span>
+                <span className={styles.copyFeedback}>
+                  {copyFeedback.address}
+                </span>
               )}
             </button>
           </div>
@@ -237,7 +239,9 @@ export function Wishlist({ isOpen, onClose }: WishlistProps) {
             >
               <GoCopy /> Copy Number
               {copyFeedback.phone && (
-                <span className={styles.copyFeedback}>{copyFeedback.phone}</span>
+                <span className={styles.copyFeedback}>
+                  {copyFeedback.phone}
+                </span>
               )}
             </button>
           </div>
