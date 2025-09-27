@@ -6,6 +6,7 @@ import {
   FaMapMarkerAlt,
   FaClock,
   FaCalendarAlt,
+  FaListAlt,
 } from "react-icons/fa";
 import { IoTime } from "react-icons/io5";
 import { GiDiamondRing } from "react-icons/gi";
@@ -103,7 +104,7 @@ export function Intro() {
         {/* Schedule timeline */}
         <div className={styles.detailItem}>
           <div className={styles.detailIcon}>
-            <IoTime />
+            <FaListAlt />
           </div>
           <div className={styles.detailContent}>
             <h4 className={styles.detailLabel}>Aturcara</h4>
