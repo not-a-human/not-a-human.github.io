@@ -263,11 +263,6 @@
   position: relative;
   gap: 0.5rem;
   padding: 1rem 0;
-  background: linear-gradient(
-    135deg,
-    rgba(240, 201, 123, 0.02),
-    rgba(190, 130, 43, 0.01)
-  );
   border-radius: 15px;
   margin-top: 0.5rem;
 }
