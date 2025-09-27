@@ -113,9 +113,7 @@ export function Guestbook({
           <div className={styles.galleryContainer}>
             {guestbookEntries.length === 0 ? (
               <div className={styles.emptyState}>
-                <p>
-                  Tiada mesej lagi. Jadilah yang pertama meninggalkan mesej!
-                </p>
+                <p>Kosong lagi ni… tulis la something dulu</p>
               </div>
             ) : (
               <>
@@ -178,7 +176,7 @@ export function Guestbook({
                 onClick={() => onOpenModal?.()}
                 className={styles.addMessageButton}
               >
-                Tinggalkan Ucapan
+                Drop ucapan sini
               </button>
             </div>
           </div>

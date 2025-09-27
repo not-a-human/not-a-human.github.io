@@ -107,7 +107,7 @@ export function Intro() {
             <FaListAlt />
           </div>
           <div className={styles.detailContent}>
-            <h4 className={styles.detailLabel}>Aturcara</h4>
+            <h4 className={styles.detailLabel}>Susun atur event</h4>
             <div className={styles.timeline}>
               <div className={styles.timelineItem}>
                 <div className={styles.timelineTime}>5:00 PM</div>

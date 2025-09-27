@@ -105,7 +105,7 @@ export function MusicPlayer({ isVisible = true }: MusicPlayerProps) {
             <div className={styles.playIcon}>
               <IoMusicalNotes />
             </div>
-            <div className={styles.promptText}>Click to play music</div>
+            <div className={styles.promptText}>Click untuk ada music vibe</div>
           </div>
         )}
         {!needsUserInteraction && (

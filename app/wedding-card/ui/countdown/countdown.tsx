@@ -51,7 +51,7 @@ export function Countdown({ targetDate }: { targetDate: string }) {
 
   return (
     <div className={styles.countdownContainer}>
-      <h2 className={styles.countdownTitle}>Menanti Hari</h2>
+      <h2 className={styles.countdownTitle}>Menanti Our Big Day</h2>
       <div className={styles.countdown}>
         <div className={styles.timeUnit}>
           <div className={styles.timeNumber}>{timeLeft.days}</div>
