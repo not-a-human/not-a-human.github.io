@@ -235,6 +235,11 @@
   font-size: 1rem;
 }
 
+.weddingDate:hover .dayNumber,
+.weddingDate:focus .dayNumber {
+  color: linear-gradient(135deg, var(--primary-color), #d4a574);
+}
+
 .weddingDot {
   position: absolute;
   top: 2px;
