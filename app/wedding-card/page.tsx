@@ -154,34 +154,34 @@ export default function WeddingCardPage() {
       <div className={styles.backgroundAnimation}>
         {isClient && (
           <div className={styles.floatingParticles}>
-            {/* Floating hearts */}
-            {[...Array(8)].map((_, i) => (
+            {/* Reduced floating hearts from 8 to 4 */}
+            {[...Array(4)].map((_, i) => (
               <div
                 key={`heart-${i}`}
                 className={`${styles.particle} ${styles.heart}`}
                 style={
                   {
-                    "--delay": `${i * 2}s`,
-                    "--duration": `${15 + i * 2}s`,
-                    "--start-x": `${Math.random() * 100}%`,
-                    "--end-x": `${Math.random() * 100}%`,
+                    "--delay": `${i * 3}s`,
+                    "--duration": `${20 + i * 3}s`,
+                    "--start-x": `${25 + i * 25}%`,
+                    "--end-x": `${30 + i * 25}%`,
                   } as React.CSSProperties
                 }
               >
                 ♥
               </div>
             ))}
-            {/* Floating sparkles */}
-            {[...Array(12)].map((_, i) => (
+            {/* Reduced floating sparkles from 12 to 6 */}
+            {[...Array(6)].map((_, i) => (
               <div
                 key={`sparkle-${i}`}
                 className={`${styles.particle} ${styles.sparkle}`}
                 style={
                   {
-                    "--delay": `${i * 1.5}s`,
-                    "--duration": `${10 + i}s`,
-                    "--start-x": `${Math.random() * 100}%`,
-                    "--end-x": `${Math.random() * 100}%`,
+                    "--delay": `${i * 2}s`,
+                    "--duration": `${15 + i * 2}s`,
+                    "--start-x": `${20 + i * 15}%`,
+                    "--end-x": `${25 + i * 15}%`,
                   } as React.CSSProperties
                 }
               >

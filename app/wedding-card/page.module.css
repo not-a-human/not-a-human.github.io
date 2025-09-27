@@ -13,7 +13,7 @@
     var(--background-color) 100%
   );
   background-size: 400% 400%;
-  animation: gradientShift 20s ease infinite;
+  animation: gradientShift 30s ease infinite;
   color: var(--primary-color);
   position: relative;
   overflow: hidden;
@@ -21,33 +21,15 @@
   /* Add elegant border with golden glow */
   border: 1px solid rgba(240, 201, 123, 0.2);
 
-  /* Multiple background layers for shimmer effect */
+  /* Simplified background - single shimmer layer */
   background-image: 
-    /* Main shimmer overlay with increased visibility */ linear-gradient(
+    /* Single shimmer overlay for better performance */ linear-gradient(
       45deg,
-      transparent 20%,
-      rgba(240, 201, 123, 0.15) 45%,
-      rgba(255, 255, 255, 0.1) 50%,
-      rgba(240, 201, 123, 0.15) 55%,
-      transparent 80%
+      transparent 30%,
+      rgba(240, 201, 123, 0.08) 50%,
+      transparent 70%
     ),
-    /* Secondary shimmer with different angle */
-      linear-gradient(
-        -45deg,
-        transparent 30%,
-        rgba(240, 201, 123, 0.08) 48%,
-        rgba(255, 255, 255, 0.05) 50%,
-        rgba(240, 201, 123, 0.08) 52%,
-        transparent 70%
-      ),
-    /* Additional diagonal shimmer for more depth */
-      linear-gradient(
-        135deg,
-        transparent 35%,
-        rgba(240, 201, 123, 0.06) 50%,
-        transparent 65%
-      ),
-    /* Base gradient (existing) */
+    /* Base gradient */
       linear-gradient(
         135deg,
         var(--background-color) 0%,
@@ -57,11 +39,9 @@
         var(--background-color) 100%
       );
 
-  background-size: 150% 150%, 200% 200%, 250% 250%, 400% 400%;
-
-  animation: gradientShift 20s ease infinite,
-    shimmerMove 5s ease-in-out infinite,
-    elegantGlow 6s ease-in-out infinite alternate;
+  background-size: 200% 200%, 400% 400%;
+  /* Reduced to single animation for performance */
+  animation: gradientShift 30s ease infinite;
 }
 
 /* Elegant corner sparkles */
@@ -101,7 +81,7 @@
   z-index: 1;
 }
 
-/* Enhanced Shimmer Overlay for better visibility */
+/* Optimized Shimmer Overlay for better performance */
 .shimmerOverlay {
   position: absolute;
   top: 0;
@@ -109,18 +89,16 @@
   right: 0;
   bottom: 0;
   background: linear-gradient(
-    110deg,
-    transparent 25%,
-    rgba(240, 201, 123, 0.1) 48%,
-    rgba(255, 255, 255, 0.15) 50%,
-    rgba(240, 201, 123, 0.1) 52%,
-    transparent 75%
+    90deg,
+    transparent 40%,
+    rgba(240, 201, 123, 0.06) 50%,
+    transparent 60%
   );
-  background-size: 200% 100%;
-  animation: strongShimmer 4s ease-in-out infinite;
+  background-size: 300% 100%;
+  animation: simpleShimmer 6s ease-in-out infinite;
   pointer-events: none;
   z-index: 1;
-  mix-blend-mode: overlay;
+  /* Remove expensive blend mode */
 }
 
 /* Background Animation Container */
@@ -348,25 +326,13 @@
   }
 }
 
-/* Strong shimmer animation for the overlay */
-@keyframes strongShimmer {
+/* Optimized simple shimmer animation */
+@keyframes simpleShimmer {
   0% {
-    background-position: -200% 0;
-    opacity: 0;
-  }
-  20% {
-    opacity: 1;
-  }
-  50% {
-    background-position: 0% 0;
-    opacity: 1;
-  }
-  80% {
-    opacity: 1;
+    background-position: -300% 0;
   }
   100% {
-    background-position: 200% 0;
-    opacity: 0;
+    background-position: 300% 0;
   }
 }
 
@@ -396,5 +362,70 @@
     height: 3px;
     top: 8px;
     right: 8px;
+  }
+}
+
+/* Performance optimizations for low-end devices */
+@media (max-width: 768px) {
+  /* Reduce animations on mobile devices */
+  .container {
+    animation: gradientShift 40s ease infinite;
+  }
+
+  .container::before {
+    animation: rotateGlow 35s linear infinite;
+  }
+
+  .container::after {
+    animation: sparkleShine 6s ease-in-out infinite;
+  }
+
+  .shimmerOverlay {
+    animation: simpleShimmer 8s ease-in-out infinite;
+  }
+
+  /* Reduce particle count further on mobile */
+  .particle:nth-child(n + 4) {
+    display: none;
+  }
+}
+
+/* Disable heavy animations on very low-end devices */
+@media (max-width: 480px) {
+  .container {
+    animation: none;
+    background: linear-gradient(
+      135deg,
+      var(--background-color) 0%,
+      #4a4a4a 50%,
+      var(--background-color) 100%
+    );
+  }
+
+  .container::before,
+  .container::after {
+    animation: none;
+    opacity: 0.5;
+  }
+
+  .shimmerOverlay {
+    animation: simpleShimmer 10s ease-in-out infinite;
+    opacity: 0.5;
+  }
+
+  /* Show only essential particles */
+  .particle:nth-child(n + 3) {
+    display: none;
+  }
+}
+
+/* Prefer reduced motion for accessibility and performance */
+@media (prefers-reduced-motion: reduce) {
+  .container,
+  .container::before,
+  .container::after,
+  .shimmerOverlay,
+  .particle {
+    animation: none;
   }
 }
