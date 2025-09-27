@@ -1,5 +1,6 @@
 "use client";
 
+import { IoMusicalNotes, IoMusicalNoteSharp } from "react-icons/io5";
 import styles from "./musicPlayer.module.css";
 import { useState, useEffect } from "react";
 
@@ -101,7 +102,9 @@ export function MusicPlayer({ isVisible = true }: MusicPlayerProps) {
       <div className={styles.musicContainer}>
         {needsUserInteraction && (
           <div className={styles.playPrompt}>
-            <div className={styles.playIcon}>🎵</div>
+            <div className={styles.playIcon}>
+              <IoMusicalNotes />
+            </div>
             <div className={styles.promptText}>Click to play music</div>
           </div>
         )}

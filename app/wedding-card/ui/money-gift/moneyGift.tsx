@@ -103,10 +103,10 @@ export function MoneyGift({ isOpen, onClose }: MoneyGiftProps) {
         </div>
       </div>
 
-      <div className={styles.thankYouMessage}>
+      {/* <div className={styles.thankYouMessage}>
         <p>Terima kasih atas sumbangan anda! 🙏</p>
         <p>Thank you for your generous gift! 🙏</p>
-      </div>
+      </div> */}
     </Modal>
   );
 }

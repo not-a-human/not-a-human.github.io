@@ -2,9 +2,10 @@
 
 import styles from "./mainPage.module.css";
 import { FaHeart } from "react-icons/fa";
-import { GiFlowerPot } from "react-icons/gi";
+import { GiFlowerPot, GiOppositeHearts } from "react-icons/gi";
 import { MdOutlineLocationOn } from "react-icons/md";
 import { useState, useEffect } from "react";
+import { BsHeartArrow, BsHearts } from "react-icons/bs";
 
 export function MainPage() {
   const [showScrollHint, setShowScrollHint] = useState(false);
@@ -102,9 +103,15 @@ export function MainPage() {
 
         {/* Floating Hearts Animation */}
         <div className={styles.floatingElements}>
-          <div className={`${styles.floatingHeart} ${styles.heart1}`}>💕</div>
-          <div className={`${styles.floatingHeart} ${styles.heart2}`}>💖</div>
-          <div className={`${styles.floatingHeart} ${styles.heart3}`}>💝</div>
+          <div className={`${styles.floatingHeart} ${styles.heart1}`}>
+            <GiOppositeHearts />
+          </div>
+          <div className={`${styles.floatingHeart} ${styles.heart2}`}>
+            <BsHeartArrow />
+          </div>
+          <div className={`${styles.floatingHeart} ${styles.heart3}`}>
+            <BsHearts />
+          </div>
         </div>
 
         {/* Scroll Hint Animation */}

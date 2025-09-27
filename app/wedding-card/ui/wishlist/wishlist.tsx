@@ -6,6 +6,7 @@ import { FiExternalLink } from "react-icons/fi";
 import { GoCopy } from "react-icons/go";
 import { FaMapMarkerAlt, FaPhone } from "react-icons/fa";
 import { Modal } from "../modal/modal";
+import { LuHeartHandshake } from "react-icons/lu";
 
 interface WishlistProps {
   isOpen: boolean;
@@ -130,8 +131,10 @@ export function Wishlist({ isOpen, onClose }: WishlistProps) {
       maxWidth="600px"
     >
       <div className={styles.wishlistIntro}>
-        <p>Help us start our new journey together! 💝</p>
-        <p>Click on any item to view it on Shopee.</p>
+        <p>
+          Bantu kami memulakan perjalanan baharu kami! <LuHeartHandshake />
+        </p>
+        <p>Klik pada mana-mana item untuk melihatnya di Shopee.</p>
       </div>
 
       {/* Delivery Information Section */}
@@ -212,12 +215,12 @@ export function Wishlist({ isOpen, onClose }: WishlistProps) {
         ))}
       </div>
 
-      <div className={styles.thankYouMessage}>
+      {/* <div className={styles.thankYouMessage}>
         <p>Thank you for helping us build our future together! 🏠💕</p>
         <p>
           Terima kasih kerana membantu kami membina masa depan bersama! 🏠💕
         </p>
-      </div>
+      </div> */}
     </Modal>
   );
 }

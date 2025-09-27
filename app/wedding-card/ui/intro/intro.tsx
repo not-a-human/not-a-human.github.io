@@ -72,7 +72,6 @@ export function Intro() {
             <p className={styles.detailText}>Ahad, 9 November 2025</p>
           </div>
         </div>
-
         {/* Time */}
         <div className={styles.detailItem}>
           <div className={styles.detailIcon}>
@@ -83,7 +82,6 @@ export function Intro() {
             <p className={styles.detailText}>5:00 Petang - 6:30 Malam</p>
           </div>
         </div>
-
         {/* Location */}
         <div className={styles.detailItem}>
           <div className={styles.detailIcon}>
@@ -100,26 +98,25 @@ export function Intro() {
             </p>
           </div>
         </div>
-      </div>
-
-      {/* Schedule timeline */}
-      <div className={styles.detailItem}>
-        <div className={styles.detailIcon}>
-          <IoTime />
-        </div>
-        <div className={styles.detailContent}>
-          <h4 className={styles.detailLabel}>Aturcara</h4>
-          <div className={styles.timeline}>
-            <div className={styles.timelineItem}>
-              <div className={styles.timelineTime}>5:00 PM</div>
-              <div className={styles.timelineDot}></div>
-              <div className={styles.timelineEvent}>Akad Nikah</div>
-            </div>
-            <div className={styles.timelineConnector}></div>
-            <div className={styles.timelineItem}>
-              <div className={styles.timelineTime}>5:30 PM</div>
-              <div className={styles.timelineDot}></div>
-              <div className={styles.timelineEvent}>High Tea</div>
+        {/* Schedule timeline */}
+        <div className={styles.detailItem}>
+          <div className={styles.detailIcon}>
+            <IoTime />
+          </div>
+          <div className={styles.detailContent}>
+            <h4 className={styles.detailLabel}>Aturcara</h4>
+            <div className={styles.timeline}>
+              <div className={styles.timelineItem}>
+                <div className={styles.timelineTime}>5:00 PM</div>
+                <div className={styles.timelineDot}></div>
+                <div className={styles.timelineEvent}>Akad Nikah</div>
+              </div>
+              <div className={styles.timelineConnector}></div>
+              <div className={styles.timelineItem}>
+                <div className={styles.timelineTime}>5:30 PM</div>
+                <div className={styles.timelineDot}></div>
+                <div className={styles.timelineEvent}>High Tea</div>
+              </div>
             </div>
           </div>
         </div>
