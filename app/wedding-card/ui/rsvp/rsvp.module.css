@@ -273,13 +273,17 @@
 }
 
 .selectOptionSelected::before {
-  content: '';
+  content: "";
   position: absolute;
   left: 0;
   top: 0;
   bottom: 0;
   width: 3px;
-  background: linear-gradient(to bottom, rgba(240, 201, 123, 0.8), rgba(240, 201, 123, 0.4));
+  background: linear-gradient(
+    to bottom,
+    rgba(240, 201, 123, 0.8),
+    rgba(240, 201, 123, 0.4)
+  );
 }
 
 /* Light mode specific styling for select options */
@@ -298,7 +302,11 @@
 }
 
 :global(body:not(.dark-mode)) .selectOptionSelected::before {
-  background: linear-gradient(to bottom, rgba(184, 148, 31, 0.8), rgba(184, 148, 31, 0.4));
+  background: linear-gradient(
+    to bottom,
+    rgba(184, 148, 31, 0.8),
+    rgba(184, 148, 31, 0.4)
+  );
 }
 
 .optionContent {
