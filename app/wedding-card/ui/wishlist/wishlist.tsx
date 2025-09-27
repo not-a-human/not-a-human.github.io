@@ -26,22 +26,23 @@ interface WishlistItem {
 const wishlistItems: WishlistItem[] = [
   {
     id: 1,
-    name: "Racing Simulator Wheelstand",
+    name: "Wheelstand Racer Vibes 🏎️",
     image: "/assets/shopee-1.webp",
     shopeeLink:
       "https://shopee.com.my/S5-Supra-Racing-Simulator-Wheelstand-for-Moza-Simagic-G29-T300-Logitech-FANATEC-Racing-Wheel-stand-foldable-rig-sim-i.1304970579.26555670119?xptdk=125db1e0-19a8-4d58-8e87-e356dba39354",
     price: "RM 494.00",
     description:
-      "High-quality racing simulator wheelstand for immersive gaming.",
+      "Untuk future ‘racer’ dalam rumah 😎 Kasi real sikit vibe bila main game, tak goyang-goyang lagi!",
   },
   {
     id: 2,
-    name: "TV Cabinet",
+    name: "Kabinet TV Chill Time 📺",
     image: "/assets/shopee-2.webp",
     shopeeLink:
       "https://shopee.com.my/ELISA-HOME-Aishah-5ft-Low-TV-Cabinet-Kabinet-TV-Rendah-%E7%94%B5%E8%A7%86%E6%9F%9C-i.277735313.14101823077?xptdk=304e9b9c-7217-4bc8-97c7-40ccae33f5fa",
     price: "RM 169.58",
-    description: "Stylish and functional TV cabinet for your living room.",
+    description:
+      "Nak letak TV elok-elok, baru lawa ruang tamu ✨ Kemas sikit, Netflix & chill style.",
   },
   {
     id: 3,
@@ -50,34 +51,38 @@ const wishlistItems: WishlistItem[] = [
     shopeeLink:
       "hhttps://shopee.com.my/TP-Link-Archer-AX55-AX3000-WiFi-6-Mesh-WiFi-Onemesh-Gigabit-AX-Router-OFDMA-Low-Latency-WPA3-OpenVPN-IPV6--i.91478005.15137277563?xptdk=99d3545e-156f-4c70-94a2-5c9fa9d53905",
     price: "RM 349.00",
-    description: "WiFi 6 router for seamless connectivity",
+    description:
+      "WiFi laju untuk semua – takde lagi lag masa Netflix, Shopee, atau Mobile Legends 🔥",
   },
   {
     id: 4,
-    name: "Pillow",
+    name: "Bantal Sweet Dream 😴",
     image: "/assets/shopee-4.webp",
     shopeeLink:
       "https://shopee.com.my/Jean-Perry-Hotel-Series-Ultra-Luxe-Pillow-i.20165543.26608230944?xptdk=0b1ed1c2-f03c-4fbd-930a-80c47bbdde51",
     price: "RM 52.50",
-    description: "Essential pillow for a good night's sleep",
+    description:
+      "Bantal empuk untuk mimpi indah 😴 Kasi tidur pengantin baru lebih selesa hehe.",
   },
   {
     id: 5,
-    name: "Mattress",
+    name: "Tilam Recharge Power 🛏️",
     image: "/assets/shopee-5.webp",
     shopeeLink:
       "https://shopee.com.my/10CM-Latex-Mattress-Single-Queen-King-Tatami-Foldable-Mattress-Thick-Mattress-Topper-i.1229626534.28815389385?xptdk=252ade66-9759-47c2-8c38-d8eb405d93015",
     price: "RM 169.90",
-    description: "Comfortable and supportive mattress for a good night's sleep",
+    description:
+      "Tilam ngam untuk recharge after penat kerje 🛏️ Sweet dream every night.",
   },
   {
     id: 6,
-    name: "Desktop Table",
+    name: "Meja Kerja + Gaming 🎮",
     image: "/assets/shopee-6.webp",
     shopeeLink:
       "https://shopee.com.my/YISONG-Z-Type-Gaming-Office-Computer-Study-Table-Meja-Gaming-Split-Top-With-Cable-Management-i.1257732505.44014270515?xptdk=fe620a73-35c5-4ae5-bbf7-4dfe41a8bf3e",
     price: "RM 249.90",
-    description: "Stylish and functional desktop table for your workspace",
+    description:
+      "Meja style untuk kerja + gaming. Senang nak grind siang kerja, malam gaming 🎮",
   },
 ];
 

@@ -458,15 +458,16 @@
 }
 
 .popupContent::-webkit-scrollbar-track {
-  background: rgba(240, 201, 123, 0.1);
-  border-radius: 3px;
+  background: transparent;
 }
 
 .popupContent::-webkit-scrollbar-thumb {
-  background: rgba(240, 201, 123, 0.5);
+  background: var(--primary-color);
   border-radius: 3px;
+  opacity: 0.7;
 }
 
 .popupContent::-webkit-scrollbar-thumb:hover {
-  background: var(--primary-color);
+  background: rgba(240, 201, 123, 0.9);
+  opacity: 1;
 }

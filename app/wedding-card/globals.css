@@ -5,7 +5,7 @@ body {
   --primary-color: #d4af37;
   --white-color: #2a2a2a;
   --secondary-color: #f5f5f5;
-  
+
   /* Background gradient variables for light mode */
   --bg-primary: #ffffff;
   --bg-secondary: #fafafa;
@@ -54,7 +54,7 @@ body.dark-mode {
   --primary-color: #d4af37;
   --white-color: #f0f0f0;
   --secondary-color: #2a2a2a;
-  
+
   /* Background gradient variables for dark mode */
   --bg-primary: #1a1a1a;
   --bg-secondary: #2a2a2a;
@@ -94,4 +94,57 @@ body.dark-mode .floatingHeart:nth-child(3n) {
 body.dark-mode .floatingHeart:nth-child(4n) {
   color: rgba(255, 105, 180, 0.3);
   text-shadow: 0 0 12px rgba(255, 105, 180, 0.3);
+}
+
+/* Global Scrollbar Styles - Override all other scrollbar styles */
+* {
+  scrollbar-width: thin;
+  scrollbar-color: var(--primary-color) transparent;
+}
+
+*::-webkit-scrollbar {
+  width: 6px !important;
+}
+
+*::-webkit-scrollbar-track {
+  background: transparent !important;
+}
+
+*::-webkit-scrollbar-thumb {
+  background: var(--primary-color) !important;
+  border-radius: 3px !important;
+  opacity: 0.7 !important;
+}
+
+*::-webkit-scrollbar-thumb:hover {
+  background: rgba(240, 201, 123, 0.9) !important;
+  opacity: 1 !important;
+}
+
+/* Specific targeting for modal elements */
+.modal *::-webkit-scrollbar,
+[class*="modal"]::-webkit-scrollbar,
+[class*="Modal"]::-webkit-scrollbar {
+  width: 6px !important;
+}
+
+.modal *::-webkit-scrollbar-track,
+[class*="modal"]::-webkit-scrollbar-track,
+[class*="Modal"]::-webkit-scrollbar-track {
+  background: transparent !important;
+}
+
+.modal *::-webkit-scrollbar-thumb,
+[class*="modal"]::-webkit-scrollbar-thumb,
+[class*="Modal"]::-webkit-scrollbar-thumb {
+  background: var(--primary-color) !important;
+  border-radius: 3px !important;
+  opacity: 0.7 !important;
+}
+
+.modal *::-webkit-scrollbar-thumb:hover,
+[class*="modal"]::-webkit-scrollbar-thumb:hover,
+[class*="Modal"]::-webkit-scrollbar-thumb:hover {
+  background: rgba(240, 201, 123, 0.9) !important;
+  opacity: 1 !important;
 }
