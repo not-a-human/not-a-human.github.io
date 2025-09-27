@@ -1,0 +1,97 @@
+/* Default/Light Mode Styles */
+body {
+  --background-color: #ffffff;
+  --text-color: #2a2a2a;
+  --primary-color: #d4af37;
+  --white-color: #2a2a2a;
+  --secondary-color: #f5f5f5;
+  
+  /* Background gradient variables for light mode */
+  --bg-primary: #ffffff;
+  --bg-secondary: #fafafa;
+  --bg-tertiary: #f5f5f5;
+  --shimmer-color: rgba(184, 148, 31, 0.12);
+}
+
+body .darkModeToggle {
+  background: linear-gradient(
+    135deg,
+    rgba(212, 175, 55, 0.9),
+    rgba(190, 150, 40, 0.8)
+  );
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2), 0 0 20px rgba(212, 175, 55, 0.3);
+  border-color: rgba(212, 175, 55, 0.4);
+}
+
+body .darkModeToggle:hover {
+  background: linear-gradient(
+    135deg,
+    rgba(212, 175, 55, 1),
+    rgba(190, 150, 40, 0.9)
+  );
+  box-shadow: 0 6px 25px rgba(0, 0, 0, 0.3), 0 0 30px rgba(212, 175, 55, 0.5);
+}
+
+body .floatingHeart {
+  color: rgba(212, 175, 55, 0.4);
+  text-shadow: 0 0 10px rgba(212, 175, 55, 0.2);
+}
+
+body .floatingHeart:nth-child(3n) {
+  color: rgba(255, 182, 193, 0.3);
+  text-shadow: 0 0 8px rgba(255, 182, 193, 0.1);
+}
+
+body .floatingHeart:nth-child(4n) {
+  color: rgba(255, 105, 180, 0.2);
+  text-shadow: 0 0 12px rgba(255, 105, 180, 0.2);
+}
+
+/* Dark Mode Styles */
+body.dark-mode {
+  --background-color: #1a1a1a;
+  --text-color: #e0e0e0;
+  --primary-color: #d4af37;
+  --white-color: #f0f0f0;
+  --secondary-color: #2a2a2a;
+  
+  /* Background gradient variables for dark mode */
+  --bg-primary: #1a1a1a;
+  --bg-secondary: #2a2a2a;
+  --bg-tertiary: #252525;
+  --shimmer-color: rgba(212, 175, 55, 0.08);
+}
+
+body.dark-mode .darkModeToggle {
+  background: linear-gradient(
+    135deg,
+    rgba(212, 175, 55, 0.9),
+    rgba(190, 150, 40, 0.8)
+  );
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.4), 0 0 20px rgba(212, 175, 55, 0.4);
+  border-color: rgba(212, 175, 55, 0.4);
+}
+
+body.dark-mode .darkModeToggle:hover {
+  background: linear-gradient(
+    135deg,
+    rgba(212, 175, 55, 1),
+    rgba(190, 150, 40, 0.9)
+  );
+  box-shadow: 0 6px 25px rgba(0, 0, 0, 0.5), 0 0 30px rgba(212, 175, 55, 0.6);
+}
+
+body.dark-mode .floatingHeart {
+  color: rgba(212, 175, 55, 0.6);
+  text-shadow: 0 0 10px rgba(212, 175, 55, 0.4);
+}
+
+body.dark-mode .floatingHeart:nth-child(3n) {
+  color: rgba(255, 182, 193, 0.4);
+  text-shadow: 0 0 8px rgba(255, 182, 193, 0.2);
+}
+
+body.dark-mode .floatingHeart:nth-child(4n) {
+  color: rgba(255, 105, 180, 0.3);
+  text-shadow: 0 0 12px rgba(255, 105, 180, 0.3);
+}
