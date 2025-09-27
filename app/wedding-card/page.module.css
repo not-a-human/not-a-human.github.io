@@ -507,12 +507,10 @@
 }
 
 .floatingHeart:nth-child(3n) {
-  color: rgba(220, 20, 60, 0.6);
   text-shadow: 0 0 8px rgba(220, 20, 60, 0.4);
 }
 
 .floatingHeart:nth-child(4n) {
-  color: rgba(255, 105, 180, 0.5);
   text-shadow: 0 0 12px rgba(255, 105, 180, 0.6);
 }
 

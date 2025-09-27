@@ -304,12 +304,27 @@
 .appleButton {
   background: #000000;
   color: white;
+  border: 1px solid #333333;
 }
 
 .appleButton:hover:not(:disabled) {
   background: #333333;
   transform: translateY(-2px);
   box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
+}
+
+/* Dark mode styling for Apple button */
+[data-theme="dark"] .appleButton {
+  background: #f5f5f5;
+  color: #000000;
+  border: 1px solid #cccccc;
+}
+
+[data-theme="dark"] .appleButton:hover:not(:disabled) {
+  background: #ffffff;
+  color: #000000;
+  transform: translateY(-2px);
+  box-shadow: 0 4px 12px rgba(255, 255, 255, 0.2);
 }
 
 .actionButtonIcon {

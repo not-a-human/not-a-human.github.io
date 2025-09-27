@@ -21,6 +21,7 @@ import {
   useScrollAnimation,
   getAnimationClasses,
 } from "./hooks/useScrollAnimation";
+import { GoHeartFill } from "react-icons/go";
 
 export default function WeddingCardPage() {
   const [isClient, setIsClient] = useState(false);
@@ -296,7 +297,7 @@ export default function WeddingCardPage() {
               animationDelay: `${heart.delay}s`,
             }}
           >
-            💖
+            <GoHeartFill />
           </div>
         ))}
 
