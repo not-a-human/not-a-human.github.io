@@ -545,6 +545,7 @@
 @media (max-width: 768px) {
   .scrollHint {
     padding: 1rem 1.4rem;
+    bottom: 3%;
   }
 
   .chevronDown {
