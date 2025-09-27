@@ -91,6 +91,13 @@ const deliveryInfo = {
 
 export function Wishlist({ isOpen, onClose }: WishlistProps) {
   const [loadingItems, setLoadingItems] = useState<number[]>([]);
+  const [copyFeedback, setCopyFeedback] = useState<{
+    address: string;
+    phone: string;
+  }>({
+    address: "",
+    phone: "",
+  });
 
   if (!isOpen) return null;
 
@@ -106,14 +113,70 @@ export function Wishlist({ isOpen, onClose }: WishlistProps) {
     }, 1000);
   };
 
-  const handleCopyAddress = () => {
-    navigator.clipboard.writeText(deliveryInfo.address);
-    // You could add a toast notification here
+  const handleCopyAddress = async () => {
+    try {
+      if (navigator.clipboard && navigator.clipboard.writeText) {
+        await navigator.clipboard.writeText(deliveryInfo.address);
+        setCopyFeedback((prev) => ({ ...prev, address: "Disalin!" }));
+      } else {
+        // Fallback for browsers that don't support clipboard API
+        const textArea = document.createElement("textarea");
+        textArea.value = deliveryInfo.address;
+        textArea.style.position = "fixed";
+        textArea.style.left = "-999999px";
+        textArea.style.top = "-999999px";
+        document.body.appendChild(textArea);
+        textArea.focus();
+        textArea.select();
+        try {
+          document.execCommand("copy");
+          setCopyFeedback((prev) => ({ ...prev, address: "Disalin!" }));
+        } catch (err) {
+          setCopyFeedback((prev) => ({ ...prev, address: "Gagal menyalin" }));
+        }
+        document.body.removeChild(textArea);
+      }
+    } catch (error) {
+      setCopyFeedback((prev) => ({ ...prev, address: "Ralat menyalin" }));
+      console.error("Error copying address:", error);
+    }
+
+    setTimeout(() => {
+      setCopyFeedback((prev) => ({ ...prev, address: "" }));
+    }, 2000);
   };
 
-  const handleCopyPhone = () => {
-    navigator.clipboard.writeText(deliveryInfo.phoneNumber);
-    // You could add a toast notification here
+  const handleCopyPhone = async () => {
+    try {
+      if (navigator.clipboard && navigator.clipboard.writeText) {
+        await navigator.clipboard.writeText(deliveryInfo.phoneNumber);
+        setCopyFeedback((prev) => ({ ...prev, phone: "Disalin!" }));
+      } else {
+        // Fallback for browsers that don't support clipboard API
+        const textArea = document.createElement("textarea");
+        textArea.value = deliveryInfo.phoneNumber;
+        textArea.style.position = "fixed";
+        textArea.style.left = "-999999px";
+        textArea.style.top = "-999999px";
+        document.body.appendChild(textArea);
+        textArea.focus();
+        textArea.select();
+        try {
+          document.execCommand("copy");
+          setCopyFeedback((prev) => ({ ...prev, phone: "Disalin!" }));
+        } catch (err) {
+          setCopyFeedback((prev) => ({ ...prev, phone: "Gagal menyalin" }));
+        }
+        document.body.removeChild(textArea);
+      }
+    } catch (error) {
+      setCopyFeedback((prev) => ({ ...prev, phone: "Ralat menyalin" }));
+      console.error("Error copying phone:", error);
+    }
+
+    setTimeout(() => {
+      setCopyFeedback((prev) => ({ ...prev, phone: "" }));
+    }, 2000);
   };
 
   const handleImageError = (e: React.SyntheticEvent<HTMLImageElement>) => {
@@ -153,6 +216,9 @@ export function Wishlist({ isOpen, onClose }: WishlistProps) {
               title="Copy address"
             >
               <GoCopy /> Copy Address
+              {copyFeedback.address && (
+                <span className={styles.copyFeedback}>{copyFeedback.address}</span>
+              )}
             </button>
           </div>
         </div>
@@ -170,6 +236,9 @@ export function Wishlist({ isOpen, onClose }: WishlistProps) {
               title="Copy phone number"
             >
               <GoCopy /> Copy Number
+              {copyFeedback.phone && (
+                <span className={styles.copyFeedback}>{copyFeedback.phone}</span>
+              )}
             </button>
           </div>
         </div>

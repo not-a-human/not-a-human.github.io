@@ -20,6 +20,7 @@ const bankingInfo = {
 
 export function MoneyGift({ isOpen, onClose }: MoneyGiftProps) {
   const [isDownloading, setIsDownloading] = useState(false);
+  const [copyFeedback, setCopyFeedback] = useState("");
 
   if (!isOpen) return null;
 
@@ -40,9 +41,37 @@ export function MoneyGift({ isOpen, onClose }: MoneyGiftProps) {
     }
   };
 
-  const handleCopyAccountNumber = () => {
-    navigator.clipboard.writeText(bankingInfo.accountNumber);
-    // You could add a toast notification here
+  const handleCopyAccountNumber = async () => {
+    try {
+      // Check if clipboard API is available
+      if (navigator.clipboard && navigator.clipboard.writeText) {
+        await navigator.clipboard.writeText(bankingInfo.accountNumber);
+        setCopyFeedback("Disalin!");
+      } else {
+        // Fallback for browsers that don't support clipboard API
+        const textArea = document.createElement("textarea");
+        textArea.value = bankingInfo.accountNumber;
+        textArea.style.position = "fixed";
+        textArea.style.left = "-999999px";
+        textArea.style.top = "-999999px";
+        document.body.appendChild(textArea);
+        textArea.focus();
+        textArea.select();
+        try {
+          document.execCommand("copy");
+          setCopyFeedback("Disalin!");
+        } catch (err) {
+          setCopyFeedback("Tidak dapat menyalin");
+        }
+        document.body.removeChild(textArea);
+      }
+    } catch (error) {
+      setCopyFeedback("Ralat menyalin");
+      console.error("Error copying to clipboard:", error);
+    }
+
+    // Clear feedback after 2 seconds
+    setTimeout(() => setCopyFeedback(""), 2000);
   };
 
   return (
@@ -66,6 +95,9 @@ export function MoneyGift({ isOpen, onClose }: MoneyGiftProps) {
                 title="Copy account number"
               >
                 <GoCopy />
+                {copyFeedback && (
+                  <span className={styles.copyFeedback}>{copyFeedback}</span>
+                )}
               </button>
             </div>
           </div>

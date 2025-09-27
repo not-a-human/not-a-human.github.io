@@ -128,11 +128,57 @@
   transition: all 0.2s ease;
   font-size: 0.9rem;
   color: var(--primary-color);
+  position: relative;
 }
 
 .copyButton:hover {
   background: rgba(240, 201, 123, 0.2);
   border-color: var(--primary-color);
+}
+
+.copyFeedback {
+  position: absolute;
+  top: -35px;
+  left: 50%;
+  transform: translateX(-50%);
+  background: rgba(255, 255, 255, 0.95);
+  color: #333;
+  border: 2px solid var(--primary-color);
+  padding: 6px 12px;
+  border-radius: 8px;
+  font-size: 0.75rem;
+  font-weight: 600;
+  white-space: nowrap;
+  z-index: 1000;
+  box-shadow: 0 4px 12px rgba(240, 201, 123, 0.3), 0 2px 4px rgba(0, 0, 0, 0.1);
+  backdrop-filter: blur(10px);
+  animation: fadeInOut 2s ease-in-out;
+}
+
+/* Dark mode support for copyFeedback */
+[data-theme="dark"] .copyFeedback {
+  background: rgba(40, 40, 40, 0.95);
+  color: #f0c97b;
+  box-shadow: 0 4px 12px rgba(240, 201, 123, 0.4), 0 2px 4px rgba(0, 0, 0, 0.3);
+}
+
+@keyframes fadeInOut {
+  0% {
+    opacity: 0;
+    transform: translateX(-50%) translateY(-5px);
+  }
+  20% {
+    opacity: 1;
+    transform: translateX(-50%) translateY(0);
+  }
+  80% {
+    opacity: 1;
+    transform: translateX(-50%) translateY(0);
+  }
+  100% {
+    opacity: 0;
+    transform: translateX(-50%) translateY(-5px);
+  }
 }
 
 .qrSection {

@@ -29,6 +29,7 @@ const venueAddress = {
 export function Location({ isOpen, onClose }: LocationProps) {
   const [mapLoaded, setMapLoaded] = useState(false);
   const [loadingApp, setLoadingApp] = useState<string | null>(null);
+  const [copyFeedback, setCopyFeedback] = useState("");
 
   // Generate Google Maps embed URL
   const googleMapsEmbedUrl = `https://www.google.com/maps/embed/v1/place?key=${
@@ -64,9 +65,35 @@ export function Location({ isOpen, onClose }: LocationProps) {
     }, 1000);
   };
 
-  const handleCopyAddress = () => {
-    navigator.clipboard.writeText(venueAddress.address);
-    // You could add a toast notification here
+  const handleCopyAddress = async () => {
+    try {
+      if (navigator.clipboard && navigator.clipboard.writeText) {
+        await navigator.clipboard.writeText(venueAddress.address);
+        setCopyFeedback("Disalin!");
+      } else {
+        // Fallback for browsers that don't support clipboard API
+        const textArea = document.createElement("textarea");
+        textArea.value = venueAddress.address;
+        textArea.style.position = "fixed";
+        textArea.style.left = "-999999px";
+        textArea.style.top = "-999999px";
+        document.body.appendChild(textArea);
+        textArea.focus();
+        textArea.select();
+        try {
+          document.execCommand("copy");
+          setCopyFeedback("Disalin!");
+        } catch (err) {
+          setCopyFeedback("Gagal menyalin");
+        }
+        document.body.removeChild(textArea);
+      }
+    } catch (error) {
+      setCopyFeedback("Ralat menyalin");
+      console.error("Error copying address:", error);
+    }
+
+    setTimeout(() => setCopyFeedback(""), 2000);
   };
 
   return (
@@ -87,6 +114,9 @@ export function Location({ isOpen, onClose }: LocationProps) {
           title="Copy address"
         >
           <GoCopy /> Copy Address
+          {copyFeedback && (
+            <span className={styles.copyFeedback}>{copyFeedback}</span>
+          )}
         </button>
       </div>
 
