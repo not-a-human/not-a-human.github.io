@@ -1,0 +1,12 @@
+User-agent: *
+Allow: /
+
+# Wedding Card
+Allow: /wedding-card
+Allow: /wedding-card/*
+
+# Sitemap
+Sitemap: https://not-a-human.github.io/sitemap.xml
+
+# Crawl delay
+Crawl-delay: 1

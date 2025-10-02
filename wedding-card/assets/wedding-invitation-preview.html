@@ -1,0 +1,229 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Wedding Invitation Preview</title>
+    <style>
+      body {
+        margin: 0;
+        font-family: "Georgia", serif;
+        width: 1200px;
+        height: 630px;
+        background: linear-gradient(
+          135deg,
+          #1a1a1a 0%,
+          #2a2a2a 50%,
+          #252525 100%
+        );
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        position: relative;
+        overflow: hidden;
+      }
+
+      .container {
+        text-align: center;
+        padding: 40px;
+        border: 2px solid rgba(212, 175, 55, 0.6);
+        border-radius: 10px;
+        margin: 20px;
+        background: rgba(212, 175, 55, 0.05);
+        box-shadow: 0 0 30px rgba(212, 175, 55, 0.2);
+      }
+
+      .decorative-top {
+        color: #d4af37;
+        font-size: 24px;
+        margin-bottom: 20px;
+        text-shadow: 0 0 10px rgba(212, 175, 55, 0.4);
+      }
+
+      .event-type {
+        color: #d4af37;
+        font-size: 24px;
+        font-weight: 300;
+        margin-bottom: 30px;
+        text-transform: uppercase;
+        letter-spacing: 2px;
+        text-shadow: 0 0 15px rgba(212, 175, 55, 0.3);
+      }
+
+      .couple-names {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        gap: 30px;
+        margin-bottom: 40px;
+      }
+
+      .couple-names h1 {
+        font-size: 48px;
+        color: #e0e0e0;
+        margin: 0;
+        font-weight: 600;
+        text-shadow: 0 2px 4px rgba(0, 0, 0, 0.3);
+      }
+
+      .heart {
+        color: #d4af37;
+        font-size: 32px;
+        text-shadow: 0 0 20px rgba(212, 175, 55, 0.5);
+      }
+
+      .wedding-details {
+        display: flex;
+        justify-content: center;
+        gap: 50px;
+        margin-bottom: 40px;
+      }
+
+      .date-container,
+      .location-container {
+        background: rgba(26, 26, 26, 0.8);
+        padding: 20px;
+        border-radius: 8px;
+        border: 2px solid #d4af37;
+        min-width: 200px;
+        box-shadow: 0 0 20px rgba(212, 175, 55, 0.2);
+      }
+
+      .date-main {
+        font-size: 42px;
+        font-weight: 700;
+        color: #e0e0e0;
+        margin: 10px 0;
+        text-shadow: 0 2px 4px rgba(0, 0, 0, 0.3);
+      }
+
+      .date-label {
+        color: #d4af37;
+        font-size: 14px;
+        font-weight: 600;
+        margin: 0;
+      }
+
+      .month-year {
+        font-size: 12px;
+        color: #b0b0b0;
+      }
+
+      .location-main {
+        color: #e0e0e0;
+        font-size: 16px;
+        font-weight: 600;
+        margin: 10px 0 5px 0;
+        text-shadow: 0 1px 2px rgba(0, 0, 0, 0.3);
+      }
+
+      .location-sub {
+        color: #b0b0b0;
+        font-size: 14px;
+        margin: 0;
+      }
+
+      .location-time {
+        color: #b0b0b0;
+        font-size: 12px;
+        margin: 5px 0 0 0;
+      }
+
+      .invitation-text {
+        color: #b0b0b0;
+        font-style: italic;
+        font-size: 16px;
+        margin-top: 30px;
+      }
+
+      .floating-hearts {
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        pointer-events: none;
+        opacity: 0.4;
+      }
+
+      .floating-heart {
+        position: absolute;
+        color: #d4af37;
+        font-size: 24px;
+        text-shadow: 0 0 15px rgba(212, 175, 55, 0.4);
+      }
+
+      .heart1 {
+        top: 150px;
+        left: 100px;
+        transform: scale(0.8);
+      }
+      .heart2 {
+        top: 100px;
+        right: 150px;
+        transform: scale(0.6);
+      }
+      .heart3 {
+        bottom: 180px;
+        left: 150px;
+        transform: scale(0.7);
+      }
+      .heart4 {
+        bottom: 150px;
+        right: 100px;
+        transform: scale(0.5);
+      }
+    </style>
+  </head>
+  <body>
+    <div class="floating-hearts">
+      <div class="floating-heart heart1">♥</div>
+      <div class="floating-heart heart2">♥</div>
+      <div class="floating-heart heart3">♥</div>
+      <div class="floating-heart heart4">♥</div>
+    </div>
+
+    <div class="container">
+      <div class="decorative-top">✧・゚: *✧・゚:*</div>
+
+      <div class="event-type">Hi-Tea</div>
+
+      <div class="couple-names">
+        <h1>Avie</h1>
+        <div class="heart">♥</div>
+        <h1>Ayuni</h1>
+      </div>
+
+      <div class="wedding-details">
+        <div class="date-container">
+          <p class="date-label">AHAD</p>
+          <div class="date-main">9</div>
+          <div class="month-year">NOVEMBER<br />2025</div>
+        </div>
+
+        <div class="location-container">
+          <div
+            style="
+              color: #d4af37;
+              font-size: 20px;
+              margin-bottom: 10px;
+              text-shadow: 0 0 10px rgba(212, 175, 55, 0.4);
+            "
+          >
+            📍
+          </div>
+          <h4 class="location-main">Kuala Pilah</h4>
+          <h4 class="location-sub">Negeri Sembilan</h4>
+          <p class="location-time">5:00 PM - 6:30 PM</p>
+        </div>
+      </div>
+
+      <div class="decorative-top">✧・゚: *✧・゚:*</div>
+
+      <div class="invitation-text">
+        You're Invited to Our Wedding Celebration
+      </div>
+    </div>
+  </body>
+</html>

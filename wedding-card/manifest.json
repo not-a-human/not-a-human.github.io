@@ -1,0 +1,25 @@
+{
+  "name": "Avie & Ayuni Wedding Invitation",
+  "short_name": "Wedding Card",
+  "description": "Interactive wedding invitation for Avie & Ayuni's special day",
+  "start_url": "/wedding-card",
+  "display": "standalone",
+  "background_color": "#1a1a1a",
+  "theme_color": "#f0c97b",
+  "orientation": "portrait",
+  "icons": [
+    {
+      "src": "/icon.png",
+      "sizes": "500x500",
+      "type": "image/png"
+    }
+  ],
+  "categories": ["lifestyle", "entertainment"],
+  "screenshots": [
+    {
+      "src": "/assets/wedding-invitation.png",
+      "sizes": "1546x932",
+      "type": "image/png"
+    }
+  ]
+}
