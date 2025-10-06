@@ -520,8 +520,8 @@ body {
   }
 
   .sub-header-text {
-    margin-left: 8mm;
     padding-left: 10mm;
+    margin-left: -15px;
   }
 }
 
