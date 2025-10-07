@@ -1,31 +1,35 @@
 /**
  * Wedding Card Service Worker
+ * Scoped specifically to /wedding-card/ to avoid conflicts with main site
  * Provides offline caching and background sync capabilities
  */
 
 const CACHE_NAME = "wedding-card-v1";
 const OFFLINE_URL = "/wedding-card/offline";
+const WEDDING_CARD_SCOPE = "/wedding-card/";
 
-// Assets to cache for offline use
+// Assets to cache for offline use (all scoped to wedding-card)
 const urlsToCache = [
   "/wedding-card",
   "/wedding-card/",
   "/wedding-card/offline",
-  "/assets/music.ogg",
-  "/assets/bank-qr-code.jpg",
-  "/assets/wedding-invitation.png",
-  "/assets/shopee-1.webp",
-  "/assets/shopee-2.webp",
-  "/assets/shopee-3.webp",
-  "/assets/shopee-4.webp",
-  "/assets/shopee-5.webp",
-  "/assets/shopee-6.webp",
+  "/wedding-card/assets/music.ogg",
+  "/wedding-card/assets/bank-qr-code.jpg",
+  "/wedding-card/assets/wedding-invitation.png",
+  "/wedding-card/assets/shopee-1.webp",
+  "/wedding-card/assets/shopee-2.webp",
+  "/wedding-card/assets/shopee-3.webp",
+  "/wedding-card/assets/shopee-4.webp",
+  "/wedding-card/assets/shopee-5.webp",
+  "/wedding-card/assets/shopee-6.webp",
   // Add other critical assets
 ];
 
 // Install event - cache resources
 self.addEventListener("install", (event) => {
-  console.log("💍 Wedding Card Service Worker installing...");
+  console.log(
+    "💍 Wedding Card Service Worker installing (scoped to /wedding-card/)"
+  );
 
   event.waitUntil(
     caches
@@ -50,7 +54,9 @@ self.addEventListener("install", (event) => {
 
 // Activate event - clean up old caches
 self.addEventListener("activate", (event) => {
-  console.log("🎉 Wedding Card Service Worker activated");
+  console.log(
+    "🎉 Wedding Card Service Worker activated (scoped to /wedding-card/)"
+  );
 
   event.waitUntil(
     caches
@@ -73,13 +79,24 @@ self.addEventListener("activate", (event) => {
 
 // Fetch event - serve from cache when offline
 self.addEventListener("fetch", (event) => {
+  const url = new URL(event.request.url);
+
+  // Only handle requests that are within our wedding-card scope
+  // This prevents interference with the main site's service worker
+  if (!url.pathname.startsWith(WEDDING_CARD_SCOPE)) {
+    return; // Let the main site's service worker handle this
+  }
+
   // Handle wedding card pages
-  if (event.request.url.includes("/wedding-card")) {
+  if (url.pathname.startsWith("/wedding-card")) {
     event.respondWith(
       caches.match(event.request).then((response) => {
         // Return cached version if available
         if (response) {
-          console.log("📱 Serving from cache:", event.request.url);
+          console.log(
+            "📱 Wedding Card: Serving from cache:",
+            event.request.url
+          );
           return response;
         }
 
@@ -117,8 +134,8 @@ self.addEventListener("fetch", (event) => {
     );
   }
 
-  // Handle asset requests
-  else if (event.request.url.includes("/assets/")) {
+  // Handle wedding-card asset requests (scoped to /wedding-card/assets/)
+  else if (url.pathname.startsWith("/wedding-card/assets/")) {
     event.respondWith(
       caches.match(event.request).then((response) => {
         return (
