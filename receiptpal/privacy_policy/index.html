@@ -3,21 +3,41 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="color-scheme" content="light dark" />
     <title>ReceiptPal Privacy Policy</title>
     <style>
+      :root {
+        color-scheme: light dark;
+        --bg: #ffffff;
+        --text: #1f2937;
+        --heading: #17203a;
+        --code-bg: #f4f4f4;
+      }
+
+      @media (prefers-color-scheme: dark) {
+        :root {
+          --bg: #0f172a;
+          --text: #e5e7eb;
+          --heading: #f8fafc;
+          --code-bg: #1f2937;
+        }
+      }
+
       body {
         font-family: Arial, sans-serif;
         max-width: 800px;
         margin: 24px auto;
         line-height: 1.6;
         padding: 0 16px;
+        background: var(--bg);
+        color: var(--text);
       }
       h1,
       h2 {
-        color: #17203a;
+        color: var(--heading);
       }
       code {
-        background: #f4f4f4;
+        background: var(--code-bg);
         padding: 2px 4px;
         border-radius: 4px;
       }
